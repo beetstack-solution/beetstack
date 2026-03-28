@@ -12,6 +12,10 @@ const config: Pick<Config, "content" | "presets" | "theme"> = {
   presets: [sharedConfig],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
+        heading: ["var(--font-montserrat)", "sans-serif"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
