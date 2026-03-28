@@ -20,7 +20,8 @@ import {
   HiArrowRightOnRectangle,
   HiBars3,
   HiMoon,
-  HiSun
+  HiSun,
+  HiBriefcase
 } from "react-icons/hi2";
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
@@ -49,6 +50,7 @@ export const Icons = {
   Menu: (props: IconProps) => <HiBars3 {...props} />,
   Moon: (props: IconProps) => <HiMoon {...props} />,
   Sun: (props: IconProps) => <HiSun {...props} />,
+  Briefcase: (props: IconProps) => <HiBriefcase {...props} />,
 };
 
 export default Icons;
