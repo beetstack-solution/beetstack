@@ -3,6 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@repo/ui/button";
+import { Icons } from "@beetstack/icons";
+import Image from "next/image";
 
 export function HeroContent() {
   return (
@@ -10,37 +12,47 @@ export function HeroContent() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="space-y-6"
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-4xl space-y-12"
       >
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight drop-shadow-sm select-none">
-          <span className="text-primary drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]">
-            Beetstack
-          </span>{" "}
-          <span className="text-foreground">IT Solutions</span>
-        </h1>
-        
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="max-w-xl mx-auto text-lg md:text-xl text-muted-foreground font-medium leading-relaxed drop-shadow-sm"
+        {/* Branding Logo - Centered */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="flex items-center gap-4 mb-12 justify-center"
         >
-          Architecting the next generation of scalable, enterprise-grade software with 
-          <span className="text-primary font-bold"> Beetroot-inspired</span> precision.
-        </motion.p>
+            <Image 
+              src="/logo.png" 
+              alt="Beetstack Logo" 
+              width={320} 
+              height={80} 
+              className="h-20 w-auto object-contain drop-shadow-2xl"
+              priority
+            />
+        </motion.div>
+
+        {/* Main Heading */}
+        <div className="space-y-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-medium tracking-tight select-none leading-[1.1] text-foreground">
+            Scalable Software. <br /> Built for Global Impact.
+          </h1>
+        </div>
         
+        {/* CTA Buttons - Rounded Pills */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 pointer-events-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-12 pointer-events-auto"
         >
-          <Button size="lg" className="rounded-full px-12 py-7 text-lg shadow-xl shadow-primary/20 transition-all hover:scale-110 active:scale-95">
-            Get Started
+          <Button size="lg" className="rounded-full px-8 py-6 text-lg font-heading font-medium bg-foreground text-background hover:bg-foreground/90 transition-all flex items-center gap-2 shadow-2xl">
+            <Icons.Briefcase className="h-5 w-5" />
+            Our Services
+            <Icons.ChevronRight className="h-5 w-5" />
           </Button>
-          <Button variant="outline" size="lg" className="rounded-full px-12 py-7 text-lg backdrop-blur-md transition-all hover:scale-110 active:scale-95">
-            Our Work
+          <Button variant="outline" size="lg" className="rounded-full px-8 py-6 text-lg font-heading font-medium backdrop-blur-md transition-all hover:bg-primary/5 border-primary/50">
+            Our Portfolio
           </Button>
         </motion.div>
       </motion.div>

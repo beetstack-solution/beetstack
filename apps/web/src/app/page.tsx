@@ -5,35 +5,37 @@ import { Icons } from "@beetstack/icons";
 import { Button } from "@repo/ui/button";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import Image from "next/image";
 import { HeroContent } from "@/features/hero/hero-content";
 
-// Optimized Dynamic Imports for 3D and heavy sections
+// Optimized Dynamic Imports
 const Hero3D = dynamic(() => import("@/features/hero/hero-3d").then((mod) => mod.Hero3D), {
   ssr: false,
-  loading: () => <div className="w-full h-[600px] lg:h-[800px] bg-primary/5 animate-pulse rounded-3xl" />,
+  loading: () => <div className="w-full h-full bg-primary/5 animate-pulse" />,
 });
 
-const AboutSection = dynamic(() => import("@/features/about-section").then((mod) => mod.AboutSection), {
-  ssr: false,
-});
-
-const ServicesSection = dynamic(() => import("@/features/services-section").then((mod) => mod.ServicesSection), {
-  ssr: false,
-});
-
-const TechStackSection = dynamic(() => import("@/features/tech-stack-section").then((mod) => mod.TechStackSection), {
-  ssr: false,
-});
-
-const ExperienceSection = dynamic(() => import("@/features/experience-section").then((mod) => mod.ExperienceSection), {
-  ssr: false,
-});
+const AboutSection = dynamic(() => import("@/features/about-section").then((mod) => mod.AboutSection), { ssr: false });
+const ServicesSection = dynamic(() => import("@/features/services-section").then((mod) => mod.ServicesSection), { ssr: false });
+const TechStackSection = dynamic(() => import("@/features/tech-stack-section").then((mod) => mod.TechStackSection), { ssr: false });
+const ExperienceSection = dynamic(() => import("@/features/experience-section").then((mod) => mod.ExperienceSection), { ssr: false });
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { scrollYProgress, scrollY } = useScroll();
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // Avoid hydration mismatch
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 30);
+  });
+
+  // Background opacity maps to scroll
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.4]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -41,63 +43,111 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-[family-name:var(--font-geist-sans)] transition-colors duration-500 selection:bg-primary selection:text-primary-foreground">
-      {/* Dynamic Theme Toggle - Floating */}
-      <div className="fixed top-6 right-6 z-50">
-        <Button
-          variant="outline"
-          size="icon"
-          className="rounded-full w-14 h-14 bg-background/50 backdrop-blur-xl border-primary/20 hover:scale-110 active:scale-90 transition-all shadow-2xl shadow-primary/10"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
-          {theme === "dark" ? (
-            <Icons.Sun className="h-6 w-6 text-yellow-500 animate-[spin_10s_linear_infinite]" />
-          ) : (
-            <Icons.Moon className="h-6 w-6 text-primary animate-pulse" />
-          )}
-        </Button>
-      </div>
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20">
-        <Hero3D />
-        <HeroContent />
+    <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+      
+      {/* 
+        Reference Navigation Bar 
+        Logo (Left) | Links (Center) | Download (Right)
+      */}
+      <nav className={`fixed top-0 w-full z-50 px-8 transition-all duration-500 flex items-center justify-between ${
+        isScrolled 
+          ? "py-4 backdrop-blur-md bg-background/80 shadow-lg border-b border-primary/5" 
+          : "py-10 bg-transparent"
+      }`}>
+        <div className="flex items-center gap-3">
+            <Image 
+              src="/logo.png" 
+              alt="Beetstack Logo" 
+              width={160} 
+              height={40} 
+              className="h-10 w-auto object-contain"
+              priority
+            />
+        </div>
         
-        {/* Ambient Gradient Blobs */}
-        <div className="absolute top-1/4 -left-10 w-96 h-96 bg-primary/20 rounded-full blur-[120px] -z-10 animate-pulse" />
-        <div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] -z-10 animate-pulse delay-1000" />
+        <div className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2 gap-10 text-xs font-medium uppercase tracking-widest opacity-60">
+            <a href="#about" className="hover:text-primary transition-colors hover:opacity-100">About</a>
+            <a href="#services" className="hover:text-primary transition-colors hover:opacity-100">Services</a>
+            <a href="#expertise" className="hover:text-primary transition-colors hover:opacity-100">Expertise</a>
+            <a href="#portfolio" className="hover:text-primary transition-colors hover:opacity-100">Portfolio</a>
+        </div>
+
+        <div className="flex items-center gap-2">
+             <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full w-10 h-10 hover:bg-primary dark:bg-white bg-black"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+                {theme === "dark" ? (
+                <Icons.Sun className="h-5 w-5 text-primary" />
+                ) : (
+                <Icons.Moon className="h-5 w-5 text-white" />
+                )}
+            </Button>
+            <Button size="lg" className="rounded-full px-10 h-10 bg-foreground text-background font-heading font-medium uppercase tracking-widest text-[10px] flex items-center gap-2 group transition-all">
+                Contact
+            </Button>
+        </div>
+
+        {/* Full-screen Menu Overlay (Mobile Only) */}
+        <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={isMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed lg:hidden inset-0 z-[55] bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center p-8"
+        >
+            <div className="flex flex-col items-center gap-12 text-center">
+                <div className="flex flex-col gap-8 text-2xl font-heading font-medium tracking-tighter">
+                    <a href="#about" onClick={() => setIsMenuOpen(false)} className="hover:text-primary transition-colors">About</a>
+                    <a href="#services" onClick={() => setIsMenuOpen(false)} className="hover:text-primary transition-colors">Services</a>
+                    <a href="#expertise" onClick={() => setIsMenuOpen(false)} className="hover:text-primary transition-colors">Expertise</a>
+                    <a href="#portfolio" onClick={() => setIsMenuOpen(false)} className="hover:text-primary transition-colors">Portfolio</a>
+                </div>
+            </div>
+        </motion.div>
+      </nav>
+
+      <section className="relative min-h-[130vh]">
+        {/* Sticky 3D Background */}
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+          <motion.div 
+            style={{ opacity: heroOpacity, scale: heroScale }}
+            className="absolute inset-0 z-0"
+          >
+            <Hero3D />
+          </motion.div>
+          
+          <div className="relative z-10 w-full">
+            <HeroContent />
+          </div>
+        </div>
       </section>
 
-      {/* Main Content Area */}
-      <main className="space-y-0">
+      {/* Main Content Flow */}
+      <main className="relative z-20 space-y-20 pb-20">
         <AboutSection />
         <ServicesSection />
         <TechStackSection />
         <ExperienceSection />
       </main>
 
-      {/* Footer Branding */}
-      <footer className="border-t border-primary/10 py-24 text-center text-muted-foreground bg-primary/[0.02] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10 space-y-8">
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
-               <div className="w-4 h-4 rounded-full bg-primary-foreground animate-pulse" />
-            </div>
-            <span className="font-black text-3xl text-foreground tracking-tighter">BEETSTACK</span>
-          </div>
-          
-          <div className="flex flex-wrap justify-center gap-8 text-sm font-bold uppercase tracking-widest">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Contact Us</a>
-            <a href="#" className="hover:text-primary transition-colors">Careers</a>
-          </div>
-
-          <p className="text-sm pt-8 border-t border-primary/10">
-            © 2026 Beetstack IT Solutions. Precision-engineered in the monorepo.
-          </p>
-        </div>
+      <footer className="py-24 border-t border-primary/5 px-8 flex items-center justify-between opacity-40 text-[10px] font-black uppercase tracking-widest">
+         <div className="flex items-center gap-4">
+            <Image 
+              src="/logo.png" 
+              alt="Beetstack Logo" 
+              width={80} 
+              height={20} 
+              className="h-5 w-auto object-contain transition-opacity hover:opacity-100"
+            />
+            <p>© 2026. Next-Generation IDE Platform.</p>
+         </div>
+         <div className="flex gap-12">
+            <a href="#" className="hover:text-primary transition-colors">Twitter</a>
+            <a href="#" className="hover:text-primary transition-colors">GitHub</a>
+            <a href="#" className="hover:text-primary transition-colors">Discord</a>
+         </div>
       </footer>
     </div>
   );
