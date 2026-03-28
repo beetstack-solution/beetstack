@@ -1,19 +1,33 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Icons } from "@beetstack/icons";
 import { Button } from "@repo/ui/button";
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from "@repo/ui/card";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Hero3D } from "@/features/hero/hero-3d";
 import { HeroContent } from "@/features/hero/hero-content";
+
+// Optimized Dynamic Imports for 3D and heavy sections
+const Hero3D = dynamic(() => import("@/features/hero/hero-3d").then((mod) => mod.Hero3D), {
+  ssr: false,
+  loading: () => <div className="w-full h-[600px] lg:h-[800px] bg-primary/5 animate-pulse rounded-3xl" />,
+});
+
+const AboutSection = dynamic(() => import("@/features/about-section").then((mod) => mod.AboutSection), {
+  ssr: false,
+});
+
+const ServicesSection = dynamic(() => import("@/features/services-section").then((mod) => mod.ServicesSection), {
+  ssr: false,
+});
+
+const TechStackSection = dynamic(() => import("@/features/tech-stack-section").then((mod) => mod.TechStackSection), {
+  ssr: false,
+});
+
+const ExperienceSection = dynamic(() => import("@/features/experience-section").then((mod) => mod.ExperienceSection), {
+  ssr: false,
+});
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -27,7 +41,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-[family-name:var(--font-geist-sans)] transition-colors duration-500">
+    <div className="min-h-screen bg-background text-foreground font-[family-name:var(--font-geist-sans)] transition-colors duration-500 selection:bg-primary selection:text-primary-foreground">
       {/* Dynamic Theme Toggle - Floating */}
       <div className="fixed top-6 right-6 z-50">
         <Button
@@ -55,94 +69,35 @@ export default function Home() {
       </section>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-6 py-24 space-y-32">
-        <section className="space-y-12">
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
-              Core Capabilities
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Leveraging the most advanced technology stacks to deliver unparalleled software solutions.
-            </p>
-          </div>
-          
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="group hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 bg-card/40 backdrop-blur-sm">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Icons.Settings className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl">Modular Architecture</CardTitle>
-                <CardDescription className="text-base pt-2">
-                  Building with independent, swappable components that scale with your business logic.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="group hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 bg-card/40 backdrop-blur-sm">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Icons.User className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl">Enterprise Identity</CardTitle>
-                <CardDescription className="text-base pt-2">
-                  Sophisticated authentication and authorization flows tailored for high-security environments.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="group hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 bg-card/40 backdrop-blur-sm">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Icons.Home className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl">Scalable Infrastructure</CardTitle>
-                <CardDescription className="text-base pt-2">
-                  Pro-active cloud management and automated deployment structures for 99.9% uptime.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-        </section>
-
-        {/* Feature Icons Grid - Centralized */}
-        <section className="bg-primary/[0.03] rounded-[3rem] p-12 md:p-20 border border-primary/10 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-primary/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          
-          <div className="relative z-10 grid grid-cols-2 md:grid-cols-5 gap-12 place-items-center opacity-70 hover:opacity-100 transition-opacity duration-500">
-            <div className="flex flex-col items-center gap-4 group/icon hover:scale-110 transition-transform">
-              <Icons.Search className="h-10 w-10 text-primary group-hover:drop-shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
-              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Search</span>
-            </div>
-            <div className="flex flex-col items-center gap-4 group/icon hover:scale-110 transition-transform">
-              <Icons.Mail className="h-10 w-10 text-primary group-hover:drop-shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
-              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Messaging</span>
-            </div>
-            <div className="flex flex-col items-center gap-4 group/icon hover:scale-110 transition-transform text-red-500">
-              <Icons.Heart className="h-10 w-10 group-hover:drop-shadow-[0_0_8px_currentColor]" />
-              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Engagement</span>
-            </div>
-            <div className="flex flex-col items-center gap-4 group/icon hover:scale-110 transition-transform">
-              <Icons.Bell className="h-10 w-10 text-primary group-hover:drop-shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
-              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Alerts</span>
-            </div>
-            <div className="flex flex-col items-center gap-4 group/icon hover:scale-110 transition-transform text-green-500">
-              <Icons.Check className="h-10 w-10 group-hover:drop-shadow-[0_0_8px_currentColor]" />
-              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Quality</span>
-            </div>
-          </div>
-        </section>
+      <main className="space-y-0">
+        <AboutSection />
+        <ServicesSection />
+        <TechStackSection />
+        <ExperienceSection />
       </main>
 
       {/* Footer Branding */}
-      <footer className="border-t border-primary/10 py-12 text-center text-muted-foreground">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-             <div className="w-3 h-3 rounded-full bg-primary" />
+      <footer className="border-t border-primary/10 py-24 text-center text-muted-foreground bg-primary/[0.02] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10 space-y-8">
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+               <div className="w-4 h-4 rounded-full bg-primary-foreground animate-pulse" />
+            </div>
+            <span className="font-black text-3xl text-foreground tracking-tighter">BEETSTACK</span>
           </div>
-          <span className="font-black text-foreground tracking-tighter">BEETSTACK</span>
+          
+          <div className="flex flex-wrap justify-center gap-8 text-sm font-bold uppercase tracking-widest">
+            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-primary transition-colors">Contact Us</a>
+            <a href="#" className="hover:text-primary transition-colors">Careers</a>
+          </div>
+
+          <p className="text-sm pt-8 border-t border-primary/10">
+            © 2026 Beetstack IT Solutions. Precision-engineered in the monorepo.
+          </p>
         </div>
-        <p className="text-sm">© 2026 Beetstack IT Solutions. Built with precision.</p>
       </footer>
     </div>
   );
