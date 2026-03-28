@@ -24,7 +24,7 @@ export function AboutSection() {
   };
 
   return (
-    <section className="py-24 relative overflow-hidden group">
+    <section id="about" className="py-24 relative overflow-hidden group">
       <motion.div
         variants={containerVariants}
         initial="hidden"

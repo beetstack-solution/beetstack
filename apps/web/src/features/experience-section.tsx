@@ -16,7 +16,7 @@ export function ExperienceSection() {
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1.2]);
 
   return (
-    <section className="py-24 relative overflow-hidden bg-background">
+    <section id="portfolio" className="py-24 relative overflow-hidden bg-background">
       <div className="max-w-7xl mx-auto px-6 grid gap-24 lg:grid-cols-2 items-center">
         <motion.div
            initial={{ opacity: 0, x: -100 }}
@@ -30,7 +30,7 @@ export function ExperienceSection() {
             <span className="text-primary italic">Global Reach</span>
           </h2>
           <p className="text-muted-foreground text-xl max-w-lg leading-relaxed">
-            Our journey is a testament to the <span className="text-foreground font-bold italic underline decoration-primary/50 underline-offset-8">Antigravity</span> growth 
+            Our journey is a testament to the <span className="text-foreground font-bold italic underline decoration-primary/50 underline-offset-8">exponential</span> growth 
             potential of a truly modular codebase. We build for the next decade, not just the next sprint.
           </p>
         </motion.div>

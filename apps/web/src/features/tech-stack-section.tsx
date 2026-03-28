@@ -19,7 +19,7 @@ const techStack = [
 
 export function TechStackSection() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="expertise" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
