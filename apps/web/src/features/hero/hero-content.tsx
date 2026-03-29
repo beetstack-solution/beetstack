@@ -46,13 +46,14 @@ export function HeroContent() {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-12 pointer-events-auto"
         >
-          <Button size="lg" className="rounded-full px-8 py-6 text-lg font-heading font-medium bg-foreground text-background hover:bg-foreground/90 transition-all flex items-center gap-2 shadow-2xl">
-            <Icons.Briefcase className="h-5 w-5" />
-            Our Services
-            <Icons.ChevronRight className="h-5 w-5" />
+          <Button size="lg" className="rounded-full px-8 py-6 text-lg font-heading font-medium bg-foreground text-background hover:bg-foreground/90 transition-all flex items-center gap-4 shadow-2xl">
+            <Icons.Projects className="h-4 w-4" />
+             Our Services
           </Button>
           <Button variant="outline" size="lg" className="rounded-full px-8 py-6 text-lg font-heading font-medium backdrop-blur-md transition-all hover:bg-primary/5 border-primary/50">
             Our Portfolio
+                        <Icons.ChevronRight className="h-5 w-5" />
+
           </Button>
         </motion.div>
       </motion.div>
