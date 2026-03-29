@@ -50,6 +50,11 @@ const config: Pick<Config, "content" | "presets" | "theme"> = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        brand: {
+          red: "var(--brand-red)",
+          "lite-red": "var(--brand-lite-red)",
+          green: "var(--brand-green)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
