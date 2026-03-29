@@ -23,6 +23,7 @@ import {
   HiSun,
   HiBriefcase
 } from "react-icons/hi2";
+import { GrProjects } from "react-icons/gr";
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
@@ -51,6 +52,7 @@ export const Icons = {
   Moon: (props: IconProps) => <HiMoon {...props} />,
   Sun: (props: IconProps) => <HiSun {...props} />,
   Briefcase: (props: IconProps) => <HiBriefcase {...props} />,
+  Projects: (props: IconProps) => <GrProjects {...props} />,
 };
 
 export default Icons;
