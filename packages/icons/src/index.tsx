@@ -1,17 +1,17 @@
 import React from "react";
-import { 
-  HiHome, 
-  HiUser, 
-  HiCog6Tooth, 
-  HiBell, 
-  HiMagnifyingGlass, 
-  HiEnvelope, 
-  HiHeart, 
-  HiTrash, 
-  HiPencil, 
-  HiPlus, 
-  HiMinus, 
-  HiCheck, 
+import {
+  HiHome,
+  HiUser,
+  HiCog6Tooth,
+  HiBell,
+  HiMagnifyingGlass,
+  HiEnvelope,
+  HiHeart,
+  HiTrash,
+  HiPencil,
+  HiPlus,
+  HiMinus,
+  HiCheck,
   HiXMark,
   HiChevronRight,
   HiChevronLeft,
@@ -21,14 +21,44 @@ import {
   HiBars3,
   HiMoon,
   HiSun,
-  HiBriefcase
+  HiBriefcase,
 } from "react-icons/hi2";
 import { GrProjects } from "react-icons/gr";
+
+// ─── Tech Stack logos from Simple Icons (react-icons/si) ────────────────────
+import {
+  SiNextdotjs,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiThreedotjs,
+  SiFramer,
+  SiTurborepo,
+  SiNodedotjs,
+  SiPostgresql,
+  SiDocker,
+  SiPrisma,
+  SiCloudflare,
+  SiGraphql,
+  SiRedis,
+  SiVercel,
+  SiGithub,
+  SiNestjs,
+  SiMongodb,
+  SiKubernetes,
+  SiPnpm,
+  SiVite,
+  SiGit,
+  SiEslint,
+  SiGooglecloud,
+  SiOpenai,
+} from "react-icons/si";
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
+// ─── General UI Icons ────────────────────────────────────────────────────────
 export const Icons = {
   Home: (props: IconProps) => <HiHome {...props} />,
   User: (props: IconProps) => <HiUser {...props} />,
@@ -53,6 +83,33 @@ export const Icons = {
   Sun: (props: IconProps) => <HiSun {...props} />,
   Briefcase: (props: IconProps) => <HiBriefcase {...props} />,
   Projects: (props: IconProps) => <GrProjects {...props} />,
+
+  // ─── Tech Stack / Brand Icons ──────────────────────────────────────────────
+  Nextjs:      (props: IconProps) => <SiNextdotjs    {...props} />,
+  React:       (props: IconProps) => <SiReact        {...props} />,
+  TypeScript:  (props: IconProps) => <SiTypescript   {...props} />,
+  Tailwind:    (props: IconProps) => <SiTailwindcss  {...props} />,
+  ThreeJs:     (props: IconProps) => <SiThreedotjs   {...props} />,
+  Framer:      (props: IconProps) => <SiFramer       {...props} />,
+  Turborepo:   (props: IconProps) => <SiTurborepo    {...props} />,
+  Nodejs:      (props: IconProps) => <SiNodedotjs    {...props} />,
+  Postgres:    (props: IconProps) => <SiPostgresql   {...props} />,
+  Docker:      (props: IconProps) => <SiDocker       {...props} />,
+  Prisma:      (props: IconProps) => <SiPrisma       {...props} />,
+  Cloudflare:  (props: IconProps) => <SiCloudflare   {...props} />,
+  GraphQL:     (props: IconProps) => <SiGraphql      {...props} />,
+  Redis:       (props: IconProps) => <SiRedis        {...props} />,
+  Vercel:      (props: IconProps) => <SiVercel       {...props} />,
+  Github:      (props: IconProps) => <SiGithub       {...props} />,
+  NestJs:      (props: IconProps) => <SiNestjs       {...props} />,
+  MongoDB:     (props: IconProps) => <SiMongodb      {...props} />,
+  Kubernetes:  (props: IconProps) => <SiKubernetes   {...props} />,
+  Pnpm:        (props: IconProps) => <SiPnpm         {...props} />,
+  Vite:        (props: IconProps) => <SiVite         {...props} />,
+  Git:         (props: IconProps) => <SiGit          {...props} />,
+  ESLint:      (props: IconProps) => <SiEslint       {...props} />,
+  GoogleCloud: (props: IconProps) => <SiGooglecloud  {...props} />,
+  OpenAI:      (props: IconProps) => <SiOpenai       {...props} />,
 };
 
 export default Icons;
