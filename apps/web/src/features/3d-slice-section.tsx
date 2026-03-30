@@ -23,7 +23,6 @@ const SERVICES = [
 ];
 
 const ROW1_ITEMS = ["Layers Of Solutions"];
-const ROW2_ITEMS = ["Scalable Solutions", "·", "Global Impact", "·", "Precision Engineering", "·", "Innovation at Scale", "·", "Full-Stack Mastery", "·", "Future-Ready Systems", "·"];
 
 // ─── Ring definitions ─────────────────────────────────────────────────────────
 const RINGS = [
@@ -206,14 +205,16 @@ function Scene({ onHover, scrollSpeedRef }: { onHover: (idx: number | null, x: n
 //
 function VelocityMarquee({
   items,
-  rowSign,           // +1 = follow scroll dir, -1 = oppose scroll dir
-  scrollDirRef,      // shared ref: 1 = down, -1 = up
-  scrollRawRef,      // shared ref: raw scroll velocity for speed boost
+  rowSign,
+  scrollDirRef,
+  scrollRawRef,
+  outlined = false,   // when true: transparent fill + brand-red stroke
 }: {
   items: string[];
   rowSign: 1 | -1;
   scrollDirRef: React.MutableRefObject<number>;
   scrollRawRef: React.MutableRefObject<number>;
+  outlined?: boolean;
 }) {
   const innerRef = useRef<HTMLDivElement>(null);
   const posRef   = useRef<number>(0);
@@ -221,20 +222,17 @@ function VelocityMarquee({
   useAnimationFrame((_, delta) => {
     if (!innerRef.current) return;
 
-    const W   = innerRef.current.scrollWidth / 4; // 4 copies → one copy = width/4
+    const W   = innerRef.current.scrollWidth / 4;
     const dt  = delta / 1000;
-    const dir = scrollDirRef.current;             // +1 or -1
-    const v   = Math.abs(scrollRawRef.current);   // magnitude of scroll speed
+    const dir = scrollDirRef.current;
+    const v   = Math.abs(scrollRawRef.current);
 
-    // Base drift: 45px/s in the effective direction
-    // Speed boost: adds up to 350px/s at fast scroll
     const AUTO  = 45;
     const boost = Math.min(v * 0.35, 600);
     const speed = rowSign * dir * (AUTO + boost);
 
     posRef.current += speed * dt;
 
-    // Seamless wrap — keep posRef in (-W, 0]
     if (posRef.current <= -W) posRef.current += W;
     if (posRef.current >=  0) posRef.current -= W;
 
@@ -242,6 +240,15 @@ function VelocityMarquee({
   });
 
   const quad = [...items, ...items, ...items, ...items];
+
+  // Outlined style: transparent fill + brand-red border via -webkit-text-stroke
+  const outlinedTextStyle: React.CSSProperties = outlined
+    ? { color: "transparent", WebkitTextStroke: "2.5px var(--brand-lite-red)" }
+    : {};
+
+  const outlinedDotStyle: React.CSSProperties = outlined
+    ? { color: "transparent", WebkitTextStroke: "1px var(--brand-red)", opacity: 0.5 }
+    : { opacity: 0.4 };
 
   return (
     <div
@@ -251,12 +258,12 @@ function VelocityMarquee({
       <div ref={innerRef} className="inline-flex items-center" style={{ whiteSpace: "nowrap", gap: "3.5rem" }}>
         {quad.map((item, i) =>
           item === "·" ? (
-            <span key={i} className="text-brand-red select-none" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", opacity: 0.4 }}>·</span>
+            <span key={i} className="text-brand-red select-none" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", ...outlinedDotStyle }}>·</span>
           ) : (
             <span
               key={i}
-              className="font-heading font-medium uppercase select-none text-brand-red"
-              style={{ fontSize: "clamp(10.2rem, 5vw, 4.5rem)", letterSpacing: "-0.02em", lineHeight: 1 }}
+              className="font-heading font-medium uppercase select-none text-brand-lite-red"
+              style={{ fontSize: "clamp(15rem, 5vw, 4.5rem)", letterSpacing: "-0.02em", lineHeight: 1, ...outlinedTextStyle }}
             >
               {item}
             </span>
@@ -296,7 +303,7 @@ function ServiceTooltip({ service, x, y }: { service: (typeof SERVICES)[0] | nul
 }
 
 // ─── Main Export ──────────────────────────────────────────────────────────────
-export function ServicesSection() {
+export function SliceSection() {
   const [hovered, setHovered] = useState<{ index: number; x: number; y: number } | null>(null);
 
   const { scrollY }   = useScroll();
@@ -323,34 +330,14 @@ export function ServicesSection() {
   const activeService = hovered !== null ? (SERVICES[hovered.index] ?? null) : null;
 
   return (
-    <section id="services" className="relative py-10 overflow-hidden">
+    <section className="relative overflow-hidden h-full">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] rounded-full bg-brand-red/[0.06] blur-[110px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  rounded-full bg-brand-red/[0.06] blur-[110px]" />
       </div>
-
-      {/* Heading */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }} transition={{ duration: 0.8 }}
-        className="text-center space-y-3 mb-8 px-6"
-      >
-        <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.25em] text-brand-lite-red">What We Do</p>
-        <h2 className="text-4xl md:text-6xl font-heading font-medium tracking-tight">Our Solutions</h2>
-        <p className="text-muted-foreground text-sm max-w-md mx-auto">
-          Each ring is a layer of expertise.{" "}
-          <span className="text-brand-lite-red">Hover a ring</span> — drag to rotate.
-        </p>
-      </motion.div>
 
       {/* Stacked container */}
       <div className="relative w-full" style={{ height: "clamp(480px, 60vw, 640px)" }}>
-
-        {/*
-          Row 1 (rowSign=+1): follows scroll direction
-            Scroll DOWN → +1 dir → moves RIGHT
-            Scroll UP   → -1 dir → moves LEFT
-        */}
-        <div className="absolute left-0 right-0 z-0" style={{ top: "40%" }}>
+        <div className="absolute left-0 right-0 z-0" style={{ top: "30%" }}>
           <VelocityMarquee
             items={ROW1_ITEMS}
             rowSign={-1}
@@ -358,13 +345,15 @@ export function ServicesSection() {
             scrollRawRef={scrollRawRef}
           />
         </div>
-
-        {/*
-          Row 2 (rowSign=-1): opposes scroll direction
-            Scroll DOWN → +1 dir × -1 rowSign → moves LEFT
-            Scroll UP   → -1 dir × -1 rowSign → moves RIGHT
-        */}
-       
+        <div className="absolute left-0 right-0 z-20" style={{ top: "30%" }}>
+          <VelocityMarquee
+            items={ROW1_ITEMS}
+            rowSign={-1}
+            scrollDirRef={scrollDirRef}
+            scrollRawRef={scrollRawRef}
+            outlined
+          />
+        </div>
 
         {/* 3D Canvas — on top */}
         <div className="absolute inset-0 z-10" style={{ cursor: hovered ? "none" : "grab" }}>
