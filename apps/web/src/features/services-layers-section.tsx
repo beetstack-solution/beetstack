@@ -55,7 +55,7 @@ function BeetrootLayers({ progress, isForeground = false }: { progress: MotionVa
   const scalePulse = useTransform(progress, [0, 0.5, 1], [1, isForeground ? 1.1 : 1.3, 1]);
 
   return (
-    <motion.div 
+    <motion.div
       style={{ rotate: rotateSlower, scale: scalePulse }}
       className={`absolute inset-0 flex items-center justify-center pointer-events-none ${isForeground ? 'z-20 scale-[1.35] lg:scale-[1.65]' : '-z-10 scale-[1.7] lg:scale-[2.8]'}`}
     >
