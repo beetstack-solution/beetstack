@@ -15,7 +15,8 @@ const Hero3D = dynamic(() => import("@/features/hero/hero-3d").then((mod) => mod
   loading: () => <div className="w-full h-full bg-primary/5 animate-pulse" />,
 });
 
-const ServicesSection = dynamic(() => import("@/features/3d-slice-section").then((mod) => mod.SliceSection), { ssr: false });
+const ServicesSection = dynamic(() => import("@/features/services-layers-section").then((mod) => mod.ServicesLayersSection), { ssr: false });
+const SliceSection = dynamic(() => import("@/features/3d-slice-section").then((mod) => mod.SliceSection), { ssr: false });
 const TechStackSection = dynamic(() => import("@/features/tech-stack-section").then((mod) => mod.TechStackSection), { ssr: false });
 
 export default function Home() {
@@ -121,6 +122,7 @@ export default function Home() {
 
       {/* Main Content Flow */}
       <main className="relative z-20 space-y-20 pb-20">
+        <SliceSection />
         <ServicesSection />
         <TechStackSection />
       </main>
