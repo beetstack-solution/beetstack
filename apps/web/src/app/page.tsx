@@ -19,6 +19,7 @@ const ServicesSection = dynamic(() => import("@/features/services-layers-section
 const WhoWeAreSection = dynamic(() => import("@/features/who-we-are-section").then((mod) => mod.WhoWeAreSection), { ssr: false });
 const SliceSection = dynamic(() => import("@/features/3d-slice-section").then((mod) => mod.SliceSection), { ssr: false });
 const TechStackSection = dynamic(() => import("@/features/tech-stack-section").then((mod) => mod.TechStackSection), { ssr: false });
+const DifferenceSection = dynamic(() => import("@/features/difference-section").then((mod) => mod.DifferenceSection), { ssr: false });
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -104,6 +105,14 @@ export default function Home() {
         </motion.div>
       </nav>
 
+      {/* Global Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 h-[4px] bg-brand-green z-[60]">
+        <motion.div
+          className="h-full bg-brand-lite-red origin-left"
+          style={{ scaleX: scrollYProgress }}
+        />
+      </div>
+
       <section className="relative">
         {/* Sticky 3D Background */}
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
@@ -126,6 +135,7 @@ export default function Home() {
         <SliceSection />
         <ServicesSection />
         <TechStackSection />
+        <DifferenceSection />
       </main>
 
       <footer className="py-24 border-t border-primary/5 px-8 flex items-center justify-between opacity-40 text-[10px] font-black uppercase tracking-widest">
