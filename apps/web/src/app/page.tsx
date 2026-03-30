@@ -15,10 +15,8 @@ const Hero3D = dynamic(() => import("@/features/hero/hero-3d").then((mod) => mod
   loading: () => <div className="w-full h-full bg-primary/5 animate-pulse" />,
 });
 
-const AboutSection = dynamic(() => import("@/features/about-section").then((mod) => mod.AboutSection), { ssr: false });
-const ServicesSection = dynamic(() => import("@/features/services-section").then((mod) => mod.ServicesSection), { ssr: false });
+const ServicesSection = dynamic(() => import("@/features/3d-slice-section").then((mod) => mod.SliceSection), { ssr: false });
 const TechStackSection = dynamic(() => import("@/features/tech-stack-section").then((mod) => mod.TechStackSection), { ssr: false });
-const ExperienceSection = dynamic(() => import("@/features/experience-section").then((mod) => mod.ExperienceSection), { ssr: false });
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -45,13 +43,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white overflow-x-hidden">
       
-      {/* 
-        Reference Navigation Bar 
-        Logo (Left) | Links (Center) | Download (Right)
-      */}
+    
       <nav className={`fixed top-0 w-full z-50 px-8 transition-all duration-500 flex items-center justify-between ${
         isScrolled 
-          ? "py-4 backdrop-blur-md bg-background/80 shadow-lg border-b border-primary/5" 
+          ? "py-4 backdrop-blur-md bg-background shadow border-b border-primary/5" 
           : "py-10 bg-transparent"
       }`}>
         <div className="flex items-center gap-3">
@@ -108,7 +103,7 @@ export default function Home() {
         </motion.div>
       </nav>
 
-      <section className="relative min-h-[130vh]">
+      <section className="relative">
         {/* Sticky 3D Background */}
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           <motion.div 
@@ -126,10 +121,8 @@ export default function Home() {
 
       {/* Main Content Flow */}
       <main className="relative z-20 space-y-20 pb-20">
-        <AboutSection />
         <ServicesSection />
         <TechStackSection />
-        <ExperienceSection />
       </main>
 
       <footer className="py-24 border-t border-primary/5 px-8 flex items-center justify-between opacity-40 text-[10px] font-black uppercase tracking-widest">
