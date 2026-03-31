@@ -6,12 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Icons } from "@beetstack/icons";
 
-const SOCIAL_LINKS = [
-  { id: "github", icon: "Github", href: "https://github.com/beetstack", label: "GitHub" },
-  { id: "linkedin", icon: "LinkedIn", href: "https://linkedin.com/company/beetstack", label: "LinkedIn" },
-  { id: "instagram", icon: "Instagram", href: "https://instagram.com/beetstack", label: "Instagram" },
-  { id: "twitter", icon: "Twitter", href: "https://twitter.com/beetstack", label: "Twitter" },
-] as const;
+import { SOCIAL_LINKS } from "../data";
 
 export function Footer() {
   return (
