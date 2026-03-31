@@ -32,6 +32,9 @@ import {
   HiBeaker,
   HiRocketLaunch,
   HiLifebuoy,
+  HiCpuChip,
+  HiArrowTrendingUp,
+  HiGlobeAmericas,
 } from "react-icons/hi2";
 import { GrProjects } from "react-icons/gr";
 
@@ -135,6 +138,9 @@ export const Icons = {
   Testing:     (props: IconProps) => <HiBeaker       {...props} />,
   Deployment:  (props: IconProps) => <HiRocketLaunch {...props} />,
   Support:     (props: IconProps) => <HiLifebuoy     {...props} />,
+  Cpu:         (props: IconProps) => <HiCpuChip     {...props} />,
+  TrendingUp:  (props: IconProps) => <HiArrowTrendingUp {...props} />,
+  Globe:       (props: IconProps) => <HiGlobeAmericas {...props} />,
 };
 
 export default Icons;
