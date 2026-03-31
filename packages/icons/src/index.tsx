@@ -38,6 +38,11 @@ import {
   HiPhone,
 } from "react-icons/hi2";
 import { GrProjects } from "react-icons/gr";
+import {
+  FaLinkedin,
+  FaInstagram,
+  FaXTwitter,
+} from "react-icons/fa6";
 
 // ─── Tech Stack logos from Simple Icons (react-icons/si) ────────────────────
 import {
@@ -145,6 +150,9 @@ export const Icons = {
   Globe:       (props: IconProps) => <HiGlobeAmericas {...props} />,
   Phone:       (props: IconProps) => <HiPhone         {...props} />,
   WhatsApp:    (props: IconProps) => <SiWhatsapp      {...props} />,
+  LinkedIn:    (props: IconProps) => <FaLinkedin      {...props} />,
+  Twitter:     (props: IconProps) => <FaXTwitter     {...props} />,
+  Instagram:   (props: IconProps) => <FaInstagram    {...props} />,
 };
 
 export default Icons;
