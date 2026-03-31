@@ -20,6 +20,8 @@ const WhoWeAreSection = dynamic(() => import("@/features/who-we-are-section").th
 const SliceSection = dynamic(() => import("@/features/3d-slice-section").then((mod) => mod.SliceSection), { ssr: false });
 const TechStackSection = dynamic(() => import("@/features/tech-stack-section").then((mod) => mod.TechStackSection), { ssr: false });
 const DifferenceSection = dynamic(() => import("@/features/difference-section").then((mod) => mod.DifferenceSection), { ssr: false });
+const SecuritySection = dynamic(() => import("@/features/security-section").then((mod) => mod.SecuritySection), { ssr: false });
+const DeliveryModelSection = dynamic(() => import("@/features/delivery-model-section").then((mod) => mod.DeliveryModelSection), { ssr: false });
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -44,7 +46,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white">
 
 
       <nav className={`fixed top-0 w-full z-50 px-8 transition-all duration-500 flex items-center justify-between ${isScrolled
@@ -136,6 +138,8 @@ export default function Home() {
         <ServicesSection />
         <TechStackSection />
         <DifferenceSection />
+        <SecuritySection />
+        <DeliveryModelSection />
       </main>
 
       <footer className="py-24 border-t border-primary/5 px-8 flex items-center justify-between opacity-40 text-[10px] font-black uppercase tracking-widest">
