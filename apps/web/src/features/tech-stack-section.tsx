@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Icons } from "@beetstack/icons";
 import Image from "next/image";
 
-// ─── Tech stack config — iconKey is resolved at render time (avoids stale cache) ─
 type IconKey = keyof typeof Icons;
 
 const TECHS: { name: string; category: string; iconKey: IconKey; color: string; glow: string }[] = [
@@ -35,11 +34,9 @@ const TECHS: { name: string; category: string; iconKey: IconKey; color: string; 
   { name: "OpenAI", category: "AI / LLM", iconKey: "OpenAI", color: "#DC382D", glow: "rgba(255,255,255,0.14)" },
 ];
 
-// ─── Beetroot Ring Badge ───────────────────────────────────────────────────────
 function BeetrootBadge({ tech, index }: { tech: (typeof TECHS)[number]; index: number }) {
   const [hovered, setHovered] = useState(false);
-  // Resolve at render time — avoids stale module cache issues
-  const Icon = (Icons as any)[tech.iconKey];
+  const Icon = Icons[tech.iconKey];
 
   return (
     <motion.div
@@ -52,24 +49,17 @@ function BeetrootBadge({ tech, index }: { tech: (typeof TECHS)[number]; index: n
       onMouseLeave={() => setHovered(false)}
     >
       <Image src={`/images/leef.png`} alt="Leef" width={50} height={50} className="-mb-2" />
-      {/* Beetroot ring badge */}
       <motion.div
         animate={hovered ? { scale: 1.13, rotate: 10 } : { scale: 1, rotate: 0 }}
         transition={{ type: "spring", stiffness: 350, damping: 22 }}
-        className="relative"
-        style={{ width: 88, height: 88 }}
+        className="relative w-[88px] h-[88px]"
       >
-        {/* SVG concentric rings — brand palette */}
         <svg viewBox="0 0 88 88" className="absolute inset-0 w-full h-full" fill="none">
-          {/* Outer ring — brand-red */}
           <circle cx="44" cy="44" r="42" stroke="#a21c3c" strokeWidth="3.5" />
-          {/* Middle ring — brand-lite-red */}
           <circle cx="44" cy="44" r="33" stroke="#e33765" strokeWidth="2" opacity={hovered ? 0.9 : 0.35} />
-          {/* Inner accent ring */}
           <circle cx="44" cy="44" r="24" stroke="#a21c3c" strokeWidth="1.5" opacity={hovered ? 0.8 : 0.2} />
         </svg>
 
-        {/* Per-tech color glow */}
         <motion.div
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.25 }}
@@ -80,8 +70,7 @@ function BeetrootBadge({ tech, index }: { tech: (typeof TECHS)[number]; index: n
           }}
         />
 
-        {/* The icon */}
-        <div className="absolute inset-0 flex items-center justify-center" style={{ padding: 20 }}>
+        <div className="absolute inset-0 flex items-center justify-center p-5">
           <motion.div
             animate={hovered ? { scale: 1.18 } : { scale: 1 }}
             transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -95,7 +84,6 @@ function BeetrootBadge({ tech, index }: { tech: (typeof TECHS)[number]; index: n
         </div>
       </motion.div>
 
-      {/* Name + category label */}
       <div className="text-center leading-none">
         <motion.p
           animate={{ color: hovered ? "#e33765" : "inherit" }}
@@ -111,20 +99,17 @@ function BeetrootBadge({ tech, index }: { tech: (typeof TECHS)[number]; index: n
   );
 }
 
-// ─── Section ──────────────────────────────────────────────────────────────────
 export function TechStackSection() {
   return (
     <section id="expertise" className="relative py-24 overflow-hidden">
-      {/* Ambient beetroot glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-brand-red/[0.05] blur-[130px]" />
       </div>
 
-      {/* Decorative rotating rings */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
         {([380, 550, 720, 900] as const).map((size, i) => (
           <motion.div
-            key={i}
+            key={size}
             className="absolute rounded-full border border-brand-red"
             style={{ width: size, height: size }}
             animate={{ rotate: i % 2 === 0 ? 360 : -360, opacity: [0.04, 0.09, 0.04] }}
@@ -137,7 +122,6 @@ export function TechStackSection() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -156,14 +140,12 @@ export function TechStackSection() {
           </p>
         </motion.div>
 
-        {/* Badge grid */}
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-x-8 gap-y-10 place-items-center">
           {TECHS.map((tech, i) => (
             <BeetrootBadge key={tech.name} tech={tech} index={i} />
           ))}
         </div>
 
-        {/* Footer label */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
