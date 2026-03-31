@@ -22,6 +22,16 @@ import {
   HiMoon,
   HiSun,
   HiBriefcase,
+  HiShieldCheck,
+  HiLockClosed,
+  HiSignalSlash,
+  HiCircleStack,
+  HiUsers,
+  HiPaintBrush,
+  HiCodeBracket,
+  HiBeaker,
+  HiRocketLaunch,
+  HiLifebuoy,
 } from "react-icons/hi2";
 import { GrProjects } from "react-icons/gr";
 
@@ -110,6 +120,21 @@ export const Icons = {
   ESLint:      (props: IconProps) => <SiEslint       {...props} />,
   GoogleCloud: (props: IconProps) => <SiGooglecloud  {...props} />,
   OpenAI:      (props: IconProps) => <SiOpenai       {...props} />,
+  
+  // ─── Security Section Icons ────────────────────────────────────────────────
+  ShieldCheck: (props: IconProps) => <HiShieldCheck  {...props} />,
+  Lock:        (props: IconProps) => <HiLockClosed   {...props} />,
+  SignalLow:   (props: IconProps) => <HiSignalSlash  {...props} />,
+  Database:    (props: IconProps) => <HiCircleStack  {...props} />,
+  
+  // ─── Delivery Model Icons ────────────────────────────────────────────────
+  Client:      (props: IconProps) => <HiUsers        {...props} />,
+  Analysis:    (props: IconProps) => <HiMagnifyingGlass {...props} />,
+  Design:      (props: IconProps) => <HiPaintBrush   {...props} />,
+  Development: (props: IconProps) => <HiCodeBracket  {...props} />,
+  Testing:     (props: IconProps) => <HiBeaker       {...props} />,
+  Deployment:  (props: IconProps) => <HiRocketLaunch {...props} />,
+  Support:     (props: IconProps) => <HiLifebuoy     {...props} />,
 };
 
 export default Icons;
