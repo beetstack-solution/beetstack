@@ -22,6 +22,7 @@ const TechStackSection = dynamic(() => import("@/features/tech-stack-section").t
 const DifferenceSection = dynamic(() => import("@/features/difference-section").then((mod) => mod.DifferenceSection), { ssr: false });
 const SecuritySection = dynamic(() => import("@/features/security-section").then((mod) => mod.SecuritySection), { ssr: false });
 const DeliveryModelSection = dynamic(() => import("@/features/delivery-model-section").then((mod) => mod.DeliveryModelSection), { ssr: false });
+const WhyBeetstackSection = dynamic(() => import("@/features/why-beetstack-section").then((mod) => mod.WhyBeetstackSection), { ssr: false });
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -136,6 +137,7 @@ export default function Home() {
         <WhoWeAreSection />
         <SliceSection />
         <ServicesSection />
+        <WhyBeetstackSection />
         <TechStackSection />
         <DifferenceSection />
         <SecuritySection />
