@@ -101,13 +101,45 @@ const RoadmapIcon = ({ step, index, scrollYProgress }: { step: Step; index: numb
         <div className="absolute inset-2.5 rounded-full border border-white/5 pointer-events-none" />
 
         <motion.div style={{ color: iconColor }} className="relative z-20">
-          <IconComp className="w-6 h-6" />
+          0 {index + 1}
         </motion.div>
       </motion.div>
 
       {/* Lifecycle Label */}
       <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-[10px] font-mono text-white/50 uppercase whitespace-nowrap bg-background/50 backdrop-blur-sm px-2 py-0.5 rounded border border-white/5">
         {step.title}
+      </div>
+    </div>
+  );
+};
+
+const DeliveryStep = ({ step, index }: { step: Step; index: number }) => {
+  const IconComponent = Icons[step.icon];
+
+  return (
+    <div className="relative flex-shrink-0 w-[100vw] h-full flex items-center justify-center px-12 lg:px-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 w-full max-w-6xl items-center relative">
+        {/* Left Side: Identity */}
+        <div className="flex flex-col items-center lg:items-end text-center lg:text-right space-y-4">
+          <div className="space-y-1">
+            <h4 className="text-6xl lg:text-9xl font-heading font-medium text-brand-lite-red/10 leading-none">
+              0{index + 1}
+            </h4>
+          </div>
+        </div>
+
+        {/* Right Side: Message */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+          <div className="w-16 h-16 rounded-2xl bg-brand-lite-red/10 flex items-center justify-center border border-brand-lite-red/20 mb-2">
+            <IconComponent className="w-8 h-8 text-brand-lite-red" />
+          </div>
+          <h3 className="text-4xl lg:text-7xl font-heading font-medium text-brand-green uppercase tracking-tighter leading-none">
+            {step.title}
+          </h3>
+          <p className="text-lg lg:text-2xl font-light text-foreground/70 leading-relaxed max-w-md">
+            {step.description}
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -146,7 +178,7 @@ export const DeliveryModelSection = () => {
             {/* Active Progress Line */}
             <motion.div
               style={{ scaleX, transformOrigin: "left" }}
-              className="absolute mt-2 top-1/2 left-0 w-full h-[2px] bg-brand-lite-red -translate-y-1/2 shadow-[0_0_15px_rgba(145,170,62,0.8)]"
+              className="absolute mt-2 top-1/2 left-0 w-full h-[2px] bg-brand-lite-red -translate-y-1/2 shadow-[0_0_15px_rgba(227,55,101,0.8)]"
             />
             {/* Phase Marker Icons */}
             {DELIVERY_STEPS.map((step, i) => (
@@ -197,35 +229,5 @@ export const DeliveryModelSection = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
-
-const DeliveryStep = ({ step, index }: { step: Step; index: number }) => {
-  const IconComponent = Icons[step.icon];
-
-  return (
-    <div className="relative flex-shrink-0 w-[100vw] h-full flex items-center justify-center px-12 lg:px-24">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 w-full max-w-6xl items-center relative">
-        {/* Left Side: Identity */}
-        <div className="flex flex-col items-center lg:items-end text-center lg:text-right space-y-4">
-
-          <div className="space-y-1">
-            <h4 className="text-4xl lg:text-9xl font-heading font-medium text-brand-green/20 leading-none text-brand-lite-red">
-              0{index + 1}
-            </h4>
-          </div>
-        </div>
-
-        {/* Right Side: Message */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
-          <h3 className="text-4xl lg:text-7xl font-heading font-medium text-brand-green uppercase tracking-tighter leading-none">
-            {step.title}
-          </h3>
-          <p className="text-lg lg:text-2xl font-light text-foreground/70 leading-relaxed max-w-md text-brand-lite-red">
-            {step.description}
-          </p>
-        </div>
-      </div>
-    </div>
   );
 };
