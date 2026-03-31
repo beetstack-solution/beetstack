@@ -14,10 +14,8 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
   const pointsRef = useRef<THREE.Points>(null);
   const finalTarget = useRef({ x: 0, y: 0 });
   const clockRef = useRef(0);
-
   const count = 2500;
 
-  // Particle positions
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -31,18 +29,16 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
     return pos;
   }, []);
 
-  // Per-particle blink: random phase & speed for each particle
   const blinkData = useMemo(() => {
     const phase = new Float32Array(count);
     const speed = new Float32Array(count);
     for (let i = 0; i < count; i++) {
       phase[i] = Math.random() * Math.PI * 2;
-      speed[i] = 0.6 + Math.random() * 1.8; // blink cycles per second
+      speed[i] = 0.6 + Math.random() * 1.8;
     }
     return { phase, speed };
   }, []);
 
-  // Vertex colors
   const colors = useMemo(() => {
     const col = new Float32Array(count * 3);
     const palette = [
@@ -61,7 +57,6 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
     return col;
   }, []);
 
-  // Mutable color buffer so we can animate per-particle brightness
   const liveColors = useMemo(() => new Float32Array(colors), [colors]);
 
   useFrame((_, delta) => {
@@ -69,24 +64,21 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
 
     clockRef.current += delta;
     const t = clockRef.current;
-
-    // ── Blink: modulate each particle's brightness via color brightness ──
     const geo = pointsRef.current.geometry;
+
     for (let i = 0; i < count; i++) {
-      // Smooth sine blink: value oscillates between 0.25 and 1.0
       const blink = 0.25 + 0.75 * (0.5 + 0.5 * Math.sin(blinkData.phase[i]! + t * blinkData.speed[i]!));
       liveColors[i * 3]     = colors[i * 3]!     * blink;
       liveColors[i * 3 + 1] = colors[i * 3 + 1]! * blink;
       liveColors[i * 3 + 2] = colors[i * 3 + 2]! * blink;
     }
+    
     const colorAttr = geo.getAttribute("color") as THREE.BufferAttribute;
     colorAttr.array = liveColors;
     colorAttr.needsUpdate = true;
 
-    // ── Rotation: lean TOWARD cursor direction ──
-    // Positive mouse.x → rotate y toward positive (lean right), etc.
-    const targetX =  mouseRef.current.y * 0.35;
-    const targetY =  mouseRef.current.x * 0.45;
+    const targetX = mouseRef.current.y * 0.35;
+    const targetY = mouseRef.current.x * 0.45;
 
     if (isMovingRef.current) {
       pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, targetX, 0.08);
@@ -94,7 +86,6 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
       finalTarget.current.x = pointsRef.current.rotation.x;
       finalTarget.current.y = pointsRef.current.rotation.y;
     } else {
-      // Idle: gentle autonomous drift + slowly settle toward last cursor position
       const driftX = finalTarget.current.x + Math.sin(t * 0.18) * 0.06;
       const driftY = finalTarget.current.y + Math.cos(t * 0.13) * 0.06;
       pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, driftX, 0.015);
