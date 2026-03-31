@@ -11,9 +11,8 @@ export function WhoWeAreSection() {
     <section id="about" ref={containerRef} className="relative py-20 bg-background">
       <div className="container mx-auto px-6 lg:px-24 relative z-10">
         <div className="flex flex-col w-full gap-20 items-center">
-          {/* Text Content */}
           <motion.div
-            initial={{ opacity: 50, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
             className="space-y-12 text-center max-w-4xl"
@@ -37,7 +36,6 @@ export function WhoWeAreSection() {
         </div>
       </div>
 
-      {/* Background Decorative Rings with Sequential "Bling" Animation */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-0">
         {([400, 600, 800, 1000, 1200, 1400] as const).map((size, i) => (
           <motion.div
@@ -51,14 +49,13 @@ export function WhoWeAreSection() {
             transition={{
               duration: 3,
               repeat: Infinity,
-              delay: i * 0.5, // Sequential "bling" effect
+              delay: i * 0.5,
               ease: "easeInOut"
             }}
           />
         ))}
       </div>
 
-      {/* Ambiance Decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-brand-green/[0.03] blur-[150px] pointer-events-none rounded-full" />
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-brand-red/[0.03] blur-[150px] pointer-events-none rounded-full" />
     </section>
