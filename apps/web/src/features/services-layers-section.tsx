@@ -4,21 +4,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
 
-interface ServiceItem {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-}
-
-const SERVICES: ServiceItem[] = [
-  { id: "software", title: "Custom Software", description: "End-to-end digital engineering tailored to your unique business logic. We build scalable, mission-critical systems designed to solve complex industrial challenges.", image: "/images/services/demo-img.png" },
-  { id: "saas", title: "SaaS Platforms", description: "Architecting multi-tenant cloud ecosystems for global scale. High-performance software-as-a-service platforms focused on user retention and technical speed.", image: "/images/services/demo-img.png" },
-  { id: "mobile", title: "Mobile Applications", description: "Resilient iOS and Android development with fluid performance. Precision-engineered native experiences that establish a dominant market authority.", image: "/images/services/demo-img.png" },
-  { id: "erp", title: "ERP & Enterprise", description: "Smarter resource planning and enterprise-grade software solutions. Unifying fragmented business processes into a cohesive, high-efficiency digital core.", image: "/images/services/demo-img.png" },
-  { id: "website", title: "Modern Websites", description: "High-fidelity digital presences engineered with Next.js and React. Focus on technical SEO, accessibility, and high-conversion web ecosystems.", image: "/images/services/demo-img.png" },
-  { id: "seo", title: "SEO & Marketing", description: "Data-driven digital marketing and technical SEO strategies. Dominating search results and scaling your brand presence across the global digital landscape.", image: "/images/services/demo-img.png" },
-];
+import { SERVICES, ServiceItem } from "../data";
 
 function BeetrootLayers({ progress, isForeground = false }: { progress: MotionValue<number>, isForeground?: boolean }) {
   const rotateSlower = useTransform(progress, [0, 1], [0, isForeground ? -90 : 120]);
