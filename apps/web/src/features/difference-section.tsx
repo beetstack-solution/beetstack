@@ -126,7 +126,7 @@ function GridItem({ diff, index }: { diff: typeof DIFFERENCES[0]; index: number 
 
 export function DifferenceSection() {
   return (
-    <section id="difference" className="relative py-48 overflow-hidden bg-background">
+    <section id="difference" className="relative py-24 overflow-hidden bg-background">
       {/* Global Background Ambiance */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 -right-1/4 w-full h-full bg-brand-red/[0.04] blur-[160px] rounded-full animate-pulse" />
@@ -138,7 +138,7 @@ export function DifferenceSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center text-center mb-28 space-y-8"
+          className="flex flex-col items-center text-center mb-16 space-y-8"
         >
           <h2 className="text-6xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.8] uppercase text-brand-lite-red">
             What Sets <br />
