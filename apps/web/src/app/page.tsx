@@ -23,7 +23,8 @@ const DifferenceSection = dynamic(() => import("@/features/difference-section").
 const SecuritySection = dynamic(() => import("@/features/security-section").then((mod) => mod.SecuritySection), { ssr: false });
 const DeliveryModelSection = dynamic(() => import("@/features/delivery-model-section").then((mod) => mod.DeliveryModelSection), { ssr: false });
 const WhyBeetstackSection = dynamic(() => import("@/features/why-beetstack-section").then((mod) => mod.WhyBeetstackSection), { ssr: false });
-const ContactSection = dynamic(() => import("@/features/contact-section").then((mod) => mod.ContactSection), { ssr: false });
+const ContactSection = dynamic(() => import("@/features/contact-section").then(mod => mod.ContactSection), { ssr: false });
+const Footer = dynamic(() => import("@/features/footer").then(mod => mod.Footer), { ssr: false });
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -146,23 +147,7 @@ export default function Home() {
         <ContactSection />
       </main>
 
-      <footer className="py-24 border-t border-primary/5 px-8 flex items-center justify-between opacity-40 text-[10px] font-black uppercase tracking-widest">
-        <div className="flex items-center gap-4">
-          <Image
-            src="/logo.png"
-            alt="Beetstack Logo"
-            width={80}
-            height={20}
-            className="h-5 w-auto object-contain transition-opacity hover:opacity-100"
-          />
-          <p>© 2026. Next-Generation IDE Platform.</p>
-        </div>
-        <div className="flex gap-12">
-          <a href="#" className="hover:text-primary transition-colors">Twitter</a>
-          <a href="#" className="hover:text-primary transition-colors">GitHub</a>
-          <a href="#" className="hover:text-primary transition-colors">Discord</a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
