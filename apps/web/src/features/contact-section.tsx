@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icons } from "@beetstack/icons";
 import { Button } from "@repo/ui/button";
+import { CONTACT_INFO } from "../data";
 
 export const ContactSection = () => {
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -23,18 +24,13 @@ export const ContactSection = () => {
       setFormState("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setFormState("idle"), 5000);
-    } catch (_error) {
+    } catch {
       setFormState("error");
       setTimeout(() => setFormState("idle"), 5000);
     }
   };
 
-  const contactInfo = [
-    { icon: "Mail", label: "Email", value: "info@beetstack.in", href: "mailto:info@beetstack.in" },
-    { icon: "Globe", label: "Website", value: "www.beetstack.in", href: "https://www.beetstack.in" },
-    { icon: "WhatsApp", label: "WhatsApp", value: "+91 6282345226", href: "https://wa.me/916282345226" },
-    { icon: "Phone", label: "Roshin", value: "+91 9037275308", href: "tel:+919037275308" },
-  ];
+
 
   return (
     <section className="px-6">
@@ -57,7 +53,7 @@ export const ContactSection = () => {
               </motion.div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                {contactInfo.map((item, index) => {
+                {CONTACT_INFO.map((item, index) => {
                   const Icon = Icons[item.icon as keyof typeof Icons];
                   return (
                     <motion.a
