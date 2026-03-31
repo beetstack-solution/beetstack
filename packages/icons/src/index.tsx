@@ -35,6 +35,7 @@ import {
   HiCpuChip,
   HiArrowTrendingUp,
   HiGlobeAmericas,
+  HiPhone,
 } from "react-icons/hi2";
 import { GrProjects } from "react-icons/gr";
 
@@ -65,6 +66,7 @@ import {
   SiEslint,
   SiGooglecloud,
   SiOpenai,
+  SiWhatsapp,
 } from "react-icons/si";
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
@@ -141,6 +143,8 @@ export const Icons = {
   Cpu:         (props: IconProps) => <HiCpuChip     {...props} />,
   TrendingUp:  (props: IconProps) => <HiArrowTrendingUp {...props} />,
   Globe:       (props: IconProps) => <HiGlobeAmericas {...props} />,
+  Phone:       (props: IconProps) => <HiPhone         {...props} />,
+  WhatsApp:    (props: IconProps) => <SiWhatsapp      {...props} />,
 };
 
 export default Icons;
