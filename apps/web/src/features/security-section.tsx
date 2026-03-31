@@ -2,13 +2,8 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useTime } from "framer-motion";
-import { Icons } from "@beetstack/icons";
 
-const SECURITY_FEATURES = [
-  { title: "Secure Architecture", description: "Fine-grained access control and multilayered technical defense architectures. Our systems minimize attack vectors and ensure data integrity at every transition point.", icon: Icons.Lock, tags: ["AES-256", "Zero-Trust", "Multi-Layered"] },
-  { title: "Offline-First", description: "Designed for restricted environments where connectivity is absent or prohibited. Local-first data synchronization ensures operational continuity in air-gapped zones.", icon: Icons.SignalLow, tags: ["Air-Gapped", "Local-Sync", "Sovereignty"] },
-  { title: "Critical Reliability", description: "Zero-failure operational parameters for high-stakes institutional use cases. We use resilient technical stacks that withstand extreme stress and uptime requirements.", icon: Icons.Database, tags: ["Zero-Failure", "Institutional", "Uptime"] },
-];
+import { SECURITY_FEATURES } from "../data";
 
 export function SecuritySection() {
   const containerRef = useRef<HTMLDivElement>(null);
