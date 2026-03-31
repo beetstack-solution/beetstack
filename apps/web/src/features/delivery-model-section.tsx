@@ -5,85 +5,23 @@ import { motion, useScroll, useSpring, useTransform, MotionValue } from "framer-
 import { Icons } from "@beetstack/icons";
 import Image from "next/image";
 
-interface Step {
-  id: string;
-  title: string;
-  description: string;
-  icon: keyof typeof Icons;
-  color: string;
-}
-
-const DELIVERY_STEPS: Step[] = [
-  {
-    id: "client",
-    title: "Client",
-    description: "Establishing a deep partnership and understanding your unique vision and business objectives.",
-    icon: "Client",
-    color: "brand-green",
-  },
-  {
-    id: "analysis",
-    title: "Analysis",
-    description: "Rigorous technical auditing and requirement gathering to build a foolproof development blueprint.",
-    icon: "Analysis",
-    color: "brand-green",
-  },
-  {
-    id: "design",
-    title: "Design",
-    description: "Crafting intuitive, high-fidelity user experiences and scalable system architectures.",
-    icon: "Design",
-    color: "brand-green",
-  },
-  {
-    id: "development",
-    title: "Development",
-    description: "Engineering robust, clean-code solutions using state-of-the-art technologies and frameworks.",
-    icon: "Development",
-    color: "brand-green",
-  },
-  {
-    id: "testing",
-    title: "Testing",
-    description: "Automated and manual quality assurance ensures zero-defect reliability and optimal performance.",
-    icon: "Testing",
-    color: "brand-green",
-  },
-  {
-    id: "deployment",
-    title: "Deployment",
-    description: "Seamless CI/CD integration and cloud orchestration for smooth, incident-free launches.",
-    icon: "Deployment",
-    color: "brand-green",
-  },
-  {
-    id: "support",
-    title: "Support",
-    description: "24/7 proactive monitoring and iterative enhancements to keep your platform ahead of the curve.",
-    icon: "Support",
-    color: "brand-green",
-  },
-];
+import { DELIVERY_STEPS, Step } from "../data";
 
 const RoadmapIcon = ({ step, index, scrollYProgress }: { step: Step; index: number; scrollYProgress: MotionValue<number> }) => {
-  const IconComp = Icons[step.icon];
   const stepCount = DELIVERY_STEPS.length - 1;
   const targetPos = index / stepCount;
 
-  // Track if the scroll has reached this milestone
   const isActive = useTransform(scrollYProgress,
     [targetPos - 0.005, targetPos],
     [0, 1]
   );
 
-  // Transition styles based on activity
   const bgColor = useTransform(isActive, [0, 1], ["#ffffff", "var(--brand-lite-red)"]);
   const iconColor = useTransform(isActive, [0, 1], ["var(--brand-lite-red)", "#ffffff"]);
   const borderColor = "var(--brand-red)";
 
   return (
     <div className="flex flex-col justify-center items-center group relative">
-      {/* Beetroot Leaf Sprout */}
       <div className="group-hover:opacity-100 transition-opacity">
         <Image src="/images/leef.png" alt="Beetroot leaf" width={30} height={30} className="object-contain" />
       </div>
@@ -95,7 +33,6 @@ const RoadmapIcon = ({ step, index, scrollYProgress }: { step: Step; index: numb
         }}
         className="relative z-10 w-12 h-12 rounded-full border-2 flex items-center justify-center shadow-lg transition-all duration-300"
       >
-        {/* Beetroot Internal Layers */}
         <div className="absolute inset-0.5 rounded-full border border-white/5 pointer-events-none" />
         <div className="absolute inset-1.5 rounded-full border border-white/5 pointer-events-none" />
         <div className="absolute inset-2.5 rounded-full border border-white/5 pointer-events-none" />
@@ -105,7 +42,6 @@ const RoadmapIcon = ({ step, index, scrollYProgress }: { step: Step; index: numb
         </motion.div>
       </motion.div>
 
-      {/* Lifecycle Label */}
       <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-[10px] font-mono text-white/50 uppercase whitespace-nowrap bg-background/50 backdrop-blur-sm px-2 py-0.5 rounded border border-white/5">
         {step.title}
       </div>
@@ -113,13 +49,12 @@ const RoadmapIcon = ({ step, index, scrollYProgress }: { step: Step; index: numb
   );
 };
 
-const DeliveryStep = ({ step, index }: { step: Step; index: number }) => {
+const DeliveryStep = ({ step }: { step: Step }) => {
   const IconComponent = Icons[step.icon];
 
   return (
     <div className="relative flex-shrink-0 w-[100vw] h-full flex items-center justify-center px-12 lg:px-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 w-full max-w-6xl items-center relative">
-        {/* Left Side: Identity */}
         <div className="flex flex-col items-center lg:items-end text-center lg:text-right space-y-4">
           <div className="space-y-1">
             <h4 className="text-6xl lg:text-9xl font-heading font-medium text-brand-lite-red/10 leading-none">
@@ -128,7 +63,6 @@ const DeliveryStep = ({ step, index }: { step: Step; index: number }) => {
           </div>
         </div>
 
-        {/* Right Side: Message */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
           <h3 className="text-4xl lg:text-7xl font-heading font-medium text-brand-green uppercase tracking-tighter leading-none">
             {step.title}
@@ -216,11 +150,10 @@ export const DeliveryModelSection = () => {
           style={{ x }}
           className="flex h-full relative z-20 w-[700vw]"
         >
-          {DELIVERY_STEPS.map((step, index) => (
+          {DELIVERY_STEPS.map((step) => (
             <DeliveryStep
               key={step.id}
               step={step}
-              index={index}
             />
           ))}
         </motion.div>
