@@ -36,11 +36,9 @@ const BENEFITS: Benefit[] = [
 export const WhyBeetstackSection = () => {
   return (
     <section id="why-beetstack" className="relative py-20 bg-background overflow-hidden">
-      {/* Background Subtle Gradient */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-brand-lite-red/2 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
         <div className="max-w-4xl mb-24 lg:mb-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -58,7 +56,6 @@ export const WhyBeetstackSection = () => {
           </motion.div>
         </div>
 
-        {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {BENEFITS.map((benefit, index) => {
             const IconComp = Icons[benefit.icon];
@@ -72,12 +69,9 @@ export const WhyBeetstackSection = () => {
                 className="group p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-brand-lite-red/30 transition-all duration-500 flex flex-col justify-between h-full"
               >
                 <div className="space-y-6">
-                  {/* Icon Node */}
                   <div className="relative w-16 h-16 rounded-full bg-brand-lite-red/5 flex items-center justify-center border border-brand-lite-red/10 group-hover:bg-brand-lite-red/10 transition-colors overflow-hidden">
-                    {/* Beetroot Rings Decoration */}
                     <div className="absolute inset-1 rounded-full border border-brand-lite-red/5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute inset-2 rounded-full border border-brand-lite-red/5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
-
                     {IconComp && <IconComp className="w-7 h-7 text-brand-lite-red relative z-10" />}
                   </div>
 
