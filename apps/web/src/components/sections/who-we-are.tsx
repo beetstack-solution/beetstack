@@ -29,6 +29,7 @@ export function WhoWeAreSection() {
                     width={50}
                     height={50}
                     className="w-10 sm:w-14"
+                    style={{ height: "auto" }}
                   />
                   <div className="relative w-14 h-14 sm:h-20 sm:w-20 flex items-center justify-center md:mb-2">
                     <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none">
