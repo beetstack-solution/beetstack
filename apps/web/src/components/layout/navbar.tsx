@@ -48,6 +48,8 @@ export function Navbar() {
               height={40}
               className="h-10 w-auto object-contain"
               priority
+              loading="eager"
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
 
@@ -122,6 +124,8 @@ export function Navbar() {
               height={36}
               className="h-8 w-auto object-contain"
               priority
+              loading="eager"
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
 
