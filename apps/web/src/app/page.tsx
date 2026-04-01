@@ -3,26 +3,26 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { HeroContent } from "@/features/hero/hero-content";
-import { Navbar } from "@/features/navbar";
+import { HeroContent } from "@/components/sections/hero/hero-content";
+import { Navbar } from "@/components/layout/navbar";
 
 // Optimized Dynamic Imports
-const Hero3D = dynamic(() => import("@/features/hero/hero-3d").then((mod) => mod.Hero3D), {
+const Hero3D = dynamic(() => import("@/components/sections/hero/hero-3d").then((mod) => mod.Hero3D), {
   ssr: false,
   loading: () => <div className="w-full h-full bg-primary/5 animate-pulse" />,
 });
 
-const ServicesSection = dynamic(() => import("@/features/services-layers-section").then((mod) => mod.ServicesLayersSection), { ssr: false });
-const WhoWeAreSection = dynamic(() => import("@/features/who-we-are-section").then((mod) => mod.WhoWeAreSection), { ssr: false });
-const SliceSection = dynamic(() => import("@/features/3d-slice-section").then((mod) => mod.SliceSection), { ssr: false });
-const TechStackSection = dynamic(() => import("@/features/tech-stack-section").then((mod) => mod.TechStackSection), { ssr: false });
-const DifferenceSection = dynamic(() => import("@/features/difference-section").then((mod) => mod.DifferenceSection), { ssr: false });
-const SecuritySection = dynamic(() => import("@/features/security-section").then((mod) => mod.SecuritySection), { ssr: false });
-const DeliveryModelSection = dynamic(() => import("@/features/delivery-model-section").then((mod) => mod.DeliveryModelSection), { ssr: false });
-const WhyBeetstackSection = dynamic(() => import("@/features/why-beetstack-section").then((mod) => mod.WhyBeetstackSection), { ssr: false });
-const ContactSection = dynamic(() => import("@/features/contact-section").then(mod => mod.ContactSection), { ssr: false });
-const TestimonialsSection = dynamic(() => import("@/features/testimonials-section").then(mod => mod.TestimonialsSection), { ssr: false });
-const Footer = dynamic(() => import("@/features/footer").then(mod => mod.Footer), { ssr: false });
+const ServicesSection = dynamic(() => import("@/components/sections/services-layers").then((mod) => mod.ServicesLayersSection), { ssr: false });
+const WhoWeAreSection = dynamic(() => import("@/components/sections/who-we-are").then((mod) => mod.WhoWeAreSection), { ssr: false });
+const SliceSection = dynamic(() => import("@/components/sections/3d-slice").then((mod) => mod.SliceSection), { ssr: false });
+const TechStackSection = dynamic(() => import("@/components/sections/tech-stack").then((mod) => mod.TechStackSection), { ssr: false });
+const DifferenceSection = dynamic(() => import("@/components/sections/difference").then((mod) => mod.DifferenceSection), { ssr: false });
+const SecuritySection = dynamic(() => import("@/components/sections/security").then((mod) => mod.SecuritySection), { ssr: false });
+const DeliveryModelSection = dynamic(() => import("@/components/sections/delivery-model").then((mod) => mod.DeliveryModelSection), { ssr: false });
+const WhyBeetstackSection = dynamic(() => import("@/components/sections/why-beetstack").then((mod) => mod.WhyBeetstackSection), { ssr: false });
+const ContactSection = dynamic(() => import("@/components/sections/contact").then(mod => mod.ContactSection), { ssr: false });
+const TestimonialsSection = dynamic(() => import("@/components/sections/testimonials").then(mod => mod.TestimonialsSection), { ssr: false });
+const Footer = dynamic(() => import("@/components/layout/footer").then(mod => mod.Footer), { ssr: false });
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
