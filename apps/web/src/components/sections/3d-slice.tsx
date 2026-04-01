@@ -9,6 +9,7 @@ import {
   useScroll,
   useVelocity,
   useAnimationFrame,
+  MotionValue,
 } from "framer-motion";
 import * as THREE from "three";
 
@@ -78,29 +79,32 @@ interface SliceProps {
   onPointerLeave: () => void;
   onPointerMove: (e: ThreeEvent<PointerEvent>) => void;
   isInteracting: React.MutableRefObject<boolean>;
-  scrollSpeedRef: React.MutableRefObject<number>;
+  scrollProgress: MotionValue<number>;
 }
 
-function BeetrootSlice({ hoveredRing, onPointerEnter, onPointerLeave, onPointerMove, scrollSpeedRef }: SliceProps) {
+function BeetrootSlice({ hoveredRing, onPointerEnter, onPointerLeave, onPointerMove, scrollProgress }: SliceProps) {
   const groupRef = useRef<THREE.Group>(null);
   const elapsed = useRef(0);
-  const yRotRef = useRef(0);
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
     elapsed.current += delta;
     const t = elapsed.current;
 
-    const scrollBoost = Math.min(Math.abs(scrollSpeedRef.current) * 0.0003, 0.5);
-    const speedMod = 1 + Math.sin(t * 0.7) * 0.40 + Math.sin(t * 1.9) * 0.15;
-    yRotRef.current += (0.055 + scrollBoost) * Math.max(speedMod, 0.3) * delta;
-    groupRef.current.rotation.x = yRotRef.current;
+    // Direct mapping: 0 to 1 scroll progress becomes 0 to 2*PI rotation
+    // This ensures only one full rotation over the entire section
+    const progress = scrollProgress.get();
+    groupRef.current.rotation.x = progress * Math.PI * 2;
 
-    groupRef.current.rotation.y = (90 * Math.PI) / 180 + Math.sin(t * 0.5) * 0.24;
-    groupRef.current.rotation.z = Math.sin(t * 0.35) * 0.09 + Math.sin(t * 1.1) * 0.03;
-    groupRef.current.position.y = Math.sin(t * 0.45) * 0.10 + Math.sin(t * 1.2) * 0.03;
+    // Set to 45 degree angle for presentation
+    const angle45 = Math.PI / 4;
+    groupRef.current.rotation.y = angle45 + Math.sin(t * 0.5) * 0.08;
+    groupRef.current.rotation.z = angle45 + Math.sin(t * 0.35) * 0.04;
+    
+    // Subtle float
+    groupRef.current.position.y = Math.sin(t * 0.45) * 0.12;
 
-    const s = 1 + Math.sin(t * 0.6) * 0.04;
+    const s = 1 + Math.sin(t * 0.6) * 0.02;
     groupRef.current.scale.set(s, s, s);
   });
 
@@ -123,7 +127,8 @@ function BeetrootSlice({ hoveredRing, onPointerEnter, onPointerLeave, onPointerM
   );
 }
 
-function Scene({ onHover, scrollSpeedRef }: { onHover: (idx: number | null, x: number, y: number) => void; scrollSpeedRef: React.MutableRefObject<number> }) {
+function Scene({ onHover, scrollProgress }: { onHover: (idx: number | null, x: number, y: number) => void; scrollProgress: MotionValue<number> }) {
+
   const [hoveredRing, setHoveredRing] = useState<number | null>(null);
   const isInteracting = useRef(false);
 
@@ -161,7 +166,7 @@ function Scene({ onHover, scrollSpeedRef }: { onHover: (idx: number | null, x: n
         onPointerLeave={handleLeave}
         onPointerMove={handleMove}
         isInteracting={isInteracting}
-        scrollSpeedRef={scrollSpeedRef}
+        scrollProgress={scrollProgress}
       />
     </>
   );
@@ -244,7 +249,13 @@ function ServiceTooltip({ service, x, y }: { service: (typeof SERVICES)[0] | nul
 
 export function SliceSection() {
   const [hovered, setHovered] = useState<{ index: number; x: number; y: number } | null>(null);
-  const { scrollY } = useScroll();
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const { scrollY, scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
   const rawVel = useVelocity(scrollY);
   const scrollDirRef = useRef<number>(1);
   const scrollRawRef = useRef<number>(0);
@@ -265,7 +276,7 @@ export function SliceSection() {
   const activeService = hovered !== null ? (SERVICES[hovered.index] ?? null) : null;
 
   return (
-    <section id="portfolio" className="relative overflow-hidden h-full">
+    <section id="portfolio" ref={sectionRef} className="relative overflow-hidden h-full">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-red/[0.06] blur-[110px]" />
       </div>
@@ -287,7 +298,7 @@ export function SliceSection() {
         </div>
         <div className="absolute inset-0 z-10" style={{ cursor: hovered ? "none" : "grab" }}>
           <Canvas camera={{ position: [0, 1.2, 10], fov: 44 }} gl={{ antialias: true, alpha: true }} style={{ background: "transparent", width: "100%", height: "100%" }}>
-            <Scene onHover={handleHover} scrollSpeedRef={scrollSpeedRef} />
+            <Scene onHover={handleHover} scrollProgress={scrollYProgress} />
           </Canvas>
         </div>
       </div>
