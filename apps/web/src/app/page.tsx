@@ -24,6 +24,7 @@ const SecuritySection = dynamic(() => import("@/features/security-section").then
 const DeliveryModelSection = dynamic(() => import("@/features/delivery-model-section").then((mod) => mod.DeliveryModelSection), { ssr: false });
 const WhyBeetstackSection = dynamic(() => import("@/features/why-beetstack-section").then((mod) => mod.WhyBeetstackSection), { ssr: false });
 const ContactSection = dynamic(() => import("@/features/contact-section").then(mod => mod.ContactSection), { ssr: false });
+const TestimonialsSection = dynamic(() => import("@/features/testimonials-section").then(mod => mod.TestimonialsSection), { ssr: false });
 const Footer = dynamic(() => import("@/features/footer").then(mod => mod.Footer), { ssr: false });
 
 export default function Home() {
@@ -144,6 +145,7 @@ export default function Home() {
         <DifferenceSection />
         <SecuritySection />
         <DeliveryModelSection />
+        <TestimonialsSection />
         <ContactSection />
       </main>
 
