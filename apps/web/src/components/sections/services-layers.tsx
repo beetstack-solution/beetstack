@@ -83,7 +83,13 @@ function LadderSection({ service, index }: { service: ServiceItem, index: number
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }}
               className="relative w-full h-full rounded-[2rem] overflow-hidden group z-10"
             >
-              <Image src={service.image} alt={service.title} fill className="object-cover" />
+              <Image 
+                src={service.image} 
+                alt={service.title} 
+                fill 
+                className="object-cover" 
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
             </motion.div>
             <BeetrootLayers progress={scrollYProgress} isForeground={true} />
           </motion.div>
