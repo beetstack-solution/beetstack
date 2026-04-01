@@ -151,7 +151,7 @@ function Scene({ onHover, scrollSpeedRef }: { onHover: (idx: number | null, x: n
         minPolarAngle={Math.PI * 0.15}
         dampingFactor={0.05}
         enableDamping
-        rotateSpeed={0.45}
+        rotateSpeed={0.5}
         onStart={() => { isInteracting.current = true; }}
         onEnd={() => { isInteracting.current = false; }}
       />
@@ -187,7 +187,7 @@ function VelocityMarquee({
     if (!innerRef.current) return;
     const W = innerRef.current.scrollWidth / 4;
     const dt = delta / 1000;
-    const speed = rowSign * scrollDirRef.current * (45 + Math.min(Math.abs(scrollRawRef.current) * 0.35, 600));
+    const speed = rowSign * scrollDirRef.current * (160 + Math.min(Math.abs(scrollRawRef.current) * 0.35, 600));
     posRef.current += speed * dt;
     if (posRef.current <= -W) posRef.current += W;
     if (posRef.current >= 0) posRef.current -= W;
@@ -195,8 +195,8 @@ function VelocityMarquee({
   });
 
   const quad = [...items, ...items, ...items, ...items];
-  const outlinedTextStyle: React.CSSProperties = outlined ? { color: "transparent", WebkitTextStroke: "2.5px var(--brand-lite-red)" } : {};
-  const outlinedDotStyle: React.CSSProperties = outlined ? { color: "transparent", WebkitTextStroke: "1px var(--brand-red)", opacity: 0.5 } : { opacity: 0.4 };
+  const outlinedTextStyle: React.CSSProperties = outlined ? { color: "transparent", WebkitTextStroke: "2.5px white" } : {};
+  const outlinedDotStyle: React.CSSProperties = outlined ? { color: "transparent", WebkitTextStroke: "1px var(--brand-green)", opacity: 0.5 } : { opacity: 0.4 };
 
   return (
     <div className="overflow-hidden w-full pointer-events-none" style={{ maskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)" }}>
@@ -205,7 +205,7 @@ function VelocityMarquee({
           item === "·" ? (
             <span key={i} className="text-brand-red select-none" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", ...outlinedDotStyle }}>·</span>
           ) : (
-            <span key={i} className="font-heading font-medium uppercase select-none text-brand-lite-red" style={{ fontSize: "clamp(15rem, 5vw, 4.5rem)", letterSpacing: "-0.02em", lineHeight: 1, ...outlinedTextStyle }}>
+            <span key={i} className="font-heading font-black uppercase select-none text-brand-green font-mono" style={{ fontSize: "clamp(15rem, 5vw, 4.5rem)", letterSpacing: "-0.02em", lineHeight: 1, ...outlinedTextStyle }}>
               {item}
             </span>
           )
@@ -228,8 +228,8 @@ function ServiceTooltip({ service, x, y }: { service: (typeof SERVICES)[0] | nul
           className="pointer-events-none fixed z-[999]"
           style={{ left: x + 22, top: y - 20 }}
         >
-          <div className="relative rounded-2xl border border-brand-lite-red/30 bg-background/92 backdrop-blur-2xl shadow-2xl shadow-brand-lite-red/15 px-5 py-4 max-w-[260px]">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-lite-red/8 via-transparent to-brand-red/4 pointer-events-none" />
+          <div className="relative rounded-3xl border border-brand-lite-red/30 bg-background/90 backdrop-blur-2xl shadow-2xl shadow-brand-lite-red/15 px-10 py-4 max-w-[260px]">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-lite-red/8 via-transparent to-brand-red/4 pointer-events-none" />
             <span className="inline-block text-[10px] font-heading font-bold uppercase tracking-widest text-brand-lite-red mb-2 px-2.5 py-0.5 rounded-full bg-brand-lite-red/10 border border-brand-lite-red/20">
               {service.tag}
             </span>
@@ -273,8 +273,17 @@ export function SliceSection() {
         <div className="absolute left-0 right-0 z-0" style={{ top: "30%" }}>
           <VelocityMarquee items={ROW1_ITEMS} rowSign={-1} scrollDirRef={scrollDirRef} scrollRawRef={scrollRawRef} />
         </div>
-        <div className="absolute left-0 right-0 z-20" style={{ top: "30%" }}>
-          <VelocityMarquee items={ROW1_ITEMS} rowSign={-1} scrollDirRef={scrollDirRef} scrollRawRef={scrollRawRef} outlined />
+        <div
+          className="absolute left-0 right-0 z-20 pointer-events-none"
+          style={{ top: "30%" }}
+        >
+          <VelocityMarquee
+            items={ROW1_ITEMS}
+            rowSign={-1}
+            scrollDirRef={scrollDirRef}
+            scrollRawRef={scrollRawRef}
+            outlined
+          />
         </div>
         <div className="absolute inset-0 z-10" style={{ cursor: hovered ? "none" : "grab" }}>
           <Canvas camera={{ position: [0, 1.2, 10], fov: 44 }} gl={{ antialias: true, alpha: true }} style={{ background: "transparent", width: "100%", height: "100%" }}>
