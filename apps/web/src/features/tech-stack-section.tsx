@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Icons } from "@beetstack/icons";
 import Image from "next/image";
+import { AnimatePresence } from "framer-motion";
 
 import { TECHS } from "../data";
 
@@ -73,6 +74,12 @@ function BeetrootBadge({ tech, index }: { tech: (typeof TECHS)[number]; index: n
 }
 
 export function TechStackSection() {
+  const [showAll, setShowAll] = useState(false);
+  
+  // Show exactly 8 items initially (~30% of 24) to hide ~70% as requested
+  const initialItemsCount = 8;
+  const displayedTechs = showAll ? TECHS : TECHS.slice(0, initialItemsCount);
+
   return (
     <section id="expertise" className="relative py-24 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -113,24 +120,40 @@ export function TechStackSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-x-8 gap-y-10 place-items-center">
-          {TECHS.map((tech, i) => (
-            <BeetrootBadge key={tech.name} tech={tech} index={i} />
-          ))}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-x-8 gap-y-12 place-items-center">
+          <AnimatePresence mode="popLayout">
+            {displayedTechs.map((tech, i) => (
+              <BeetrootBadge key={tech.name} tech={tech} index={i} />
+            ))}
+          </AnimatePresence>
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="flex items-center justify-center gap-4 mt-16"
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="flex flex-col items-center justify-center mt-16 space-y-8"
         >
-          <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-transparent to-brand-red/30" />
-          <span className="text-[10px] font-heading font-semibold uppercase tracking-[0.3em] text-brand-red/40">
-            And many more
-          </span>
-          <div className="h-px flex-1 max-w-[100px] bg-gradient-to-l from-transparent to-brand-red/30" />
+          <div className="flex items-center justify-center gap-4 w-full">
+            <div className="h-px flex-1 max-w-[150px] bg-gradient-to-r from-transparent to-brand-red/30" />
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="group relative px-8 py-3 rounded-full border border-brand-red/20 bg-brand-red/5 hover:bg-brand-red/10 transition-all duration-300"
+            >
+              <span className="text-[11px] font-heading font-bold uppercase tracking-[0.2em] text-brand-lite-red group-hover:text-brand-red transition-colors flex items-center gap-2">
+                {showAll ? "Show Less" : `View All (${TECHS.length})`}
+                <Icons.ChevronDown className={`w-3 h-3 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`} />
+              </span>
+            </button>
+            <div className="h-px flex-1 max-w-[150px] bg-gradient-to-l from-transparent to-brand-red/30" />
+          </div>
+          
+          {!showAll && (
+            <span className="text-[10px] font-heading font-semibold uppercase tracking-[0.3em] text-brand-red/40 animate-pulse">
+              + Discover our full ecosystem
+            </span>
+          )}
         </motion.div>
       </div>
     </section>
