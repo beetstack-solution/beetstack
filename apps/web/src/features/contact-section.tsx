@@ -33,8 +33,8 @@ export const ContactSection = () => {
 
 
   return (
-    <section className="px-6">
-      <div id="contact" className="relative py-24 lg:py-40 bg-brand-lite-red overflow-hidden selection:bg-white selection:text-brand-lite-red rounded-[50px]">
+    <section id="contact" className="px-6">
+      <div className="relative py-24 lg:py-40 bg-brand-lite-red overflow-hidden selection:bg-white selection:text-brand-lite-red rounded-[50px]">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-black/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
 
@@ -82,9 +82,11 @@ export const ContactSection = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Name</label>
+                    <label htmlFor="contact-name" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Name</label>
                     <input
                       required
+                      id="contact-name"
+                      name="name"
                       type="text"
                       placeholder="John Doe"
                       value={formData.name}
@@ -93,9 +95,11 @@ export const ContactSection = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Email</label>
+                    <label htmlFor="contact-email" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Email</label>
                     <input
                       required
+                      id="contact-email"
+                      name="email"
                       type="email"
                       placeholder="john@example.com"
                       value={formData.email}
@@ -106,9 +110,11 @@ export const ContactSection = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Subject</label>
+                  <label htmlFor="contact-subject" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Subject</label>
                   <input
                     required
+                    id="contact-subject"
+                    name="subject"
                     type="text"
                     placeholder="How can we help?"
                     value={formData.subject}
@@ -118,9 +124,11 @@ export const ContactSection = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Message</label>
+                  <label htmlFor="contact-message" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Message</label>
                   <textarea
                     required
+                    id="contact-message"
+                    name="message"
                     rows={4}
                     placeholder="Tell us about your project..."
                     value={formData.message}

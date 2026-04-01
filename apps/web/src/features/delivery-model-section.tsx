@@ -57,9 +57,9 @@ const DeliveryStep = ({ step }: { step: Step }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 w-full max-w-6xl items-center relative">
         <div className="flex flex-col items-center lg:items-end text-center lg:text-right space-y-4">
           <div className="space-y-1">
-            <h4 className="text-6xl lg:text-9xl font-heading font-medium text-brand-lite-red/10 leading-none">
+            <div className="text-6xl lg:text-9xl font-heading font-medium text-brand-lite-red/10 leading-none">
               <IconComponent className="text-brand-lite-red" />
-            </h4>
+            </div>
           </div>
         </div>
 

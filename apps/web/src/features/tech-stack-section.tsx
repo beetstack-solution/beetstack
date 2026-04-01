@@ -76,8 +76,9 @@ function BeetrootBadge({ tech, index }: { tech: (typeof TECHS)[number]; index: n
 export function TechStackSection() {
   const [showAll, setShowAll] = useState(false);
   
-  // Show exactly 8 items initially (~30% of 24) to hide ~70% as requested
-  const initialItemsCount = 8;
+  // Show 12 items initially. 
+  // 12 is the LCM of 3, 4, and 6 columns, ensuring full rows on all screen sizes (2 rows desktop, 3 tablet, 4 mobile).
+  const initialItemsCount = 12;
   const displayedTechs = showAll ? TECHS : TECHS.slice(0, initialItemsCount);
 
   return (
