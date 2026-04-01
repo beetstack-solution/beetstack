@@ -6,7 +6,7 @@ import { Icons } from "@beetstack/icons";
 import { Button } from "@repo/ui/button";
 import { CONTACT_INFO } from "@/data";
 
-export const ContactSection = () => {
+export function ContactSection() {
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",

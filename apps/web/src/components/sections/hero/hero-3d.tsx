@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { DynamicParticles } from "./dynamic-particles";
 

@@ -76,7 +76,7 @@ const DeliveryStep = ({ step }: { step: Step }) => {
   );
 };
 
-export const DeliveryModelSection = () => {
+export function DeliveryModelSection() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,

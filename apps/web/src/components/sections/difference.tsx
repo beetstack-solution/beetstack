@@ -53,6 +53,8 @@ const GridItem = React.memo(({ diff, index }: { diff: typeof DIFFERENCES[0]; ind
   );
 });
 
+GridItem.displayName = "GridItem";
+
 export function DifferenceSection() {
   return (
     <section id="difference" className="relative py-24 overflow-hidden bg-background">

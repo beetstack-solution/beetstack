@@ -6,7 +6,7 @@ import { Icons } from "@beetstack/icons";
 
 import { BENEFITS } from "@/data";
 
-export const WhyBeetstackSection = () => {
+export function WhyBeetstackSection() {
   return (
     <section id="why-beetstack" className="relative py-20 bg-background overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-brand-lite-red/2 blur-[120px] rounded-full pointer-events-none" />

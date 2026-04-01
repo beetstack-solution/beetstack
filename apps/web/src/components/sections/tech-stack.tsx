@@ -72,6 +72,8 @@ const BeetrootBadge = React.memo(({ tech, index }: { tech: (typeof TECHS)[number
   );
 });
 
+BeetrootBadge.displayName = "BeetrootBadge";
+
 export function TechStackSection() {
   const [showAll, setShowAll] = useState(false);
   
