@@ -75,7 +75,7 @@ export default function RootLayout({
       <head>
         <JsonLd />
       </head>
-      <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
