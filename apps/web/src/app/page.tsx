@@ -38,7 +38,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white">
+    <div className="relative min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white">
 
       <Navbar />
 
@@ -52,7 +52,7 @@ export default function Home() {
 
       <section className="relative">
         {/* Sticky 3D Background */}
-        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden relative">
           <motion.div
             style={{ opacity: heroOpacity, scale: heroScale }}
             className="absolute inset-0 z-0"
@@ -60,7 +60,7 @@ export default function Home() {
             <Hero3D />
           </motion.div>
 
-          <div className="relative z-10 w-full">
+          <div className="relative z-10 w-full container mx-auto px-4">
             <HeroContent />
           </div>
         </div>
@@ -69,7 +69,9 @@ export default function Home() {
       {/* Main Content Flow */}
       <main className="relative z-20 space-y-20 pb-20">
         <WhoWeAreSection />
-        <SliceSection />
+        <div className="relative">
+          <SliceSection />
+        </div>
         <ServicesSection />
         <WhyBeetstackSection />
         <TechStackSection />
