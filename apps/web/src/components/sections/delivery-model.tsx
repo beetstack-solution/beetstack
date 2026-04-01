@@ -16,14 +16,14 @@ const RoadmapIcon = ({ step, index, scrollYProgress }: { step: Step; index: numb
     [0, 1]
   );
 
-  const bgColor = useTransform(isActive, [0, 1], ["#ffffff", "var(--brand-lite-red)"]);
-  const iconColor = useTransform(isActive, [0, 1], ["var(--brand-lite-red)", "#ffffff"]);
+  const bgColor = useTransform(isActive, [0, 1], ["#ffffff", "#e33765"]);
+  const iconColor = useTransform(isActive, [0, 1], ["#e33765", "#ffffff"]);
   const borderColor = "var(--brand-red)";
 
   return (
     <div className="flex flex-col justify-center items-center group relative">
       <div className="group-hover:opacity-100 transition-opacity">
-        <Image src="/images/leef.png" alt="Beetroot leaf" width={30} height={30} className="object-contain" />
+        <Image src="/images/leef.png" alt="Beetroot leaf" width={30} height={30} className="object-contain" style={{ height: "auto" }} />
       </div>
 
       <motion.div
