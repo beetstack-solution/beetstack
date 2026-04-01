@@ -63,14 +63,14 @@ export function DifferenceSection() {
 
       <div className="container mx-auto px-6 lg:px-24 relative z-10">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-col items-center text-center mb-16 space-y-8">
-          <h2 className="text-6xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.8] uppercase text-brand-lite-red">
+          <h2 className="text-4xl sm:text-6xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.8] uppercase text-brand-lite-red">
             What Sets <br />
             <span className="text-brand-green">Us Apart</span>
           </h2>
-          <p className="text-xl text-muted-foreground/50 max-w-xl font-light">Industrial engineering standards combined with modern aesthetic precision.</p>
+          <p className="text-lg sm:text-xl text-muted-foreground/50 max-w-xl font-light">Industrial engineering standards combined with modern aesthetic precision.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-[340px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 md:auto-rows-[340px]">
           {DIFFERENCES.map((diff, i) => (
             <GridItem key={diff.id} diff={diff} index={i} />
           ))}
