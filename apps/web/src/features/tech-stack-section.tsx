@@ -90,7 +90,7 @@ export function TechStackSection() {
         {([380, 550, 720, 900] as const).map((size, i) => (
           <motion.div
             key={size}
-            className="absolute rounded-full border border-brand-red"
+            className={`absolute rounded-full border border-brand-red ${i >= 2 ? "lg:hidden" : ""}`}
             style={{ width: size, height: size }}
             animate={{ rotate: i % 2 === 0 ? 360 : -360, opacity: [0.04, 0.09, 0.04] }}
             transition={{
