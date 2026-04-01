@@ -73,9 +73,9 @@ function LadderSection({ service, index }: { service: ServiceItem, index: number
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <div ref={containerRef} className="relative min-h-screen flex items-center">
-      <div className="container mx-auto px-6 lg:px-24">
-        <div className={`grid lg:grid-cols-2 gap-16 lg:gap-32 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
+    <div ref={containerRef} className="relative min-h-[80vh] lg:min-h-screen flex items-center py-16 lg:py-0">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-24">
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-32 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
           <motion.div style={{ y: imageY, opacity }} className={`relative aspect-[4/3] flex items-center justify-center ${!isEven ? 'lg:order-last' : ''}`}>
             <BeetrootLayers progress={scrollYProgress} isForeground={false} />
             <motion.div
@@ -105,9 +105,9 @@ function LadderSection({ service, index }: { service: ServiceItem, index: number
               <div className="h-[1px] flex-1 bg-gradient-to-r from-brand-red to-transparent opacity-20 mt-4" />
             </div>
 
-            <div className="space-y-6">
-              <h3 className="text-4xl lg:text-6xl font-heading font-medium tracking-tighter leading-tight text-brand-lite-red uppercase">{service.title}</h3>
-              <p className="text-xl lg:text-2xl font-light text-foreground leading-relaxed max-w-xl">{service.description}</p>
+            <div className="space-y-4 sm:space-y-6">
+              <h3 className="text-3xl sm:text-4xl lg:text-6xl font-heading font-medium tracking-tighter leading-tight text-brand-lite-red uppercase">{service.title}</h3>
+              <p className="text-base sm:text-xl lg:text-2xl font-light text-foreground leading-relaxed max-w-xl">{service.description}</p>
             </div>
           </motion.div>
         </div>
@@ -122,9 +122,9 @@ export function ServicesLayersSection() {
 
   return (
     <section id="services" ref={containerRef} className="relative bg-background overflow-hidden">
-      <div className="h-screen flex flex-col items-center justify-center px-6 text-center">
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="space-y-8">
-          <h2 className="text-7xl lg:text-[10rem] font-heading font-semibold tracking-tighter leading-[0.85] uppercase text-brand-lite-red">
+      <div className="h-screen flex flex-col items-center justify-center px-5 sm:px-6 text-center">
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="space-y-6 sm:space-y-8">
+          <h2 className="text-5xl sm:text-7xl lg:text-[10rem] font-heading font-semibold tracking-tighter leading-[0.85] uppercase text-brand-lite-red">
             What We <br />
             <span className="text-brand-green">Provide</span>
           </h2>
