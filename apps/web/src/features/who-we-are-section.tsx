@@ -18,8 +18,33 @@ export function WhoWeAreSection() {
             className="space-y-12 text-center max-w-4xl"
           >
             <div className="space-y-12 flex justify-center">
-              <h2 className="text-6xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase text-brand-lite-red flex items-end">
-                Wh <div className="flex flex-col justify-center items-center mr-4"> <Image src="/images/leef.png" alt="leef" width={50} height={50} className="-mb-4" /> o</div> <span className="text-brand-green">We Are</span>
+              <h2 className="text-6xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase text-brand-lite-red flex flex-wrap items-end justify-center text-center">
+
+                <span>Wh</span>
+
+                <div className="flex flex-col justify-center items-center sm:mr-4 ml-1">
+                  <Image
+                    src="/images/leef.png"
+                    alt="leef"
+                    width={50}
+                    height={50}
+                    className="w-10 sm:w-14"
+                  />
+                  <div className="relative w-14 h-14 sm:h-20 sm:w-20 flex items-center justify-center md:mb-2">
+                    <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none">
+                      <circle cx="50" cy="50" r="48" stroke="#d1083dff" strokeWidth="4" fill="none" opacity="0.8" />
+                      <circle cx="50" cy="50" r="38" stroke="#e33765" strokeWidth="3" fill="none" opacity="0.4" />
+                      <circle cx="50" cy="50" r="28" stroke="#a21c3c" strokeWidth="2" fill="none" opacity="0.2" />
+                    </svg>
+                    <span className="relative text-[20px] font-mono font-bold text-brand-red tracking-[0.1em] z-10"></span>
+                    <div className="absolute inset-0 bg-brand-red/5 rounded-full" />
+                  </div>
+                </div>
+
+                <span className="w-full lg:w-auto text-brand-green mt-2 lg:mt-0">
+                  We Are
+                </span>
+
               </h2>
             </div>
 
@@ -36,7 +61,7 @@ export function WhoWeAreSection() {
         </div>
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-0">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-0 max-w-[100vw] overflow-x-hidden overflow-y-visible">
         {([400, 600, 800, 1000, 1200, 1400] as const).map((size, i) => (
           <motion.div
             key={i}
