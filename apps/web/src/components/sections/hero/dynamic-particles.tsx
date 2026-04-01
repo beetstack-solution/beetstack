@@ -59,15 +59,32 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
 
   const liveColors = useMemo(() => new Float32Array(colors), [colors]);
 
+  const intensity = useRef(0);
+  
   useFrame((_, delta) => {
     if (!pointsRef.current || !mouseRef.current) return;
 
-    clockRef.current += delta;
+    // Smoothly transition intensity based on cursor movement
+    intensity.current = THREE.MathUtils.lerp(intensity.current, isMovingRef.current ? 1 : 0, 0.06);
+    
+    // Skip heavy calculations if intensity is very low
+    if (intensity.current < 0.005) {
+      if (intensity.current > 0) {
+        // Fade out any remaining rotation/blink
+        const geo = pointsRef.current.geometry;
+        const colorAttr = geo.getAttribute("color") as THREE.BufferAttribute;
+        colorAttr.needsUpdate = false;
+      }
+      return;
+    }
+
+    clockRef.current += delta * intensity.current;
     const t = clockRef.current;
     const geo = pointsRef.current.geometry;
 
     for (let i = 0; i < count; i++) {
-      const blink = 0.25 + 0.75 * (0.5 + 0.5 * Math.sin(blinkData.phase[i]! + t * blinkData.speed[i]!));
+      const blinkBase = 0.5 + 0.5 * Math.sin(blinkData.phase[i]! + t * blinkData.speed[i]!);
+      const blink = 0.4 + 0.6 * blinkBase;
       liveColors[i * 3]     = colors[i * 3]!     * blink;
       liveColors[i * 3 + 1] = colors[i * 3 + 1]! * blink;
       liveColors[i * 3 + 2] = colors[i * 3 + 2]! * blink;
@@ -86,8 +103,8 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
       finalTarget.current.x = pointsRef.current.rotation.x;
       finalTarget.current.y = pointsRef.current.rotation.y;
     } else {
-      const driftX = finalTarget.current.x + Math.sin(t * 0.18) * 0.06;
-      const driftY = finalTarget.current.y + Math.cos(t * 0.13) * 0.06;
+      const driftX = finalTarget.current.x + Math.sin(t * 0.18) * 0.04;
+      const driftY = finalTarget.current.y + Math.cos(t * 0.13) * 0.04;
       pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, driftX, 0.015);
       pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, driftY, 0.015);
     }
