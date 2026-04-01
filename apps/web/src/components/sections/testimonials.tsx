@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 import { TESTIMONIALS } from "@/data";
 
-// Arc positions for 7 avatars — same curved model as reference
+// Arc positions for 7 avatars — mapped to dist from activeIndex
 const ARC_POSITIONS = [
   { x: -42, y: -28, scale: 0.55, zIndex: 1 },
   { x: -29, y: -14, scale: 0.65, zIndex: 2 },
@@ -19,6 +19,8 @@ const ARC_POSITIONS = [
 
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(3); // start centre
+  const [isPaused, setIsPaused] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const goTo = useCallback(
     (dir: 1 | -1) => {
@@ -29,21 +31,38 @@ export function TestimonialsSection() {
     []
   );
 
-  // Build the sliding window of 7 avatars centred on activeIndex
-  const windowIndices = Array.from({ length: 7 }, (_, i) =>
-    (activeIndex - 3 + i + TESTIMONIALS.length) % TESTIMONIALS.length
-  );
+  // Auto-update effect: every 3 seconds
+  useEffect(() => {
+    if (isPaused) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      return;
+    }
+
+    timerRef.current = setInterval(() => {
+      goTo(1);
+    }, 3000);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isPaused, goTo]);
 
   const active = TESTIMONIALS[activeIndex]!;
 
   return (
-    <section id="testimonials" className="relative py-24 lg:py-32 overflow-hidden bg-background">
+    <section 
+      id="testimonials" 
+      className="relative py-24 lg:py-32 overflow-hidden bg-background"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+    >
       {/* Ambient blobs */}
       <div className="absolute top-0 left-1/4 w-[60vw] h-[60vw] bg-brand-lite-red/[0.04] rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[50vw] h-[50vw] bg-brand-green/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-24 relative z-10">
-
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -60,59 +79,66 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Avatar Arc */}
-        <div className="relative flex items-end justify-center h-44 mb-2 select-none">
+        {/* Avatar Arc with smooth sliding (Non-Spring) */}
+        <div className="relative h-44 mb-16 select-none flex items-end justify-center">
+          <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
+            <AnimatePresence initial={false}>
+              {TESTIMONIALS.map((person, i) => {
+                // Calculate wrap-around distance
+                let dist = i - activeIndex;
+                const half = Math.floor(TESTIMONIALS.length / 2);
+                if (dist > half) dist -= TESTIMONIALS.length;
+                if (dist < -half) dist += TESTIMONIALS.length;
 
+                const isVisible = Math.abs(dist) <= 3;
+                if (!isVisible) return null;
 
-          <div className="relative flex items-end justify-center gap-0 w-full max-w-3xl mx-auto px-8">
-            {windowIndices.map((dataIdx, slotIdx) => {
-              const pos = ARC_POSITIONS[slotIdx]!;
-              const isCentre = slotIdx === 3;
-              const person = TESTIMONIALS[dataIdx]!;
+                const slotIdx = dist + 3; // map -3..3 to 0..6
+                const pos = ARC_POSITIONS[slotIdx]!;
+                const isCentre = dist === 0;
 
-              return (
-                <motion.button
-                  key={`${dataIdx}-${slotIdx}`}
-                  initial={false}
-                  animate={{
-                    y: pos.y * -1.5,
-                    scale: pos.scale,
-                    zIndex: pos.zIndex,
-                    opacity: isCentre ? 1 : 0.6 + (pos.scale - 0.55) * 1.5,
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  onClick={() => {
-                    const offset = slotIdx - 3;
-                    if (offset !== 0) {
-                      setActiveIndex(
-                        (activeIndex + offset + TESTIMONIALS.length) % TESTIMONIALS.length
-                      );
-                    }
-                  }}
-                  className="relative flex-1 flex justify-center items-end origin-bottom cursor-pointer focus:outline-none mb-16"
-                  style={{ zIndex: pos.zIndex }}
-                >
-                  <div
-                    className={`relative rounded-full overflow-hidden transition-all duration-300 ${isCentre
-                      ? "ring-4 ring-brand-lite-red shadow-[0_0_30px_rgba(227,55,101,0.35)]"
-                      : "ring-2 ring-brand-lite-red hover:ring-brand-lite-red/50"
-                      }`}
-                    style={{
-                      width: isCentre ? 96 : 64,
-                      height: isCentre ? 96 : 64,
+                return (
+                  <motion.button
+                    key={person.id}
+                    initial={false}
+                    animate={{
+                      x: dist * 110, // Horizontal distribution
+                      y: pos.y * -1.8,
+                      scale: pos.scale,
+                      opacity: isCentre ? 1 : 0.4 + (pos.scale - 0.55) * 1.3,
+                      zIndex: pos.zIndex,
                     }}
+                    transition={{ 
+                      duration: 0.6,
+                      ease: "easeInOut"
+                    }}
+                    onClick={() => setActiveIndex(i)}
+                    className="absolute cursor-pointer focus:outline-none"
+                    style={{ zIndex: pos.zIndex }}
                   >
-                    <Image
-                      src={person.avatar}
-                      alt={person.name}
-                      fill
-                      className="object-cover"
-                      sizes="96px"
-                    />
-                  </div>
-                </motion.button>
-              );
-            })}
+                    <div
+                      className={`relative rounded-full overflow-hidden transition-all duration-500 ${
+                        isCentre
+                          ? "ring-4 ring-brand-lite-red shadow-[0_0_40px_rgba(227,55,101,0.4)]"
+                          : "ring-2 ring-brand-lite-red/30 hover:ring-brand-lite-red/60"
+                      }`}
+                      style={{
+                        width: isCentre ? 100 : 64,
+                        height: isCentre ? 100 : 64,
+                      }}
+                    >
+                      <Image
+                        src={person.avatar}
+                        alt={person.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 64px, 100px"
+                      />
+                    </div>
+                  </motion.button>
+                );
+              })}
+            </AnimatePresence>
           </div>
         </div>
 
@@ -121,50 +147,55 @@ export function TestimonialsSection() {
           {/* Nav Arrows */}
           <button
             onClick={() => goTo(-1)}
-            className="absolute -left-6 lg:-left-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-brand-red flex items-center justify-center text-white shadow-[0_0_20px_rgba(227,55,101,0.4)] hover:scale-110 transition-transform"
+            className="absolute -left-6 lg:-left-20 top-1/2 -translate-y-1/2 z-20 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-brand-red flex items-center justify-center text-white shadow-[0_0_30px_rgba(227,55,101,0.4)] hover:scale-110 active:scale-95 transition-all"
             aria-label="Previous"
           >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
           <button
             onClick={() => goTo(1)}
-            className="absolute -right-6 lg:-right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-brand-red flex items-center justify-center text-white shadow-[0_0_20px_rgba(227,55,101,0.4)] hover:scale-110 transition-transform"
+            className="absolute -right-6 lg:-right-20 top-1/2 -translate-y-1/2 z-20 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-brand-red flex items-center justify-center text-white shadow-[0_0_30px_rgba(227,55,101,0.4)] hover:scale-110 active:scale-95 transition-all"
             aria-label="Next"
           >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
 
-          {/* Card */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active.id}
-              initial={{ opacity: 0, y: 16, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -16, scale: 0.98 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="rounded-[2.5rem] border border-brand-lite-red/15 bg-brand-lite-red/[0.04] backdrop-blur-sm p-10 text-center space-y-6 shadow-[0_8px_60px_rgba(227,55,101,0.08)]"
-            >
+          {/* Card Container (Static) */}
+          <div 
+            className="rounded-[2.5rem] border border-brand-lite-red/15 bg-brand-lite-red/[0.04] backdrop-blur-sm p-10 text-center space-y-6 shadow-[0_8px_60px_rgba(227,55,101,0.1)] overflow-hidden"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.id}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className="space-y-6"
+              >
+                {/* Name & location */}
+                <div>
+                  <h3 className="text-2xl lg:text-3xl font-heading font-medium tracking-tight text-brand-lite-red">
+                    {active.name}
+                  </h3>
+                  <p className="text-sm font-mono uppercase tracking-widest text-muted-foreground/60 mt-1.5">
+                    {active.location} · {active.role}
+                  </p>
+                </div>
 
-              {/* Name & location */}
-              <div>
-                <h3 className="text-2xl font-heading font-medium tracking-tight text-brand-lite-red">
-                  {active.name}
-                </h3>
-                <p className="text-sm font-mono uppercase tracking-widest text-muted-foreground/50 mt-1">
-                  {active.location} · {active.role}
+                {/* Quote */}
+                <p className="text-lg lg:text-xl font-light text-foreground/80 leading-relaxed max-w-2xl mx-auto italic">
+                  "{active.quote}"
                 </p>
-              </div>
-
-              {/* Quote */}
-              <p className="text-base lg:text-lg font-light text-foreground/70 leading-relaxed max-w-2xl mx-auto">
-                {active.quote}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>
