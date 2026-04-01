@@ -62,10 +62,10 @@ export function WhoWeAreSection() {
       </div>
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-0 max-w-[100vw] overflow-x-hidden overflow-y-visible">
-        {([400, 600, 800, 1000, 1200, 1400] as const).map((size, i) => (
+        {([400, 600, 800, 1000] as const).map((size, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full border border-brand-red/5"
+            className={`absolute rounded-full border border-brand-red/5 ${i >= 2 ? "lg:hidden" : ""}`}
             style={{ width: size, height: size }}
             animate={{
               borderColor: ["rgba(162, 28, 60, 0.05)", "rgba(227, 55, 101, 0.3)", "rgba(162, 28, 60, 0.05)"],
