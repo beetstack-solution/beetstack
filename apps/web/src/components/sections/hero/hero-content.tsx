@@ -19,7 +19,7 @@ export function HeroContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="flex items-center gap-4 mb-6 sm:mb-12 justify-center"
+          className="flex flex-col items-center gap-4 mb-6 sm:mb-12 justify-center"
         >
           <Image
             src="/logo.webp"
@@ -31,6 +31,7 @@ export function HeroContent() {
             loading="eager"
             style={{ width: "auto", height: "100%" }}
           />
+          <h2 className="text-md font-heading font-medium tracking-widest select-none text-foreground uppercase -mt-8">Layers Of Solutions</h2>
         </motion.div>
 
         <div className="space-y-4 sm:space-y-6">
