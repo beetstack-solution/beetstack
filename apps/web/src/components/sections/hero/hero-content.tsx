@@ -29,7 +29,7 @@ export function HeroContent() {
             className="h-12 sm:h-16 lg:h-20 w-auto object-contain drop-shadow-2xl"
             priority
             loading="eager"
-            style={{ width: "auto", height: "auto" }}
+            style={{ width: "auto", height: "100%" }}
           />
         </motion.div>
 

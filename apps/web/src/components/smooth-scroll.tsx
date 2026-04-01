@@ -35,5 +35,5 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  return <>{children}</>;
+  return <div style={{ position: "relative", minHeight: "100vh" }}>{children}</div>;
 }
