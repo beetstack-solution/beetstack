@@ -73,6 +73,11 @@
 @layer base {
   * {
     @apply border-border;
+    cursor: none !important;
+  }
+
+  a, button, [role="button"], input, textarea, select {
+    cursor: none !important;
   }
 
   body {

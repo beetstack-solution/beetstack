@@ -65,6 +65,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { CustomCursor } from "@/components/custom-cursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -75,13 +77,14 @@ export default function RootLayout({
       <head>
         <JsonLd />
       </head>
-      <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased cursor-none`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+          <CustomCursor />
           <SmoothScroll>
             {children}
           </SmoothScroll>
