@@ -22,7 +22,9 @@ const GridItem = React.memo(({ diff, index }: { diff: typeof DIFFERENCES[0]; ind
 
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.06] group-hover:opacity-[0.15] transition-opacity duration-700 pointer-events-none">
         <svg viewBox="0 0 24 24" className="w-2/3 h-2/3 fill-white stroke-white/20 stroke-[0.1] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-1000">
-          <path d={diff.iconPath || "M0 0h24v24H0z"} fillRule="evenodd" clipRule="evenodd" />
+          {diff.iconPaths.map((p, i) => (
+            <path key={i} d={p} fillRule="evenodd" clipRule="evenodd" />
+          ))}
         </svg>
       </div>
 
