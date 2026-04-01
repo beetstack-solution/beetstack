@@ -91,7 +91,7 @@ function LadderSection({ service, index }: { service: ServiceItem, index: number
           <motion.div style={{ y: textY, opacity }} className="space-y-8">
             <div className="flex items-center gap-6">
               <div className="flex flex-col justify-center items-center">
-                <Image src="/images/leef.png" alt="leef" width={40} height={40} style={{ width: "auto", height: "auto" }} />
+                <Image src="/images/leef.webp" alt="leef" width={40} height={40} style={{ width: "auto", height: "auto" }} />
                 <div className="relative w-16 h-16 flex items-center justify-center">
                   <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full pointer-events-none">
                     <circle cx="50" cy="50" r="48" stroke="#a21c3c" strokeWidth="2.5" fill="none" opacity="0.8" />

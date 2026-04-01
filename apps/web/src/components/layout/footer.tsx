@@ -17,7 +17,7 @@ export function Footer() {
         <div className="flex flex-col items-center gap-16">
           <Link href="/" className="inline-block transition-transform hover:scale-105">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Beetstack"
               width={100}
               height={26}

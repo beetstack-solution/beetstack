@@ -42,7 +42,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Beetstack Logo"
               width={160}
               height={40}
@@ -118,7 +118,7 @@ export function Navbar() {
             className="absolute left-1/2 -translate-x-1/2 flex items-center"
           >
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Beetstack Logo"
               width={140}
               height={36}
@@ -164,7 +164,7 @@ export function Navbar() {
             onClick={() => setIsMenuOpen(false)}
           >
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Beetstack"
               width={140}
               height={36}

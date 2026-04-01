@@ -24,7 +24,7 @@ export function WhoWeAreSection() {
 
                 <div className="flex flex-col justify-center items-center sm:mr-4 ml-1">
                   <Image
-                    src="/images/leef.png"
+                    src="/images/leef.webp"
                     alt="leef"
                     width={50}
                     height={50}

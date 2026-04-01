@@ -13,7 +13,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Rajiv Mehta",
     location: "India",
     role: "CTO, FinEdge Labs",
-    avatar: "/testimonials/avatar-1.png",
+    avatar: "/testimonials/avatar-1.webp",
     quote:
       "Beetstack delivered a secure fintech platform that exceeded our expectations. Their attention to engineering detail and zero-trust architecture gave us confidence from day one. The team's technical depth is unmatched in the region.",
   },
@@ -22,7 +22,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Priya Nair",
     location: "UAE",
     role: "Head of Product, Nexora",
-    avatar: "/testimonials/avatar-2.png",
+    avatar: "/testimonials/avatar-2.webp",
     quote:
       "Working with Beetstack transformed our product roadmap. They didn't just build what we asked — they challenged our assumptions and delivered something far superior. The UI precision and system performance are extraordinary.",
   },
@@ -31,7 +31,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "James Holloway",
     location: "United Kingdom",
     role: "Director of Engineering, Solara",
-    avatar: "/testimonials/avatar-3.png",
+    avatar: "/testimonials/avatar-3.webp",
     quote:
       "The monorepo architecture they built for us scaled effortlessly from 3 to 300 engineers. Beetstack's delivery model is disciplined, collaborative, and results-driven. Truly a world-class engineering partner.",
   },
@@ -40,7 +40,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Dr. Marcus Klein",
     location: "Germany",
     role: "CEO, MedSync Systems",
-    avatar: "/testimonials/avatar-4.png",
+    avatar: "/testimonials/avatar-4.webp",
     quote:
       "Beetstack handled our compliance-heavy healthcare platform with remarkable expertise. Their documentation standards, testing culture, and deep understanding of secure environments made them the perfect partner for our mission-critical product.",
   },
@@ -49,7 +49,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Sophie Laurent",
     location: "France",
     role: "VP Technology, CloudAxis",
-    avatar: "/testimonials/avatar-5.png",
+    avatar: "/testimonials/avatar-5.webp",
     quote:
       "From the first sync call, it was clear Beetstack operates at a different level. Their cloud infrastructure design reduced our AWS costs by 40% while improving uptime to 99.97%. I recommend them without reservation.",
   },
@@ -58,7 +58,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Tariq Al-Hassan",
     location: "Saudi Arabia",
     role: "Founder, VentureOS",
-    avatar: "/testimonials/avatar-6.png",
+    avatar: "/testimonials/avatar-6.webp",
     quote:
       "Beetstack built our entire SaaS platform in four months — on time and under budget. Their AI integration pipeline has since become our core competitive advantage. An exceptional team with rare execution capability.",
   },
@@ -67,7 +67,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Daniel Park",
     location: "South Korea",
     role: "Principal Engineer, Quantra",
-    avatar: "/testimonials/avatar-7.png",
+    avatar: "/testimonials/avatar-7.webp",
     quote:
       "The quality of code Beetstack delivers is something you rarely see from outsourced teams. Clean architecture, type-safe APIs, and thorough testing at every layer. We've adopted their standards internally across our own engineering org.",
   },

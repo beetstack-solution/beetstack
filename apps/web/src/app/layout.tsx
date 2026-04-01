@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "Beetstack",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Beetstack IT Solutions",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Beetstack | Premium IT Solutions",
     description: "Architecting the next generation of scalable, enterprise-grade software.",
-    images: ["/og-image.png"],
+    images: ["/og-image.webp"],
     creator: "@beetstack",
   },
   robots: {

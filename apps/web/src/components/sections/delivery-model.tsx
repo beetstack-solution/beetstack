@@ -23,7 +23,7 @@ const RoadmapIcon = ({ step, index, scrollYProgress }: { step: Step; index: numb
   return (
     <div className="flex flex-col justify-center items-center group relative">
       <div className="group-hover:opacity-100 transition-opacity">
-        <Image src="/images/leef.png" alt="Beetroot leaf" width={30} height={30} className="object-contain" style={{ height: "auto" }} />
+        <Image src="/images/leef.webp" alt="Beetroot leaf" width={30} height={30} className="object-contain" style={{ height: "auto" }} />
       </div>
 
       <motion.div

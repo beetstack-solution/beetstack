@@ -22,7 +22,7 @@ const BeetrootBadge = React.memo(({ tech, index }: { tech: (typeof TECHS)[number
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Image src={`/images/leef.png`} alt="Leef" width={50} height={50} className="-mb-2" style={{ height: "auto" }} />
+      <Image src={`/images/leef.webp`} alt="Leef" width={50} height={50} className="-mb-2" style={{ height: "auto" }} />
       <motion.div
         animate={hovered ? { scale: 1.13, rotate: 10 } : { scale: 1, rotate: 0 }}
         transition={{ type: "spring", stiffness: 350, damping: 22 }}

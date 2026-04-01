@@ -22,7 +22,7 @@ export function HeroContent() {
           className="flex items-center gap-4 mb-6 sm:mb-12 justify-center"
         >
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="Beetstack Logo"
             width={320}
             height={80}
