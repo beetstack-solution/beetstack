@@ -61,52 +61,47 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
 
   const intensity = useRef(0);
   
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     if (!pointsRef.current || !mouseRef.current) return;
 
     // Smoothly transition intensity based on cursor movement
-    intensity.current = THREE.MathUtils.lerp(intensity.current, isMovingRef.current ? 1 : 0, 0.06);
+    intensity.current = THREE.MathUtils.lerp(intensity.current, isMovingRef.current ? 1 : 0.35, 0.05);
     
-    // Skip heavy calculations if intensity is very low
-    if (intensity.current < 0.005) {
-      if (intensity.current > 0) {
-        // Fade out any remaining rotation/blink
-        const geo = pointsRef.current.geometry;
-        const colorAttr = geo.getAttribute("color") as THREE.BufferAttribute;
-        colorAttr.needsUpdate = false;
-      }
-      return;
-    }
-
-    clockRef.current += delta * intensity.current;
+    // Always increment clock for auto-motion
+    clockRef.current += delta;
     const t = clockRef.current;
     const geo = pointsRef.current.geometry;
 
+    // Pulse colors based on intensity and blink phases
     for (let i = 0; i < count; i++) {
       const blinkBase = 0.5 + 0.5 * Math.sin(blinkData.phase[i]! + t * blinkData.speed[i]!);
-      const blink = 0.4 + 0.6 * blinkBase;
+      const blink = (0.3 + 0.7 * blinkBase) * intensity.current;
       liveColors[i * 3]     = colors[i * 3]!     * blink;
       liveColors[i * 3 + 1] = colors[i * 3 + 1]! * blink;
       liveColors[i * 3 + 2] = colors[i * 3 + 2]! * blink;
     }
     
     const colorAttr = geo.getAttribute("color") as THREE.BufferAttribute;
-    colorAttr.array = liveColors;
     colorAttr.needsUpdate = true;
 
+    // Calculate rotation targets
     const targetX = mouseRef.current.y * 0.35;
     const targetY = mouseRef.current.x * 0.45;
 
+    // Base auto-rotation
+    const autoX = Math.sin(t * 0.15) * 0.2;
+    const autoY = t * 0.1;
+
     if (isMovingRef.current) {
-      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, targetX, 0.08);
-      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, targetY, 0.08);
-      finalTarget.current.x = pointsRef.current.rotation.x;
-      finalTarget.current.y = pointsRef.current.rotation.y;
+      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, targetX + autoX, 0.08);
+      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, targetY + autoY, 0.08);
+      finalTarget.current.x = pointsRef.current.rotation.x - autoX;
+      finalTarget.current.y = pointsRef.current.rotation.y - autoY;
     } else {
-      const driftX = finalTarget.current.x + Math.sin(t * 0.18) * 0.04;
-      const driftY = finalTarget.current.y + Math.cos(t * 0.13) * 0.04;
-      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, driftX, 0.015);
-      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, driftY, 0.015);
+      const driftX = finalTarget.current.x + autoX + Math.sin(t * 0.3) * 0.05;
+      const driftY = finalTarget.current.y + autoY + Math.cos(t * 0.2) * 0.05;
+      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, driftX, 0.02);
+      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, driftY, 0.02);
     }
   });
 
