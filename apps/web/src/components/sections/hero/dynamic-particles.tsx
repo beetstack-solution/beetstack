@@ -65,7 +65,7 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
     if (!pointsRef.current || !mouseRef.current) return;
 
     // Smoothly transition intensity based on cursor movement
-    intensity.current = THREE.MathUtils.lerp(intensity.current, isMovingRef.current ? 1 : 0.35, 0.05);
+    intensity.current = THREE.MathUtils.lerp(intensity.current, isMovingRef.current ? 1 : 0.45, 0.04);
     
     // Always increment clock for auto-motion
     clockRef.current += delta;
@@ -74,8 +74,8 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
 
     // Pulse colors based on intensity and blink phases
     for (let i = 0; i < count; i++) {
-      const blinkBase = 0.5 + 0.5 * Math.sin(blinkData.phase[i]! + t * blinkData.speed[i]!);
-      const blink = (0.3 + 0.7 * blinkBase) * intensity.current;
+      const blinkBase = 0.5 + 0.5 * Math.sin(blinkData.phase[i]! + t * blinkData.speed[i]! * 0.8);
+      const blink = (0.4 + 0.6 * blinkBase) * intensity.current;
       liveColors[i * 3]     = colors[i * 3]!     * blink;
       liveColors[i * 3 + 1] = colors[i * 3 + 1]! * blink;
       liveColors[i * 3 + 2] = colors[i * 3 + 2]! * blink;
@@ -85,23 +85,26 @@ export function DynamicParticles({ mouseRef, isMovingRef }: DynamicParticlesProp
     colorAttr.needsUpdate = true;
 
     // Calculate rotation targets
-    const targetX = mouseRef.current.y * 0.35;
-    const targetY = mouseRef.current.x * 0.45;
+    const targetX = mouseRef.current.y * 0.3;
+    const targetY = mouseRef.current.x * 0.4;
 
-    // Base auto-rotation
-    const autoX = Math.sin(t * 0.15) * 0.2;
-    const autoY = t * 0.1;
+    // Base auto-movement (Slow & Organic)
+    const autoX = Math.sin(t * 0.07) * 0.12 + Math.cos(t * 0.04) * 0.05;
+    const autoY = t * 0.03 + Math.sin(t * 0.05) * 0.08;
+    const scalePulse = 1 + Math.sin(t * 0.25) * 0.015;
+    pointsRef.current.scale.set(scalePulse, scalePulse, scalePulse);
 
     if (isMovingRef.current) {
-      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, targetX + autoX, 0.08);
-      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, targetY + autoY, 0.08);
+      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, targetX + autoX, 0.06);
+      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, targetY + autoY, 0.06);
       finalTarget.current.x = pointsRef.current.rotation.x - autoX;
       finalTarget.current.y = pointsRef.current.rotation.y - autoY;
     } else {
-      const driftX = finalTarget.current.x + autoX + Math.sin(t * 0.3) * 0.05;
-      const driftY = finalTarget.current.y + autoY + Math.cos(t * 0.2) * 0.05;
-      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, driftX, 0.02);
-      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, driftY, 0.02);
+      // More inertia and organic floating when idle
+      const driftX = finalTarget.current.x + autoX + Math.sin(t * 0.25) * 0.04;
+      const driftY = finalTarget.current.y + autoY + Math.cos(t * 0.18) * 0.04;
+      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, driftX, 0.012);
+      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, driftY, 0.012);
     }
   });
 
