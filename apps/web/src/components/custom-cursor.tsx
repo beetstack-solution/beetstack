@@ -87,8 +87,8 @@ export function CustomCursor() {
                 opacity: isPointer ? 0.5 : 1,
                 borderWidth: isPointer ? 1 : 1.5,
               }}
-              className="absolute w-full h-full rounded-full border-[1.5px] bg-brand-lite-red"
-              style={{ borderColor: liteRed }}
+              className="absolute w-full h-full rounded-full border-[1.5px] bg-brand-red"
+              style={{ borderColor: brandRed }}
             />
 
             {/* Middle Beetroot Layer */}
@@ -98,7 +98,7 @@ export function CustomCursor() {
                 opacity: isPointer ? 0.8 : 1,
               }}
               className="absolute w-full h-full rounded-full border-[3px]"
-              style={{ borderColor: brandRed }}
+              style={{ borderColor: liteRed }}
             />
 
             {/* Core Beetroot Dot */}
@@ -107,7 +107,7 @@ export function CustomCursor() {
                 scale: isPointer ? 0.15 : 0.25,
               }}
               className="absolute w-full h-full rounded-full"
-              style={{ backgroundColor: brandRed }}
+              style={{ backgroundColor: liteRed }}
             />
 
             {/* High-visibility blink (pulse) only on clickable elements */}
