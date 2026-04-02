@@ -7,7 +7,6 @@ import { useScroll, useMotionValueEvent } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Icons } from "@beetstack/icons";
-import { Button } from "@repo/ui/button";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -72,7 +71,7 @@ export function Navbar() {
             {/* Theme Toggle Button */}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="group relative w-10 h-10 rounded-full border-2 border-brand-lite-red bg-transparent overflow-hidden flex items-center justify-center transition-all duration-300"
+              className="group relative w-10 h-10 rounded-full border-2 border-brand-red bg-transparent overflow-hidden flex items-center justify-center transition-all duration-300"
               aria-label="Toggle theme"
             >
               <div className="absolute inset-0 bg-brand-lite-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
@@ -100,7 +99,7 @@ export function Navbar() {
         </div>
 
         {/* ── MOBILE layout: [hamburger] [logo centred] [spacer] ── */}
-        <div className="lg:hidden flex items-center justify-between px-5 relative">
+        <div className="lg:hidden flex items-center justify-between px-5 relative pt-2">
           {/* Left — hamburger */}
           <button
             onClick={() => setIsMenuOpen((v) => !v)}
@@ -108,15 +107,11 @@ export function Navbar() {
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <span
-              className={`absolute block w-[18px] h-[1.5px] bg-brand-lite-red rounded-full transition-all duration-300 ${isMenuOpen ? "rotate-45" : "-translate-y-[5px]"
+              className={`absolute block w-[30px] h-[2px] bg-brand-lite-red rounded-full transition-all duration-300 ${isMenuOpen ? "rotate-45" : "-translate-y-[5px]"
                 }`}
             />
             <span
-              className={`absolute block w-[18px] h-[1.5px] bg-brand-lite-red rounded-full transition-all duration-300 ${isMenuOpen ? "opacity-0 scale-x-0" : ""
-                }`}
-            />
-            <span
-              className={`absolute block w-[18px] h-[1.5px] bg-brand-lite-red rounded-full transition-all duration-300 ${isMenuOpen ? "-rotate-45" : "translate-y-[5px]"
+              className={`absolute block w-[30px] h-[2px] bg-brand-lite-red rounded-full transition-all duration-300 ${isMenuOpen ? "-rotate-45" : "translate-y-[5px]"
                 }`}
             />
           </button>
@@ -151,41 +146,6 @@ export function Navbar() {
         className={`fixed lg:hidden inset-0 z-[48] bg-background/98 backdrop-blur-2xl flex flex-col ${isMenuOpen ? "pointer-events-auto" : "pointer-events-none"
           }`}
       >
-        {/* Overlay top bar — hamburger left, logo centre, spacer right */}
-        <div
-          className={`flex items-center justify-between px-5 shrink-0 relative ${isScrolled ? "py-3" : "py-5"
-            }`}
-        >
-          {/* Close / X button */}
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="relative flex justify-center items-center w-9 h-9 rounded-full bg-foreground/10 border border-foreground/10 shrink-0 z-10"
-            aria-label="Close menu"
-          >
-            <span className="absolute block w-[18px] h-[1.5px] bg-foreground rounded-full rotate-45" />
-            <span className="absolute block w-[18px] h-[1.5px] bg-foreground rounded-full -rotate-45" />
-          </button>
-
-          {/* Centred logo */}
-          <Link
-            href="/"
-            className="absolute left-1/2 -translate-x-1/2"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <Image
-              src="/logo.webp"
-              alt="Beetstack"
-              width={140}
-              height={36}
-              className="h-8 w-auto object-contain"
-              style={{ width: "auto", height: "100%" }}
-            />
-          </Link>
-
-          {/* Spacer */}
-          <div className="w-9 h-9 shrink-0" aria-hidden />
-        </div>
-
         {/* Nav links */}
         <div className="flex-1 flex flex-col items-start justify-center px-8 gap-1">
           {NAV_LINKS.map((link, i) => (
@@ -204,10 +164,10 @@ export function Navbar() {
               }}
               className="group flex items-center gap-4 py-4 w-full border-b border-foreground/5 last:border-0"
             >
-              <span className="text-[11px] font-mono text-brand-lite-red/50 tracking-widest w-6 shrink-0">
+              <span className="text-[11px] font-mono text-brand-lite-red tracking-widest w-6 shrink-0">
                 0{i + 1}
               </span>
-              <span className="text-4xl sm:text-5xl font-heading font-medium tracking-tighter text-foreground group-hover:text-brand-lite-red transition-colors duration-200">
+              <span className="text-4xl sm:text-5xl font-heading font-medium tracking-tighter animate-brand-gradient group-hover:text-brand-lite-red transition-colors duration-200">
                 {link.label}
               </span>
             </motion.a>
@@ -253,7 +213,7 @@ export function Navbar() {
         <div className="px-8 pb-10 shrink-0">
           <Link href="#contact" onClick={() => setIsMenuOpen(false)}>
             <button
-              className="w-full h-14 rounded-full bg-brand-lite-red text-background font-heading font-medium uppercase tracking-[0.2em] text-[11px] shadow-lg shadow-brand-lite-red/10 border-2 border-brand-lite-red"
+              className="w-full h-14 rounded-full bg-brand-lite-red text-background font-heading font-bold uppercase tracking-[0.2em] text-[14px] shadow-lg shadow-brand-lite-red/10 border-2 border-brand-lite-red"
             >
               Get Quote
             </button>
