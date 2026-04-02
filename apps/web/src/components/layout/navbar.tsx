@@ -13,7 +13,8 @@ const NAV_LINKS = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Expertise", href: "#expertise" },
-  { label: "Portfolio", href: "#portfolio" },
+  { label: "Process", href: "#delivery-model" },
+  { label: "Security", href: "#security-experience" },
 ];
 
 export function Navbar() {
@@ -250,13 +251,13 @@ export function Navbar() {
 
         {/* Bottom CTA */}
         <div className="px-8 pb-10 shrink-0">
-          <Button
-            size="lg"
-            onClick={() => setIsMenuOpen(false)}
-            className="w-full h-14 rounded-full bg-foreground text-background font-heading font-medium uppercase tracking-widest text-xs"
-          >
-            Get Quote
-          </Button>
+          <Link href="#contact" onClick={() => setIsMenuOpen(false)}>
+            <button
+              className="w-full h-14 rounded-full bg-brand-lite-red text-background font-heading font-medium uppercase tracking-[0.2em] text-[11px] shadow-lg shadow-brand-lite-red/10 border-2 border-brand-lite-red"
+            >
+              Get In Touch
+            </button>
+          </Link>
         </div>
       </motion.div>
     </>
