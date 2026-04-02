@@ -55,11 +55,6 @@ export function Footer() {
         <div className="w-full pt-16 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-foreground/40 text-[10px] font-mono uppercase tracking-[0.2em]">
             <p>© 2026 Beetstack IT Solutions. All Rights Reserved.</p>
-            <span className="hidden md:block opacity-30">|</span>
-            <span className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-brand-green shadow-[0_0_8px_rgba(145,169,62,0.4)]" />
-              Systems Operational
-            </span>
           </div>
 
           <Link
