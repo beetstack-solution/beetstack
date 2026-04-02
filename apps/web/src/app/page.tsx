@@ -38,7 +38,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white">
+    <div id="top" className="relative min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-white">
 
       <Navbar />
 
