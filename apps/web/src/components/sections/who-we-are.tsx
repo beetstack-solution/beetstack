@@ -18,9 +18,9 @@ export function WhoWeAreSection() {
             className="space-y-12 text-center max-w-4xl"
           >
             <div className="space-y-12 flex justify-center">
-              <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase text-brand-lite-red flex flex-wrap items-end justify-center text-center">
+              <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase flex flex-wrap items-end justify-center text-center">
 
-                <span>Wh</span>
+                <span className="animate-brand-gradient">Wh</span>
 
                 <div className="flex flex-col justify-center items-center sm:mr-4 ml-1">
                   <Image
