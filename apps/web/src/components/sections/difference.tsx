@@ -59,7 +59,7 @@ GridItem.displayName = "GridItem";
 
 export function DifferenceSection() {
   return (
-    <section id="difference" className="relative py-24 overflow-hidden bg-background">
+    <section id="difference" className="relative py-32 lg:py-48 overflow-hidden bg-background">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 -right-1/4 w-full h-full bg-brand-red/[0.04] blur-[160px] rounded-full animate-pulse" />
         <div className="absolute bottom-1/4 -left-1/4 w-full h-full bg-brand-green/[0.03] blur-[160px] rounded-full" />
@@ -67,7 +67,7 @@ export function DifferenceSection() {
 
       <div className="container mx-auto px-6 lg:px-24 relative z-10">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-col items-center text-center mb-16 space-y-8">
-          <h2 className="text-4xl sm:text-6xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.8] uppercase text-brand-lite-red">
+          <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase text-brand-lite-red">
             What Sets <br />
             <span className="text-brand-green">Us Apart</span>
           </h2>
