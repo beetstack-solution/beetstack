@@ -67,7 +67,7 @@ export default function Home() {
       </section>
 
       {/* Main Content Flow */}
-      <main className="relative z-20 space-y-20 pb-20">
+      <main className="relative z-20 flex flex-col pt-20">
         <WhoWeAreSection />
         <div className="relative">
           <SliceSection />
