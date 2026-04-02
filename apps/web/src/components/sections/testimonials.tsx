@@ -70,8 +70,8 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           className="flex flex-col items-center text-center mb-14 space-y-4"
         >
-          <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase text-brand-lite-red">
-            What our<br />
+          <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase">
+            <span className="animate-brand-gradient">What our</span><br />
             <span className="text-brand-green">Clients say?</span>
           </h2>
           <p className="text-lg text-muted-foreground/50 max-w-lg font-light">
@@ -180,7 +180,7 @@ export function TestimonialsSection() {
               >
                 {/* Name & location */}
                 <div>
-                  <h3 className="text-2xl lg:text-3xl font-heading font-medium tracking-tight text-brand-lite-red">
+                  <h3 className="text-2xl lg:text-3xl font-heading font-medium tracking-tight animate-brand-gradient">
                     {active.name}
                   </h3>
                   <p className="text-sm font-mono uppercase tracking-widest text-muted-foreground/60 mt-1.5">
