@@ -52,7 +52,7 @@ export function TestimonialsSection() {
   return (
     <section 
       id="testimonials" 
-      className="relative py-24 lg:py-32 overflow-hidden bg-background"
+      className="relative py-32 lg:py-48 overflow-hidden bg-background"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={() => setIsPaused(true)}
@@ -70,7 +70,7 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           className="flex flex-col items-center text-center mb-14 space-y-4"
         >
-          <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.85] uppercase text-brand-lite-red">
+          <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase text-brand-lite-red">
             What our<br />
             <span className="text-brand-green">Clients say?</span>
           </h2>
