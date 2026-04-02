@@ -1,18 +1,25 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  MotionValue,
+  useMotionValue,
+  useSpring,
+  useMotionTemplate,
+} from "framer-motion";
 import Image from "next/image";
 
 import { SERVICES, ServiceItem } from "@/data";
 
 function BeetrootLayers({ progress, isForeground = false }: { progress: MotionValue<number>, isForeground?: boolean }) {
   const rotateSlower = useTransform(progress, [0, 1], [0, isForeground ? -90 : 120]);
-  const scalePulse = useTransform(progress, [0, 0.5, 1], [1, isForeground ? 1.1 : 1.3, 1]);
 
   return (
     <motion.div
-      style={{ rotate: rotateSlower, scale: scalePulse }}
+      style={{ rotate: rotateSlower }}
       className={`absolute inset-0 flex items-center justify-center pointer-events-none ${isForeground ? 'z-20 scale-[1.35] lg:scale-[1.65]' : '-z-10 scale-[1.7] lg:scale-[2.8]'}`}
     >
       <div className="relative w-full h-full flex items-center justify-center">
@@ -63,6 +70,98 @@ function BeetrootLayers({ progress, isForeground = false }: { progress: MotionVa
   );
 }
 
+const InteractiveServiceCard = ({ src, alt, priority, index, scrollYProgress }: { src: string, alt: string, priority: boolean, index: number, scrollYProgress: MotionValue<number> }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
+
+  const translateX = useTransform(mouseXSpring, [-0.5, 0.5], ["-15px", "15px"]);
+  const translateY = useTransform(mouseYSpring, [-0.5, 0.5], ["15px", "-15px"]);
+
+  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], [0, 100]);
+  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], [0, 100]);
+  const glareBackground = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 80%)`;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    x.set(mouseX / width - 0.5);
+    y.set(mouseY / height - 0.5);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <div className="relative w-[100%] h-[100%] sm:w-full sm:h-full lg:w-[130%] lg:h-[130%] z-30 perspective-[1000px] flex items-center justify-center">
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          translateX,
+          translateY,
+          transformStyle: "preserve-3d",
+        }}
+        initial={{ z: 0 }}
+        whileHover={{ z: -30 }} // "Downwhere in z axis" -> sinking into the screen
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        className="relative w-full h-full group"
+      >
+        <motion.div
+          animate={{
+            y: [0, -25, 0],
+            rotate: [0, 0.8, -0.8, 0],
+            x: [0, 6, -6, 0]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: index * 0.5
+          }}
+          className="relative w-full h-full flex items-center justify-center"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-contain"
+            style={{ transform: "translateZ(20px)" }}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            priority={priority}
+          />
+          {/* Glare Layer */}
+          <motion.div
+            className="pointer-events-none absolute inset-0 z-50 rounded-2xl mix-blend-overlay"
+            style={{
+              background: glareBackground,
+              opacity: 0,
+            }}
+            whileHover={{ opacity: 0.6 }}
+            transition={{ duration: 0.2 }}
+          />
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
+
 function LadderSection({ service, index }: { service: ServiceItem, index: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
@@ -76,21 +175,15 @@ function LadderSection({ service, index }: { service: ServiceItem, index: number
     <div ref={containerRef} className="relative min-h-[80vh] lg:min-h-screen flex items-center py-16 lg:py-0">
       <div className="container mx-auto px-5 sm:px-6 lg:px-24">
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-32 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
-          <motion.div style={{ y: imageY, opacity }} className={`relative aspect-[4/3] flex items-center justify-center ${!isEven ? 'lg:order-last' : ''}`}>
+          <motion.div style={{ y: imageY, opacity }} className={`relative w-full aspect-square lg:aspect-[4/3] flex items-center justify-center ${!isEven ? 'lg:order-last' : ''}`}>
             <BeetrootLayers progress={scrollYProgress} isForeground={false} />
-            <motion.div
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }}
-              className="relative w-full h-full rounded-[2rem] overflow-hidden group z-10"
-            >
-              <Image 
-                src={service.image} 
-                alt={service.title} 
-                fill 
-                className="object-cover" 
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
-            </motion.div>
+            <InteractiveServiceCard 
+              src={service.image} 
+              alt={service.title} 
+              priority={index < 2} 
+              index={index} 
+              scrollYProgress={scrollYProgress} 
+            />
             <BeetrootLayers progress={scrollYProgress} isForeground={true} />
           </motion.div>
 
