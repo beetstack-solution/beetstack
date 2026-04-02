@@ -34,21 +34,22 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="px-2 sm:px-6">
-      <div className="relative py-10 md:py-48 bg-brand-lite-red overflow-hidden selection:bg-white selection:text-brand-lite-red rounded-[30px] sm:rounded-[60px]">
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-black/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
+      <div className="relative py-10 md:py-48 bg-background border border-foreground/5 overflow-hidden selection:bg-brand-red selection:text-white rounded-[30px] sm:rounded-[60px]">
+        {/* Ambient background glows */}
+        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-red/[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-brand-green/[0.03] rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
 
         <div className="container mx-auto px-2 sm:px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             <div className="space-y-12">
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
-                <h2 className="text-6xl lg:text-9xl font-heading font-medium tracking-tighter text-background leading-none uppercase">
+                <h2 className="text-6xl lg:text-9xl font-heading font-medium tracking-tighter text-foreground leading-none uppercase">
                   Get in <br />
-                  <span className="opacity-40">Touch</span>
+                  <span className="text-brand-red opacity-100">Touch</span>
                 </h2>
                 <div className="space-y-2">
-                  <p className="text-xl lg:text-2xl font-light text-background/90">Beetstack IT Solutions</p>
-                  <p className="text-sm font-mono uppercase tracking-widest text-background/60">Kannur, Kerala, India</p>
+                  <p className="text-xl lg:text-2xl font-light text-foreground/90">Beetstack IT Solutions</p>
+                  <p className="text-sm font-mono uppercase tracking-widest text-foreground/40">Kannur, Kerala, India</p>
                 </div>
               </motion.div>
 
@@ -63,14 +64,14 @@ export function ContactSection() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="group flex items-center gap-4 p-4 rounded-2xl bg-background/5 border border-white/10 hover:bg-white/10 transition-all"
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-foreground/[0.02] border border-foreground/5 hover:bg-brand-red/5 hover:border-brand-red/20 transition-all"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        {Icon && <Icon className="w-5 h-5 text-background" />}
+                      <div className="w-12 h-12 rounded-xl bg-brand-red/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        {Icon && <Icon className="w-5 h-5 text-brand-red" />}
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase font-mono tracking-widest text-background/40">{item.label}</p>
-                        <p className="text-sm font-medium text-background">{item.value}</p>
+                        <p className="text-[10px] uppercase font-mono tracking-widest text-foreground/30">{item.label}</p>
+                        <p className="text-sm font-medium text-foreground">{item.value}</p>
                       </div>
                     </motion.a>
                   );
@@ -87,7 +88,7 @@ export function ContactSection() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label htmlFor="contact-name" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red px-2">Name</label>
+                    <label htmlFor="contact-name" className="text-[10px] uppercase font-mono tracking-widest text-brand-red px-2">Name</label>
                     <input
                       required
                       id="contact-name"
@@ -96,11 +97,11 @@ export function ContactSection() {
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full h-14 bg-brand-lite-red/[0.03] dark:bg-white/[0.02] border border-brand-lite-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-lite-red dark:text-white placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/30 dark:focus:border-brand-lite-red/50 transition-all duration-300"
+                      className="w-full h-14 bg-brand-red/[0.03] dark:bg-white/[0.02] border border-brand-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-red dark:text-white placeholder:text-brand-red/30 focus:outline-none focus:border-brand-red/30 dark:focus:border-brand-red/50 transition-all duration-300"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="contact-email" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red px-2">Email</label>
+                    <label htmlFor="contact-email" className="text-[10px] uppercase font-mono tracking-widest text-brand-red px-2">Email</label>
                     <input
                       required
                       id="contact-email"
@@ -109,13 +110,13 @@ export function ContactSection() {
                       placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full h-14 bg-brand-lite-red/[0.03] dark:bg-white/[0.02] border border-brand-lite-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-lite-red dark:text-white placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/30 dark:focus:border-brand-lite-red/50 transition-all duration-300"
+                      className="w-full h-14 bg-brand-red/[0.03] dark:bg-white/[0.02] border border-brand-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-red dark:text-white placeholder:text-brand-red/30 focus:outline-none focus:border-brand-red/30 dark:focus:border-brand-red/50 transition-all duration-300"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="contact-subject" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red px-2">Subject</label>
+                  <label htmlFor="contact-subject" className="text-[10px] uppercase font-mono tracking-widest text-brand-red px-2">Subject</label>
                   <input
                     required
                     id="contact-subject"
@@ -124,12 +125,12 @@ export function ContactSection() {
                     placeholder="How can we help?"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full h-14 bg-brand-lite-red/[0.03] dark:bg-white/[0.02] border border-brand-lite-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-lite-red dark:text-white placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/30 dark:focus:border-brand-lite-red/50 transition-all duration-300"
+                    className="w-full h-14 bg-brand-red/[0.03] dark:bg-white/[0.02] border border-brand-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-red dark:text-white placeholder:text-brand-red/30 focus:outline-none focus:border-brand-red/30 dark:focus:border-brand-red/50 transition-all duration-300"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="contact-message" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red px-2">Message</label>
+                  <label htmlFor="contact-message" className="text-[10px] uppercase font-mono tracking-widest text-brand-red px-2">Message</label>
                   <textarea
                     required
                     id="contact-message"
@@ -138,14 +139,14 @@ export function ContactSection() {
                     placeholder="Tell us about your project..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-brand-lite-red/[0.03] dark:bg-white/[0.02] border border-brand-lite-red/10 dark:border-white/5 rounded-2xl p-6 text-sm text-brand-lite-red dark:text-white placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/30 dark:focus:border-brand-lite-red/50 transition-all duration-300 resize-none"
+                    className="w-full bg-brand-red/[0.03] dark:bg-white/[0.02] border border-brand-red/10 dark:border-white/5 rounded-2xl p-6 text-sm text-brand-red dark:text-white placeholder:text-brand-red/30 focus:outline-none focus:border-brand-red/30 dark:focus:border-brand-red/50 transition-all duration-300 resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={formState === "submitting"}
-                  className={`w-full h-14 rounded-full font-heading font-medium uppercase tracking-[0.2em] text-[11px] flex items-center justify-center gap-2 transition-all duration-500 shadow-xl ${formState === "success" ? "bg-green-500 hover:bg-green-600 shadow-green-500/20" : "bg-brand-lite-red hover:bg-brand-lite-red/50 shadow-brand-lite-red/10"} text-background`}
+                  className={`w-full h-14 rounded-full font-heading font-medium uppercase tracking-[0.2em] text-[11px] flex items-center justify-center gap-2 transition-all duration-500 shadow-xl ${formState === "success" ? "bg-green-500 hover:bg-green-600 shadow-green-500/20" : "bg-brand-red hover:bg-brand-red/50 shadow-brand-red/10"} text-background`}
                 >
                   <AnimatePresence mode="wait">
                     {formState === "idle" && (
