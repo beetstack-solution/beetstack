@@ -172,17 +172,17 @@ function LadderSection({ service, index }: { service: ServiceItem, index: number
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <div ref={containerRef} className="relative min-h-[80vh] lg:min-h-screen flex items-center py-16 lg:py-0">
+    <div ref={containerRef} className="relative min-h-screen flex items-center py-16 lg:py-0">
       <div className="container mx-auto px-5 sm:px-6 lg:px-24">
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-32 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
           <motion.div style={{ y: imageY, opacity }} className={`relative w-full aspect-square lg:aspect-[4/3] flex items-center justify-center ${!isEven ? 'lg:order-last' : ''}`}>
             <BeetrootLayers progress={scrollYProgress} isForeground={false} />
-            <InteractiveServiceCard 
-              src={service.image} 
-              alt={service.title} 
-              priority={index < 2} 
-              index={index} 
-              scrollYProgress={scrollYProgress} 
+            <InteractiveServiceCard
+              src={service.image}
+              alt={service.title}
+              priority={index < 2}
+              index={index}
+              scrollYProgress={scrollYProgress}
             />
             <BeetrootLayers progress={scrollYProgress} isForeground={true} />
           </motion.div>
@@ -220,8 +220,8 @@ export function ServicesLayersSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="services" ref={containerRef} className="relative bg-background overflow-hidden">
-      <div className="h-screen flex flex-col items-center justify-center px-5 sm:px-6 text-center">
+    <section id="services" ref={containerRef} className="relative bg-background overflow-hidden max-sm:pt-32">
+      <div className="flex flex-col items-center justify-center px-5 sm:px-6 text-center">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="space-y-6 sm:space-y-8">
           <h2 className="text-5xl sm:text-7xl lg:text-[10rem] font-heading font-semibold tracking-tighter leading-[0.85] uppercase text-brand-lite-red">
             What We <br />
