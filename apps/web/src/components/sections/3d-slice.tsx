@@ -210,7 +210,7 @@ function VelocityMarquee({
           item === "·" ? (
             <span key={i} className="text-brand-red select-none" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", ...outlinedDotStyle }}>·</span>
           ) : (
-            <span key={i} className="font-heading font-black uppercase select-none text-brand-green font-mono" style={{ fontSize: "clamp(15rem, 5vw, 4.5rem)", letterSpacing: "-0.02em", lineHeight: 1, ...outlinedTextStyle }}>
+            <span key={i} className="font-heading font-bold sm:font-black uppercase select-none text-brand-green sm:font-mono" style={{ fontSize: "clamp(16rem, 5vw, 4.5rem)", letterSpacing: "-0.02em", lineHeight: 1, ...outlinedTextStyle }}>
               {item}
             </span>
           )
@@ -276,7 +276,7 @@ export function SliceSection() {
   const activeService = hovered !== null ? (SERVICES[hovered.index] ?? null) : null;
 
   return (
-    <section id="portfolio" ref={sectionRef} className="relative overflow-hidden py-32 lg:py-48 h-full">
+    <section id="portfolio" ref={sectionRef} className="relative overflow-hidden py-0 lg:py-48 h-full">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-red/[0.06] blur-[110px]" />
       </div>
