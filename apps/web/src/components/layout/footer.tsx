@@ -49,26 +49,26 @@ export function Footer() {
         </div>
 
         <div className="w-full pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-black/30 text-[10px] font-mono uppercase tracking-[0.2em]">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-foreground/40 text-[10px] font-mono uppercase tracking-[0.2em]">
             <p>© 2026 Beetstack IT Solutions. All Rights Reserved.</p>
             <span className="hidden md:block opacity-30">|</span>
             <span className="flex items-center gap-2">
-              <div className="w-1 h-1 rounded-full bg-brand-green" />
+              <div className="w-1.5 h-1.5 rounded-full bg-brand-green shadow-[0_0_8px_rgba(145,169,62,0.4)]" />
               Systems Operational
             </span>
           </div>
 
           <Link
             href="#top"
-            className="text-black/30 hover:text-black text-[10px] font-mono uppercase tracking-[0.2em] transition-colors"
+            className="text-foreground/40 hover:text-brand-lite-red dark:hover:text-white text-[10px] font-mono uppercase tracking-[0.2em] transition-colors"
           >
             Back to top ↑
           </Link>
         </div>
       </div>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
-        <h2 className="text-[12vw] font-black leading-none tracking-tighter text-black">BEETSTACK</h2>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] dark:opacity-[0.05] pointer-events-none select-none">
+        <h2 className="text-[12vw] font-black leading-none tracking-tighter text-foreground">BEETSTACK</h2>
       </div>
 
       <div className="w-full h-1 bg-brand-lite-red rounded-full absolute bottom-0 left-0" />

@@ -67,26 +67,34 @@ export function Navbar() {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-2 shrink-0">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-full w-10 h-10 hover:bg-primary dark:bg-white bg-black"
+          <div className="flex items-center gap-3 shrink-0">
+            {/* Theme Toggle Button */}
+            <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="group relative w-10 h-10 rounded-full border-2 border-brand-lite-red bg-transparent overflow-hidden flex items-center justify-center transition-all duration-300"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? (
-                <Icons.Sun className="h-5 w-5 text-primary" />
-              ) : (
-                <Icons.Moon className="h-5 w-5 text-white" />
-              )}
-            </Button>
-            <Button
-              size="lg"
-              className="rounded-full px-10 h-10 bg-foreground text-background font-heading font-medium uppercase tracking-widest text-[10px] flex items-center gap-2 transition-all"
-            >
-              Contact
-            </Button>
+              <div className="absolute inset-0 bg-brand-lite-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+              <div className="relative z-10 transition-colors duration-500">
+                {theme === "dark" ? (
+                  <Icons.Sun className="h-4 w-4 text-brand-lite-red group-hover:text-white" />
+                ) : (
+                  <Icons.Moon className="h-4 w-4 text-brand-lite-red group-hover:text-white" />
+                )}
+              </div>
+            </button>
+
+            {/* Contact Button */}
+            <Link href="#contact">
+              <button
+                className="group relative px-10 h-10 rounded-full border-2 border-brand-green bg-transparent overflow-hidden flex items-center justify-center gap-2 transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-brand-green scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+                <span className="relative z-10 text-[10px] font-heading font-medium uppercase tracking-[0.2em] text-foreground group-hover:text-background transition-colors duration-500">
+                  Contact
+                </span>
+              </button>
+            </Link>
           </div>
         </div>
 
