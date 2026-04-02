@@ -14,7 +14,7 @@ export const DIFFERENCES: DifferenceItem[] = [
     description:
       "Deep technical background in building real-world, high-impact systems that drive critical infrastructure.",
     span: "md:col-span-1",
-    bgColor: "bg-brand-lite-red",
+    bgColor: "bg-gradient-to-br from-brand-lite-red to-brand-red",
     iconPaths: ["M13 2L3 14h9l-1 8 10-12h-9l1-8z"],
   },
   {
@@ -32,7 +32,7 @@ export const DIFFERENCES: DifferenceItem[] = [
     description:
       "Purpose-built solutions tailored exactly to your unique business logic and operational goals.",
     span: "md:col-span-1",
-    bgColor: "bg-brand-lite-red",
+    bgColor: "bg-gradient-to-br from-brand-lite-red to-brand-red",
     iconPaths: [
       "M19.4 15c0.3-0.8 0.3-1.6 0-2.4l2.1-1.6c0.2-0.2 0.3-0.5 0.1-0.7l-2-3.5c-0.1-0.2-0.4-0.3-0.6-0.2l-2.5 1c-0.7-0.5-1.4-1-2.2-1.3l-0.4-2.6C14 3.4 13.7 3.2 13.5 3.2h-4c-0.3 0-0.5 0.2-0.6 0.5L8.5 6.3C7.7 6.6 7 7.1 6.3 7.6l-2.5-1c-0.2-0.1-0.5 0-0.6 0.2l-2 3.5c-0.1 0.2-0.1 0.5 0.1 0.7l2.1 1.6c-0.3 0.8-0.3 1.6 0 2.4l-2.1 1.6c-0.2 0.2-0.3 0.5-0.1 0.7l2 3.5c0.1 0.2 0.4 0.3 0.6 0.2l2.5-1c0.7 0.5 1.4 1 2.2 1.3l0.4 2.6c0.1 0.3 0.3 0.5 0.6 0.5h4c0.3 0 0.5-0.2 0.6-0.5l0.4-2.6c0.8-0.3 1.5-0.8 2.2-1.3l2.5 1c0.2 0.1 0.5 0 0.6-0.2l2-3.5c0.1-0.2 0.1-0.5-0.1-0.7L19.4 15z",
       "M12 15.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z",
@@ -58,7 +58,7 @@ export const DIFFERENCES: DifferenceItem[] = [
     description:
       "Unwavering focus on scalability, benchmarks, and dedicated long-term technical evolution.",
     span: "md:col-span-1",
-    bgColor: "bg-brand-lite-red",
+    bgColor: "bg-gradient-to-br from-brand-lite-red to-brand-red",
     iconPaths: ["M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"],
   },
   {
