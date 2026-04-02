@@ -45,7 +45,7 @@ export default function Home() {
       {/* Global Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-[4px] bg-brand-green z-[60]">
         <motion.div
-          className="h-full bg-brand-lite-red origin-left"
+          className="h-full bg-gradient-to-tr from-brand-red to-brand-lite-red origin-left rounded-r-full"
           style={{ scaleX: scrollYProgress }}
         />
       </div>
