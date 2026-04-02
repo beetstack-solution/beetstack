@@ -276,7 +276,7 @@ export function SliceSection() {
   const activeService = hovered !== null ? (SERVICES[hovered.index] ?? null) : null;
 
   return (
-    <section id="portfolio" ref={sectionRef} className="relative overflow-hidden h-full">
+    <section id="portfolio" ref={sectionRef} className="relative overflow-hidden py-32 lg:py-48 h-full">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-red/[0.06] blur-[110px]" />
       </div>
