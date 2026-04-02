@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Beetstack | Premium IT Solutions",
     description: "Architecting the next generation of scalable, enterprise-grade software.",
-    images: ["/og-image.webp"],
+    images: ["https://beetstack.in/public/assets/img/logo.png"],
     creator: "@beetstack",
   },
   robots: {
