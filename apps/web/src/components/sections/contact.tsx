@@ -5,8 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Icons } from "@beetstack/icons";
 import { Button } from "@repo/ui/button";
 import { CONTACT_INFO } from "@/data";
+import { sendContactEmail } from "@/actions/send-email";
 
 export function ContactSection() {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",
@@ -18,15 +20,24 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("submitting");
+    setErrorMessage(null);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setFormState("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setFormState("idle"), 5000);
-    } catch {
+      const response = await sendContactEmail(formData);
+      
+      if (response.success) {
+        setFormState("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setFormState("idle"), 5000);
+      } else {
+        setFormState("error");
+        setErrorMessage(response.error || "An unknown error occurred");
+        setTimeout(() => setFormState("idle"), 7000);
+      }
+    } catch (err: any) {
       setFormState("error");
-      setTimeout(() => setFormState("idle"), 5000);
+      setErrorMessage(err.message || "Something went wrong. Please try again later.");
+      setTimeout(() => setFormState("idle"), 7000);
     }
   };
 
@@ -166,8 +177,26 @@ export function ContactSection() {
                         <Icons.Check className="w-4 h-4" /> Message Sent
                       </motion.span>
                     )}
+                    {formState === "error" && (
+                      <motion.span key="error" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-2">
+                         Error Occurred
+                      </motion.span>
+                    )}
                   </AnimatePresence>
                 </Button>
+
+                <AnimatePresence>
+                  {formState === "error" && errorMessage && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-mono text-center"
+                    >
+                      {errorMessage}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </form>
             </motion.div>
           </div>
