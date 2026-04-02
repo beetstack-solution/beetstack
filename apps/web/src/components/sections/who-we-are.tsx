@@ -8,7 +8,7 @@ export function WhoWeAreSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="about" ref={containerRef} className="relative py-32 lg:py-60 bg-background overflow-hidden">
+    <section id="about" ref={containerRef} className="min-h-screen relative lg:py-60 bg-background overflow-hidden flex justify-center items-center">
       <div className="container mx-auto px-6 lg:px-24 relative z-10">
         <div className="flex flex-col w-full gap-20 items-center">
           <motion.div
