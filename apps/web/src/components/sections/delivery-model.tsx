@@ -65,9 +65,9 @@ const HorizontalDeliveryStep = ({ step, index }: { step: Step, index: number }) 
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-start text-left space-y-6 pr-[500px]">
+        <div className="flex flex-col items-start text-left space-y-6">
           <h3 className="text-4xl lg:text-7xl font-heading font-medium text-brand-green uppercase tracking-tighter leading-none">
-            <span className="text-brand-lite-red">0{index + 1}</span> {step.title}
+            <span className="animate-brand-gradient">0{index + 1}</span> {step.title}
           </h3>
           <p className="text-lg lg:text-2xl font-light text-foreground/70 leading-relaxed max-w-md">
             {step.description}
@@ -107,8 +107,8 @@ function DesktopHorizontalLayout() {
         {/* Legend */}
         <div className="absolute bottom-12 left-12 lg:bottom-16 lg:left-24 z-40">
           <div className="flex flex-col">
-            <h2 className="text-xl lg:text-3xl font-heading font-medium tracking-tighter text-brand-lite-red uppercase leading-none">
-              How We <span className="text-brand-green">Deliver</span>
+            <h2 className="text-xl lg:text-3xl font-heading font-medium tracking-tighter uppercase leading-none">
+              <span className="animate-brand-gradient">How We</span> <span className="text-brand-green">Deliver</span>
             </h2>
             <p className="text-[10px] lg:text-xs font-mono text-foreground/40 mt-1 uppercase tracking-[0.4em]">
               Precision Lifecycle
@@ -146,7 +146,7 @@ const VerticalDeliveryStep = ({ step, index }: { step: Step, index: number }) =>
         {IconComponent ? <IconComponent className="text-brand-lite-red" /> : `0${index + 1}`}
       </div>
       <h3 className="text-3xl font-heading font-medium text-brand-green uppercase tracking-tighter mb-4">
-        <span className="text-brand-lite-red">0{index + 1}</span> {step.title}
+        <span className="animate-brand-gradient">0{index + 1}</span> {step.title}
       </h3>
       <p className="text-base font-light text-foreground/70 leading-relaxed max-w-sm">
         {step.description}
@@ -159,8 +159,8 @@ function MobileVerticalLayout() {
   return (
     <section className="bg-background py-20 overflow-hidden">
       <div className="px-6 mb-12">
-        <h2 className="text-3xl font-heading font-medium tracking-tighter text-brand-lite-red uppercase leading-none">
-          How We <span className="text-brand-green">Deliver</span>
+        <h2 className="text-3xl font-heading font-medium tracking-tighter uppercase leading-none">
+          <span className="animate-brand-gradient">How We</span> <span className="text-brand-green">Deliver</span>
         </h2>
         <p className="text-[10px] font-mono text-foreground/40 mt-2 uppercase tracking-[0.3em]">
           Precision Lifecycle
