@@ -44,7 +44,7 @@ const RoadmapIcon = ({ step, index, scrollYProgress }: { step: Step; index: numb
         }}
         className="relative z-10 w-12 h-12 rounded-full border-2 flex items-center justify-center shadow-lg transition-all duration-500"
       >
-        <motion.div style={{ color: iconColor }} className="relative z-20 font-heading font-medium text-xs">
+        <motion.div style={{ color: iconColor }} className="relative z-20 font-heading font-bold text-sm">
           0{index + 1}
         </motion.div>
       </motion.div>
