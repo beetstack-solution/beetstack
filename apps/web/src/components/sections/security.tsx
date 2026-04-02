@@ -24,8 +24,8 @@ export function SecuritySection() {
       <div className="container mx-auto px-6 lg:px-24 space-y-20">
         <div className="flex flex-col lg:flex-row items-end justify-between gap-12 border-b border-white/5 pb-16">
           <div className="space-y-4">
-            <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter uppercase text-brand-lite-red leading-[0.9]">
-              High-Security <br />
+            <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter uppercase leading-[0.9]">
+              <span className="animate-brand-gradient">High-Security</span> <br />
               <span className="text-brand-green">Environments</span>
             </h2>
           </div>
