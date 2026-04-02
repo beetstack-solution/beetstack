@@ -2,7 +2,7 @@
 
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.AJ_MAIL_KEY);
 
 interface EmailData {
   name: string;
@@ -29,64 +29,63 @@ export async function sendContactEmail(data: EmailData) {
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>New Message From Beetstack</title>
-            <style>
-      .hover-link:hover {
-        color: #a21c3c !important;
-        text-decoration: underline !important;
-      }
-      .whatsapp-btn:hover {
-        background-color: #20ba5c !important;
-        transform: translateY(-2px);
-      }
-    </style>
           </head>
-          <body style="margin: 0; padding: 50px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #ffff; color: #1a1a1a;">
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #ffffff; color: #1a1a1a;">
             
-            <div style="max-width: 600px; margin: 40px auto; background-color: #ffffff; overflow: hidden; border-radius: 50px; box-shadow: 0 4px 24px rgba(0,0,0,0.05);">
+            <div style="max-width: 600px; margin: auto; background-color: #ffffff; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.05);">
               
               <div style="padding: 40px 20px; text-align: center;">
                 <img src="https://beetstack.in/public/assets/img/logo.png" alt="Beetstack Logo" style="max-height: 60px; width: auto; display: block; margin: 0 auto 12px auto;">
-                <p style="margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #a21c3c;">New Project Inquiry</p>
+                <p style="margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #a21c3c;">Project Inquiry</p>
               </div>
 
-              <div style="background-color: #fafafa; padding: 40px 30px; border-radius: 50px;">
-                <div style="background-color: #ffffff; padding: 24px; border-radius: 25px; border: 1px solid #eaeaea; border-left: 4px solid #a21c3c; margin-bottom: 24px;">
-                  
-                  <div style="margin-bottom: 16px;">
-                    <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Sender Name</p>
-                    <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">${name}</p>
-                  </div>
-                  
-                  <div style="margin-bottom: 16px;">
-                    <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Email Address</p>
-                    <p class="hover-link" style="margin: 0; font-size: 16px; font-weight: 600;"><a href="mailto:${email}" style="color: #1a1a1a; text-decoration: none;">${email}</a></p>
-                  </div>
+              <div style="padding: 24px; border-radius: 25px; border: 1px solid #eaeaea; border-left: 4px solid #a21c3c; margin: 0 0px 24px 0px;">
+                <div style="margin-bottom: 16px;">
+                  <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Sender Name</p>
+                  <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">${name}</p>
+                </div>
+                
+                <div style="margin-bottom: 16px;">
+                  <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Email Address</p>
+                  <p style="margin: 0; font-size: 16px; font-weight: 600;"><a href="mailto:${email}" style="color: #1a1a1a; text-decoration: none;">${email}</a></p>
+                </div>
 
-                  <div style="margin-bottom: 16px;">
-                    <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Phone Number</p>
-                    <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">${phone}</p>
-                    <div style="margin-top: 10px;">
-                      <a href="https://wa.me/${whatsappNumber}" class="whatsapp-btn" style="display: inline-flex; align-items: center; background-color: #25d366; color: white; padding: 8px 16px; border-radius: 12px; text-decoration: none; font-size: 12px; font-weight: 600; transition: all 0.3s ease;">
-                        Chat on WhatsApp
+                <div style="margin-bottom: 16px;">
+                  <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Phone Number</p>
+                  <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">${phone}</p>
+                </div>
+                
+                <div>
+                  <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Subject</p>
+                  <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">${subject}</p>
+                </div>
+              </div>
+
+              <div style="padding: 24px; border-radius: 25px; border: 1px solid #eaeaea; border-left: 4px solid #91a93e; margin: 0 0px 24px 0px;">
+                <p style="margin: 0 0 12px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #91a93e;">Message Content</p>
+                <div style="font-size: 15px; color: #1a1a1a; line-height: 1.7; white-space: pre-wrap;">${message}</div>
+              </div>
+
+              <div style="text-align: center; margin-top: 24px;">
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td width="50%" style="padding-right: 5px;">
+                      <a href="https://wa.me/${whatsappNumber}" style="display: block; background-color: #91a93e; color: white; padding: 14px 10px; border-radius: 50px; text-decoration: none; font-size: 16px; font-weight: 600; text-align: center; line-height: 20px;">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/whatsapp-white-icon.png" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px; margin-top: -2px;" />
+                        WhatsApp
                       </a>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Subject</p>
-                    <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1a1a1a; text-transform: capitalize;">${subject}</p>
-                  </div>
-
-                </div>
-
-                <div style="background-color: #ffffff; padding: 24px; border-radius: 25px; border: 1px solid #eaeaea; border-left: 4px solid #91a93e;">
-                  <p style="margin: 0 0 12px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #91a93e;">Message Content</p>
-                  <div style="font-size: 15px; font-weight: 400; color: #1a1a1a; line-height: 1.7; white-space: pre-wrap; text-transform: capitalize;">${message}</div>
-                </div>
-
+                    </td>
+                    <td width="50%" style="padding-left: 5px;">
+                      <a href="tel:${whatsappNumber}" style="display: block; background-color: #a21c3c; color: white; padding: 14px 10px; border-radius: 50px; text-decoration: none; font-size: 16px; font-weight: 600; text-align: center; line-height: 20px;">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/phone-call-white-icon.png" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px; margin-top: -2px;" />
+                        Call Now
+                      </a>
+                    </td>
+                  </tr>
+                </table>
               </div>
 
-              <div style="padding: 30px; text-align: center; background-color: #ffffff; border-top: 1px solid #f0f0f0;">
+              <div style="padding: 30px; text-align: center; background-color: #ffffff;">
                 <p style="margin: 0; font-size: 12px; font-weight: 500; color: #999999; line-height: 1.6;">
                   © 2026 Beetstack IT Solutions<br>
                   Kannur, Kerala, India
