@@ -22,8 +22,8 @@ export function WhyBeetstackSection() {
             <span className="text-[10px] lg:text-xs font-mono text-brand-lite-red uppercase tracking-[0.4em]">
               The Beetstack Advantage
             </span>
-            <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter text-brand-lite-red uppercase leading-[0.9]">
-              Why <br />
+            <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter uppercase leading-[0.9]">
+              <span className="animate-brand-gradient">Why</span> <br />
               <span className="text-brand-green">Beetstack</span>
             </h2>
           </motion.div>
