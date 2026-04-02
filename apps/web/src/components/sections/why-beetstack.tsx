@@ -8,7 +8,7 @@ import { BENEFITS } from "@/data";
 
 export function WhyBeetstackSection() {
   return (
-    <section id="why-beetstack" className="relative py-20 bg-background overflow-hidden">
+    <section id="expertise" className="relative py-20 bg-background overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-brand-lite-red/2 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
