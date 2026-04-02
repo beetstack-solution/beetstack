@@ -46,7 +46,7 @@ export function Footer() {
               );
             })}
 
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] dark:opacity-[0.08] sm:dark:opacity-[0.05] pointer-events-none select-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] dark:opacity-[0.05] sm:dark:opacity-[0.8] pointer-events-none select-none">
               <h2 className="text-[15vw] font-black leading-none tracking-tighter text-foreground">BEETSTACK</h2>
             </div>
           </div>
