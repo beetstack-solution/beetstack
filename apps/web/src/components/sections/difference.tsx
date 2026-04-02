@@ -12,7 +12,7 @@ const GridItem = React.memo(({ diff, index }: { diff: typeof DIFFERENCES[0]; ind
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.8 }}
-      className={`group relative rounded-[2.5rem] overflow-hidden ${diff.bgColor} border border-white/10 p-8 lg:p-12 transition-all duration-700 hover:scale-[1.02] ${diff.span}`}
+      className={`group relative rounded-[2.5rem] overflow-hidden   border border-white/10 p-8 lg:p-12 transition-all duration-700 hover:scale-[1.02] ${diff.span}`}
     >
       <div className="absolute inset-0 z-20 pointer-events-none">
         <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
