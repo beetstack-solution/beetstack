@@ -6,7 +6,7 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motio
 export function CustomCursor() {
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -23,13 +23,13 @@ export function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isClickable = 
-        target.tagName === 'A' || 
-        target.tagName === 'BUTTON' || 
-        target.closest('a') || 
+      const isClickable =
+        target.tagName === 'A' ||
+        target.tagName === 'BUTTON' ||
+        target.closest('a') ||
         target.closest('button') ||
         window.getComputedStyle(target).cursor === 'pointer';
-      
+
       setIsPointer(!!isClickable);
     };
 
@@ -40,10 +40,10 @@ export function CustomCursor() {
     window.addEventListener("mouseover", handleMouseOver);
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mouseenter", handleMouseEnter);
-    
+
     // Hide default cursor globally
     document.body.style.cursor = "none";
-    
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
@@ -80,10 +80,10 @@ export function CustomCursor() {
                 opacity: isPointer ? 0.5 : 1,
                 borderWidth: isPointer ? 1 : 1.5,
               }}
-              className="absolute w-full h-full rounded-full border-[1.5px]"
+              className="absolute w-full h-full rounded-full border-[1.5px] bg-brand-lite-red"
               style={{ borderColor: liteRed }}
             />
-            
+
             {/* Middle Beetroot Layer */}
             <motion.div
               animate={{
