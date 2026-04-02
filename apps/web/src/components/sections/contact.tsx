@@ -46,7 +46,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="px-2 sm:px-6">
-      <div className="relative py-10 md:py-48 bg-background border border-foreground/5 overflow-hidden selection:bg-brand-red selection:text-white rounded-[30px] sm:rounded-[60px]">
+      <div className="relative py-10 md:py-20 bg-background border border-foreground/5 overflow-hidden selection:bg-brand-red selection:text-white rounded-[30px] sm:rounded-[60px]">
         {/* Ambient background glows */}
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-red/[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-brand-green/[0.03] rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
