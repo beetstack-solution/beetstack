@@ -8,7 +8,7 @@ import { BENEFITS } from "@/data";
 
 export function WhyBeetstackSection() {
   return (
-    <section id="expertise" className="relative py-20 bg-background overflow-hidden">
+    <section id="expertise" className="relative py-32 lg:py-48 bg-background overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-brand-lite-red/2 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -22,7 +22,7 @@ export function WhyBeetstackSection() {
             <span className="text-[10px] lg:text-xs font-mono text-brand-lite-red uppercase tracking-[0.4em]">
               The Beetstack Advantage
             </span>
-            <h2 className="text-6xl lg:text-8xl font-heading font-medium tracking-tighter text-brand-lite-red uppercase leading-none">
+            <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter text-brand-lite-red uppercase leading-[0.9]">
               Why <br />
               <span className="text-brand-green">Beetstack</span>
             </h2>
