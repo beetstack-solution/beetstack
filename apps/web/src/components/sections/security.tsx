@@ -16,7 +16,7 @@ export function SecuritySection() {
   const scannerScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.15, 0.95]);
 
   return (
-    <section id="security-experience" ref={containerRef} className="relative bg-background overflow-hidden py-24">
+    <section id="security-experience" ref={containerRef} className="relative bg-background overflow-hidden py-32 lg:py-48">
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div className="w-full h-full bg-[linear-gradient(rgba(145,170,62,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(145,170,62,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
       </div>
@@ -24,7 +24,7 @@ export function SecuritySection() {
       <div className="container mx-auto px-6 lg:px-24 space-y-20">
         <div className="flex flex-col lg:flex-row items-end justify-between gap-12 border-b border-white/5 pb-16">
           <div className="space-y-4">
-            <h2 className="text-4xl lg:text-6xl font-heading font-medium tracking-tighter uppercase text-brand-lite-red">
+            <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter uppercase text-brand-lite-red leading-[0.9]">
                High-Security <br/>
                <span className="text-brand-green">Environments</span>
             </h2>
