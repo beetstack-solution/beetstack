@@ -16,7 +16,7 @@ const GridItem = React.memo(({ diff, index }: { diff: typeof DIFFERENCES[0]; ind
     >
       <div className="absolute inset-0 z-20 pointer-events-none">
         <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-          <rect x="0" y="0" width="100%" height="100%" fill="none" stroke="white" strokeWidth="3" strokeDasharray="100 400" className="animate-border-flow opacity-60" rx="40" />
+          <rect x="0" y="0" width="100%" height="100%" fill="none" stroke="background" strokeWidth="5" strokeDasharray="100 400" className="animate-border-flow opacity-60" rx="40" />
         </svg>
       </div>
 

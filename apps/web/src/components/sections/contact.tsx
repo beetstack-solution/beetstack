@@ -42,13 +42,13 @@ export function ContactSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             <div className="space-y-12">
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
-                <h2 className="text-6xl lg:text-9xl font-heading font-medium tracking-tighter text-white leading-none uppercase">
+                <h2 className="text-6xl lg:text-9xl font-heading font-medium tracking-tighter text-background leading-none uppercase">
                   Get in <br />
                   <span className="opacity-40">Touch</span>
                 </h2>
                 <div className="space-y-2">
-                  <p className="text-xl lg:text-2xl font-light text-white/90">Beetstack IT Solutions</p>
-                  <p className="text-sm font-mono uppercase tracking-widest text-white/60">Kannur, Kerala, India</p>
+                  <p className="text-xl lg:text-2xl font-light text-background/90">Beetstack IT Solutions</p>
+                  <p className="text-sm font-mono uppercase tracking-widest text-background/60">Kannur, Kerala, India</p>
                 </div>
               </motion.div>
 
@@ -63,14 +63,14 @@ export function ContactSection() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+                      className="group flex items-center gap-4 p-4 rounded-2xl bg-background/5 border border-white/10 hover:bg-white/10 transition-all"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        {Icon && <Icon className="w-5 h-5 text-white" />}
+                      <div className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        {Icon && <Icon className="w-5 h-5 text-background" />}
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase font-mono tracking-widest text-white/40">{item.label}</p>
-                        <p className="text-sm font-medium text-white">{item.value}</p>
+                        <p className="text-[10px] uppercase font-mono tracking-widest text-background/40">{item.label}</p>
+                        <p className="text-sm font-medium text-background">{item.value}</p>
                       </div>
                     </motion.a>
                   );
@@ -78,11 +78,16 @@ export function ContactSection() {
               </div>
             </div>
 
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="p-8 lg:p-12 rounded-[2.5rem] bg-white shadow-2xl shadow-black/10">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="p-8 lg:p-12 rounded-[2.5rem] bg-white dark:bg-[#0a0507] shadow-[0_20px_80px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.4)] border border-transparent dark:border-white/5"
+            >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label htmlFor="contact-name" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Name</label>
+                    <label htmlFor="contact-name" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red px-2">Name</label>
                     <input
                       required
                       id="contact-name"
@@ -91,11 +96,11 @@ export function ContactSection() {
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full h-14 bg-brand-lite-red/5 border border-brand-lite-red/10 rounded-2xl px-6 text-sm text-brand-lite-red placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/40 transition-colors"
+                      className="w-full h-14 bg-brand-lite-red/[0.03] dark:bg-white/[0.02] border border-brand-lite-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-lite-red dark:text-white placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/30 dark:focus:border-brand-lite-red/50 transition-all duration-300"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="contact-email" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Email</label>
+                    <label htmlFor="contact-email" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red px-2">Email</label>
                     <input
                       required
                       id="contact-email"
@@ -104,13 +109,13 @@ export function ContactSection() {
                       placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full h-14 bg-brand-lite-red/5 border border-brand-lite-red/10 rounded-2xl px-6 text-sm text-brand-lite-red placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/40 transition-colors"
+                      className="w-full h-14 bg-brand-lite-red/[0.03] dark:bg-white/[0.02] border border-brand-lite-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-lite-red dark:text-white placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/30 dark:focus:border-brand-lite-red/50 transition-all duration-300"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="contact-subject" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Subject</label>
+                  <label htmlFor="contact-subject" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red px-2">Subject</label>
                   <input
                     required
                     id="contact-subject"
@@ -119,12 +124,12 @@ export function ContactSection() {
                     placeholder="How can we help?"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full h-14 bg-brand-lite-red/5 border border-brand-lite-red/10 rounded-2xl px-6 text-sm text-brand-lite-red placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/40 transition-colors"
+                    className="w-full h-14 bg-brand-lite-red/[0.03] dark:bg-white/[0.02] border border-brand-lite-red/10 dark:border-white/5 rounded-2xl px-6 text-sm text-brand-lite-red dark:text-white placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/30 dark:focus:border-brand-lite-red/50 transition-all duration-300"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="contact-message" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red/60 px-2">Message</label>
+                  <label htmlFor="contact-message" className="text-[10px] uppercase font-mono tracking-widest text-brand-lite-red px-2">Message</label>
                   <textarea
                     required
                     id="contact-message"
@@ -133,14 +138,14 @@ export function ContactSection() {
                     placeholder="Tell us about your project..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-brand-lite-red/5 border border-brand-lite-red/10 rounded-2xl p-6 text-sm text-brand-lite-red placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/40 transition-colors resize-none"
+                    className="w-full bg-brand-lite-red/[0.03] dark:bg-white/[0.02] border border-brand-lite-red/10 dark:border-white/5 rounded-2xl p-6 text-sm text-brand-lite-red dark:text-white placeholder:text-brand-lite-red/30 focus:outline-none focus:border-brand-lite-red/30 dark:focus:border-brand-lite-red/50 transition-all duration-300 resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={formState === "submitting"}
-                  className={`w-full h-14 rounded-2xl font-heading font-medium uppercase tracking-widest text-xs flex items-center justify-center gap-2 transition-all duration-300 ${formState === "success" ? "bg-green-500 hover:bg-green-600 shadow-[0_0_20px_rgba(34,197,94,0.4)]" : "bg-brand-lite-red hover:bg-brand-red"} text-white`}
+                  className={`w-full h-14 rounded-full font-heading font-medium uppercase tracking-[0.2em] text-[11px] flex items-center justify-center gap-2 transition-all duration-500 shadow-xl ${formState === "success" ? "bg-green-500 hover:bg-green-600 shadow-green-500/20" : "bg-brand-lite-red hover:bg-brand-lite-red/50 shadow-brand-lite-red/10"} text-background`}
                 >
                   <AnimatePresence mode="wait">
                     {formState === "idle" && (

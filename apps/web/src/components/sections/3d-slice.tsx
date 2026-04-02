@@ -100,7 +100,7 @@ function BeetrootSlice({ hoveredRing, onPointerEnter, onPointerLeave, onPointerM
     const angle45 = Math.PI / 4;
     groupRef.current.rotation.y = angle45 + Math.sin(t * 0.5) * 0.08;
     groupRef.current.rotation.z = angle45 + Math.sin(t * 0.35) * 0.04;
-    
+
     // Subtle float
     groupRef.current.position.y = Math.sin(t * 0.45) * 0.12;
 
@@ -200,7 +200,7 @@ function VelocityMarquee({
   });
 
   const quad = [...items, ...items, ...items, ...items];
-  const outlinedTextStyle: React.CSSProperties = outlined ? { color: "transparent", WebkitTextStroke: "2.5px white" } : {};
+  const outlinedTextStyle: React.CSSProperties = outlined ? { color: "transparent", WebkitTextStroke: "2.5px background" } : {};
   const outlinedDotStyle: React.CSSProperties = outlined ? { color: "transparent", WebkitTextStroke: "1px var(--brand-green)", opacity: 0.5 } : { opacity: 0.4 };
 
   return (
@@ -250,12 +250,12 @@ function ServiceTooltip({ service, x, y }: { service: (typeof SERVICES)[0] | nul
 export function SliceSection() {
   const [hovered, setHovered] = useState<{ index: number; x: number; y: number } | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  
+
   const { scrollY, scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
-  
+
   const rawVel = useVelocity(scrollY);
   const scrollDirRef = useRef<number>(1);
   const scrollRawRef = useRef<number>(0);
