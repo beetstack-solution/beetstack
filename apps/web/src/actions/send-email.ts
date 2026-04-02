@@ -19,7 +19,7 @@ export async function sendContactEmail(data: EmailData) {
   try {
     const { data: result, error } = await resend.emails.send({
       from: "Beetstack IT Solutions <onboarding@resend.dev>",
-      to: ["dev.ajmal11@gmail.com"],
+      to: ["beetstack@gmail.com"],
       subject: `New Message: ${subject}`,
       replyTo: email,
       html: `
