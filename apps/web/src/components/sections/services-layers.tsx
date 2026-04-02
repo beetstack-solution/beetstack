@@ -205,7 +205,7 @@ function LadderSection({ service, index }: { service: ServiceItem, index: number
             </div>
 
             <div className="space-y-4 sm:space-y-6">
-              <h3 className="text-3xl sm:text-4xl lg:text-6xl font-heading font-medium tracking-tighter leading-tight text-brand-lite-red uppercase">{service.title}</h3>
+              <h3 className="text-3xl sm:text-4xl lg:text-6xl font-heading font-medium tracking-tighter leading-tight animate-brand-gradient uppercase">{service.title}</h3>
               <p className="text-base sm:text-xl lg:text-2xl font-light text-foreground leading-relaxed max-w-xl">{service.description}</p>
             </div>
           </motion.div>
@@ -223,8 +223,8 @@ export function ServicesLayersSection() {
     <section id="services" ref={containerRef} className="relative bg-background overflow-hidden max-sm:pt-32">
       <div className="flex flex-col items-center justify-center px-5 sm:px-6 text-center">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="space-y-6 sm:space-y-8">
-          <h2 className="text-5xl sm:text-7xl lg:text-[10rem] font-heading font-semibold tracking-tighter leading-[0.85] uppercase text-brand-lite-red">
-            What We <br />
+          <h2 className="text-5xl sm:text-7xl lg:text-[10rem] font-heading font-semibold tracking-tighter leading-[0.85] uppercase">
+            <span className="animate-brand-gradient">What We</span> <br />
             <span className="text-brand-green">Provide</span>
           </h2>
           <div className="pt-10 flex flex-col items-center gap-12">
