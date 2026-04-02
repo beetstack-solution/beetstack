@@ -56,7 +56,7 @@ export function ContactSection() {
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
                 <h2 className="text-6xl lg:text-9xl font-heading font-medium tracking-tighter text-foreground leading-none uppercase">
                   Get in <br />
-                  <span className="text-brand-red opacity-100">Touch</span>
+                  <span className="animate-brand-gradient opacity-100">Touch</span>
                 </h2>
                 <div className="space-y-2">
                   <p className="text-xl lg:text-2xl font-light text-foreground/90">Beetstack IT Solutions</p>
