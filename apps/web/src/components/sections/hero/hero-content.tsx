@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@repo/ui/button";
 import { Icons } from "@beetstack/icons";
 import Image from "next/image";
+import Link from "next/link";
 
 export function HeroContent() {
   return (
@@ -26,7 +27,7 @@ export function HeroContent() {
             alt="Beetstack Logo"
             width={320}
             height={80}
-            className="h-12 sm:h-16 lg:h-20 w-auto object-contain drop-shadow-2xl"
+            className="h-12 sm:h-16 lg:h-20 w-auto object-contain drop"
             priority
             loading="eager"
             style={{ width: "auto", height: "100%" }}
@@ -46,14 +47,26 @@ export function HeroContent() {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 pt-6 sm:pt-12 pointer-events-auto"
         >
-          <Button size="lg" className="w-full sm:w-auto rounded-full px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-heading font-medium bg-foreground text-background hover:bg-foreground/90 transition-all flex items-center justify-center gap-4 shadow-2xl">
-            <Icons.Projects className="h-4 w-4" />
-            Our Services
-          </Button>
-          <Button variant="outline" size="lg" className="w-full sm:w-auto rounded-full px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-heading font-medium backdrop-blur-md transition-all hover:bg-primary/5 border-primary/50">
-            Our Portfolio
-            <Icons.ChevronRight className="h-5 w-5" />
-          </Button>
+          <Link
+            href="#services"
+            className="group relative w-full sm:w-auto rounded-full px-8 py-2.5 text-base sm:text-lg font-heading font-medium border-2 border-brand-red overflow-hidden flex items-center justify-center gap-4 transition-all duration-500 bg-brand-red text-background hover:bg-brand-lite-red hover:border-brand-lite-red"
+          >
+            <span className="relative z-10 flex items-center gap-4 group-hover:text-white transition-colors duration-500">
+              <Icons.Projects className="h-4 w-4" />
+              Our Services
+            </span>
+          </Link>
+
+          <Link
+            href="#portfolio"
+            className="group relative w-full sm:w-auto rounded-full px-8 py-2.5 text-base sm:text-lg font-heading font-medium border-2 border-brand-green overflow-hidden flex items-center justify-center gap-2 transition-all duration-500"
+          >
+            <div className="absolute inset-0 bg-brand-green scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+            <span className="relative z-10 flex items-center gap-2 text-brand-green group-hover:text-white transition-colors duration-500">
+              Our Portfolio
+              <Icons.ChevronRight className="h-5 w-5" />
+            </span>
+          </Link>
         </motion.div>
       </motion.div>
     </div>
