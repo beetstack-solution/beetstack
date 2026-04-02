@@ -2,17 +2,19 @@
 
 import { Resend } from "resend";
 
-const resend = new Resend("re_iLWXMSXi_NKmLizUUWCJb6WHcH6WwFJSM");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface EmailData {
   name: string;
   email: string;
+  phone: string;
   subject: string;
   message: string;
 }
 
 export async function sendContactEmail(data: EmailData) {
-  const { name, email, subject, message } = data;
+  const { name, email, phone, subject, message } = data;
+  const whatsappNumber = phone.replace(/\D/g, "");
 
   try {
     const { data: result, error } = await resend.emails.send({
@@ -28,11 +30,13 @@ export async function sendContactEmail(data: EmailData) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>New Message From Beetstack</title>
             <style>
-      /* Target any link with the class 'hover-link' */
       .hover-link:hover {
         color: #a21c3c !important;
-        
         text-decoration: underline !important;
+      }
+      .whatsapp-btn:hover {
+        background-color: #20ba5c !important;
+        transform: translateY(-2px);
       }
     </style>
           </head>
@@ -56,6 +60,16 @@ export async function sendContactEmail(data: EmailData) {
                   <div style="margin-bottom: 16px;">
                     <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Email Address</p>
                     <p class="hover-link" style="margin: 0; font-size: 16px; font-weight: 600;"><a href="mailto:${email}" style="color: #1a1a1a; text-decoration: none;">${email}</a></p>
+                  </div>
+
+                  <div style="margin-bottom: 16px;">
+                    <p style="margin: 0 0 4px 0; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a21c3c;">Phone Number</p>
+                    <p style="margin: 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">${phone}</p>
+                    <div style="margin-top: 10px;">
+                      <a href="https://wa.me/${whatsappNumber}" class="whatsapp-btn" style="display: inline-flex; align-items: center; background-color: #25d366; color: white; padding: 8px 16px; border-radius: 12px; text-decoration: none; font-size: 12px; font-weight: 600; transition: all 0.3s ease;">
+                        Chat on WhatsApp
+                      </a>
+                    </div>
                   </div>
                   
                   <div>
