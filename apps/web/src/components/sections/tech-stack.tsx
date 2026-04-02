@@ -114,8 +114,8 @@ export function TechStackSection() {
           <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.28em] text-brand-lite-red">
             Our Stack
           </p>
-          <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter uppercase text-brand-lite-red leading-[0.9]">
-            Tech Ecosystem
+          <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter uppercase leading-[0.9]">
+            <span className="animate-brand-gradient">Tech</span> <span className="text-brand-green">Ecosystem</span>
           </h2>
           <p className="text-muted-foreground text-sm max-w-sm mx-auto">
             Every ring of the Beetroot — a precision-chosen technology.
