@@ -50,8 +50,8 @@ export function TestimonialsSection() {
   const active = TESTIMONIALS[activeIndex]!;
 
   return (
-    <section 
-      id="testimonials" 
+    <section
+      id="testimonials"
       className="relative py-32 lg:py-48 overflow-hidden bg-background"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -108,7 +108,7 @@ export function TestimonialsSection() {
                       opacity: isCentre ? 1 : 0.4 + (pos.scale - 0.55) * 1.3,
                       zIndex: pos.zIndex,
                     }}
-                    transition={{ 
+                    transition={{
                       duration: 0.6,
                       ease: "easeInOut"
                     }}
@@ -117,11 +117,10 @@ export function TestimonialsSection() {
                     style={{ zIndex: pos.zIndex }}
                   >
                     <div
-                      className={`relative rounded-full overflow-hidden transition-all duration-500 ${
-                        isCentre
+                      className={`relative rounded-full overflow-hidden transition-all duration-500 ${isCentre
                           ? "ring-4 ring-brand-lite-red shadow-[0_0_40px_rgba(227,55,101,0.4)]"
                           : "ring-2 ring-brand-lite-red/30 hover:ring-brand-lite-red/60"
-                      }`}
+                        }`}
                       style={{
                         width: isCentre ? 100 : 64,
                         height: isCentre ? 100 : 64,
@@ -165,7 +164,7 @@ export function TestimonialsSection() {
           </button>
 
           {/* Card Container (Static) */}
-          <div 
+          <div
             className="rounded-[2.5rem] border border-brand-lite-red/15 bg-brand-lite-red/[0.04] backdrop-blur-sm p-10 text-center space-y-6 shadow-[0_8px_60px_rgba(227,55,101,0.1)] overflow-hidden"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}

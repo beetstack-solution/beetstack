@@ -91,8 +91,8 @@ export function Navbar() {
                 className="group relative px-10 h-10 rounded-full border-2 border-brand-green bg-transparent overflow-hidden flex items-center justify-center gap-2 transition-all duration-300"
               >
                 <div className="absolute inset-0 bg-brand-green scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
-                <span className="relative z-10 text-[10px] font-heading font-medium uppercase tracking-[0.2em] text-foreground group-hover:text-background transition-colors duration-500">
-                  Contact
+                <span className="relative z-10 text-[10px] font-semibold font-heading font-medium uppercase tracking-[0.2em] text-brand-green group-hover:text-background transition-colors duration-500">
+                  Get Quote
                 </span>
               </button>
             </Link>
@@ -255,7 +255,7 @@ export function Navbar() {
             <button
               className="w-full h-14 rounded-full bg-brand-lite-red text-background font-heading font-medium uppercase tracking-[0.2em] text-[11px] shadow-lg shadow-brand-lite-red/10 border-2 border-brand-lite-red"
             >
-              Get In Touch
+              Get Quote
             </button>
           </Link>
         </div>

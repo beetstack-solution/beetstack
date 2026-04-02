@@ -14,7 +14,7 @@ export function HeroContent() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-4xl space-y-6 sm:space-y-12"
+        className="max-w-4xl space-y-16 sm:space-y-12"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export function HeroContent() {
 
           <Link
             href="#portfolio"
-            className="group relative w-full sm:w-auto rounded-full px-8 py-2.5 text-base sm:text-lg font-heading font-medium border-2 border-brand-green overflow-hidden flex items-center justify-center gap-2 transition-all duration-500"
+            className="group relative w-full sm:w-auto rounded-full px-8 py-2.5 text-base sm:text-lg font-heading font-medium border-2 border-brand-green overflow-hidden flex items-center justify-center gap-2 transition-all duration-500 backdrop-blur-sm"
           >
             <div className="absolute inset-0 bg-brand-green scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
             <span className="relative z-10 flex items-center gap-2 text-brand-green group-hover:text-white transition-colors duration-500">

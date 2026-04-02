@@ -26,7 +26,7 @@ export function Footer() {
             />
           </Link>
 
-          <div className="flex items-center gap-4">
+          <div className="relative flex items-center gap-6">
             {SOCIAL_LINKS.map((social) => {
               const Icon = Icons[social.icon];
               return (
@@ -45,10 +45,14 @@ export function Footer() {
                 </motion.a>
               );
             })}
+
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] dark:opacity-[0.08] sm:dark:opacity-[0.05] pointer-events-none select-none">
+              <h2 className="text-[15vw] font-black leading-none tracking-tighter text-foreground">BEETSTACK</h2>
+            </div>
           </div>
         </div>
 
-        <div className="w-full pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+        <div className="w-full pt-16 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-foreground/40 text-[10px] font-mono uppercase tracking-[0.2em]">
             <p>© 2026 Beetstack IT Solutions. All Rights Reserved.</p>
             <span className="hidden md:block opacity-30">|</span>
@@ -65,10 +69,6 @@ export function Footer() {
             Back to top ↑
           </Link>
         </div>
-      </div>
-
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.05] dark:opacity-[0.05] pointer-events-none select-none">
-        <h2 className="text-[12vw] font-black leading-none tracking-tighter text-foreground">BEETSTACK</h2>
       </div>
 
       <div className="w-full h-1 bg-brand-lite-red rounded-full absolute bottom-0 left-0" />

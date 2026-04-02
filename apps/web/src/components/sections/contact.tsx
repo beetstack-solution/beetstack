@@ -33,12 +33,12 @@ export function ContactSection() {
 
 
   return (
-    <section id="contact" className="px-6">
-      <div className="relative py-32 lg:py-48 bg-brand-lite-red overflow-hidden selection:bg-white selection:text-brand-lite-red rounded-[60px]">
+    <section id="contact" className="px-2 sm:px-6">
+      <div className="relative py-10 md:py-48 bg-brand-lite-red overflow-hidden selection:bg-white selection:text-brand-lite-red rounded-[30px] sm:rounded-[60px]">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-black/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-2 sm:px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             <div className="space-y-12">
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">

@@ -6,7 +6,7 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motio
 export function CustomCursor() {
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -15,6 +15,13 @@ export function CustomCursor() {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Detect touch device
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch) {
+      setIsTouchDevice(true);
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -51,7 +58,7 @@ export function CustomCursor() {
       window.removeEventListener("mouseenter", handleMouseEnter);
       document.body.style.cursor = "auto";
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY, isVisible, isPointer]);
 
   // Beetroot colors
   const liteRed = "#e33765";
@@ -60,7 +67,7 @@ export function CustomCursor() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
       <AnimatePresence>
-        {isVisible && (
+        {(isVisible && !isTouchDevice) && (
           <motion.div
             style={{
               translateX: cursorX,

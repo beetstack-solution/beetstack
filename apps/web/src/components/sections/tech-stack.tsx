@@ -76,7 +76,7 @@ BeetrootBadge.displayName = "BeetrootBadge";
 
 export function TechStackSection() {
   const [showAll, setShowAll] = useState(false);
-  
+
   // Show 12 items initially. 
   // 12 is the LCM of 3, 4, and 6 columns, ensuring full rows on all screen sizes (2 rows desktop, 3 tablet, 4 mobile).
   const initialItemsCount = 12;
@@ -150,7 +150,7 @@ export function TechStackSection() {
             </button>
             <div className="h-px flex-1 max-w-[150px] bg-gradient-to-l from-transparent to-brand-red/30" />
           </div>
-          
+
           {!showAll && (
             <span className="text-[10px] font-heading font-semibold uppercase tracking-[0.3em] text-brand-red/40 animate-pulse">
               + Discover our full ecosystem
