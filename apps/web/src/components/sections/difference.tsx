@@ -12,7 +12,7 @@ const GridItem = React.memo(({ diff, index }: { diff: typeof DIFFERENCES[0]; ind
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.8 }}
-      className={`group relative rounded-[2.5rem] overflow-hidden   border border-white/10 p-8 lg:p-12 transition-all duration-700 hover:scale-[1.02] ${diff.span}`}
+      className={`group relative rounded-[2.5rem] overflow-hidden border border-white/10 p-8 lg:p-12 transition-all duration-700 hover:scale-[1.02] ${diff.span} ${diff.bgColor}`}
     >
       <div className="absolute inset-0 z-20 pointer-events-none">
         <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
@@ -68,7 +68,7 @@ export function DifferenceSection() {
       <div className="container mx-auto px-6 lg:px-24 relative z-10">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-col items-center text-center mb-16 space-y-8">
           <h2 className="text-5xl lg:text-8xl font-heading font-medium tracking-tighter leading-[0.9] uppercase">
-            <span className="animate-brand-gradient">What Sets</span> <br />
+            <span className="animate-brand-gradient inline-block">What Sets</span> <br />
             <span className="text-brand-green">Us Apart</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground/50 max-w-xl font-light">Industrial engineering standards combined with modern aesthetic precision.</p>
