@@ -8,8 +8,28 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { id: "github", icon: "Github", href: "https://github.com/beetstack", label: "GitHub" },
-  { id: "linkedin", icon: "LinkedIn", href: "https://linkedin.com/company/beetstack", label: "LinkedIn" },
-  { id: "instagram", icon: "Instagram", href: "https://instagram.com/beetstack", label: "Instagram" },
-  { id: "twitter", icon: "Twitter", href: "https://twitter.com/beetstack", label: "Twitter" },
+  {
+    id: "github",
+    icon: "Github",
+    href: "https://github.com/beetstack-solution",
+    label: "GitHub",
+  },
+  {
+    id: "linkedin",
+    icon: "LinkedIn",
+    href: "https://linkedin.com/company/beetstack",
+    label: "LinkedIn",
+  },
+  {
+    id: "instagram",
+    icon: "Instagram",
+    href: "https://instagram.com/beetstack",
+    label: "Instagram",
+  },
+  {
+    id: "twitter",
+    icon: "Twitter",
+    href: "https://twitter.com/beetstack",
+    label: "Twitter",
+  },
 ];
