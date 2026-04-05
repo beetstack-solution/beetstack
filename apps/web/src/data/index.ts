@@ -8,3 +8,4 @@ export * from "./security-features.data";
 export * from "./slice.data";
 export * from "./contact-info.data";
 export * from "./testimonials.data";
+export * from "./companies.data";
