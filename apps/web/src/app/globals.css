@@ -105,10 +105,12 @@
 
 @layer utilities {
   .animate-brand-gradient {
-    background: linear-gradient(to right,
-        var(--brand-red) 0%,
-        var(--brand-lite-red) 70%,
-        var(--brand-red) 100%);
+    background: linear-gradient(
+      to right,
+      var(--brand-red) 0%,
+      var(--brand-lite-red) 70%,
+      var(--brand-red) 100%
+    );
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -120,6 +122,19 @@
   @keyframes shine {
     to {
       background-position: 200% center;
+    }
+  }
+
+  .animate-scroll-ticker {
+    animation: scroll-ticker 22s linear infinite;
+  }
+
+  @keyframes scroll-ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
     }
   }
 }
