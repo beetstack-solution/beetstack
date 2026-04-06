@@ -17,6 +17,34 @@ const ARC_POSITIONS = [
   { x: 42, y: -28, scale: 0.55, zIndex: 1 },
 ];
 
+const Avatar = ({
+  src,
+  name,
+  fill,
+  className,
+  sizes,
+}: {
+  src: string;
+  name: string;
+  fill?: boolean;
+  className?: string;
+  sizes?: string;
+}) => {
+  const [error, setError] = useState(false);
+  const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=a21c3c&color=fff`;
+
+  return (
+    <Image
+      src={error ? fallback : src}
+      alt={name}
+      fill={fill}
+      className={className}
+      sizes={sizes}
+      onError={() => !error && setError(true)}
+    />
+  );
+};
+
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(3); // start centre
   const [isPaused, setIsPaused] = useState(false);
@@ -126,9 +154,9 @@ export function TestimonialsSection() {
                         height: isCentre ? 100 : 64,
                       }}
                     >
-                      <Image
+                      <Avatar
                         src={person.avatar}
-                        alt={person.name}
+                        name={person.name}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 64px, 100px"
@@ -194,14 +222,16 @@ export function TestimonialsSection() {
                 transition={{ duration: 0.6, ease: "easeInOut" }}
                 className="space-y-6"
               >
-                {/* Name & location */}
+                {/* Name & optional role */}
                 <div>
                   <h3 className="animate-brand-gradient font-heading text-2xl font-medium tracking-tight lg:text-3xl">
                     {active.name}
                   </h3>
-                  <p className="mt-1.5 font-mono text-sm uppercase tracking-widest text-muted-foreground/60">
-                    {active.location} · {active.role}
-                  </p>
+                  {active.role && (
+                    <p className="mt-1 font-mono text-sm uppercase tracking-widest text-muted-foreground/70">
+                      {active.role}
+                    </p>
+                  )}
                 </div>
 
                 {/* Quote */}
@@ -218,7 +248,7 @@ export function TestimonialsSection() {
       <div className="relative mt-24 overflow-hidden">
         {/* Section label */}
         <p className="mb-8 text-center font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground/40">
-          Trusted by world-class teams
+          Trusted by Our Clients
         </p>
 
         {/* Edge fade masks */}
@@ -237,8 +267,6 @@ export function TestimonialsSection() {
           }}
         />
 
-        {/* Ticker track — 6 copies so content is always wider than any viewport.
-            Animation moves -50% (= 3 copies) then resets; copy 4 = copy 1 → seamless */}
         <div
           className="animate-scroll-ticker flex w-max items-center hover:[animation-play-state:paused]"
           style={{ gap: "4rem" }}
@@ -250,14 +278,27 @@ export function TestimonialsSection() {
                 className="group flex flex-shrink-0 items-center justify-center px-4"
               >
                 <div
-                  className="relative"
+                  className="relative transition-all duration-500 ease-in-out group-hover:scale-110"
                   style={{ width: company.width, height: company.height }}
                 >
                   <Image
                     src={company.logo}
                     alt={company.name}
                     fill
-                    className="object-contain opacity-25 brightness-0 transition-all duration-500 group-hover:opacity-100 group-hover:brightness-100"
+                    className="object-contain transition-all duration-500"
+                    style={{
+                      // Tint logos to brand-red (#a21c3c) by default
+                      filter:
+                        "invert(18%) sepia(87%) saturate(1633%) hue-rotate(326deg) brightness(85%) contrast(92%) opacity(0.6)",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.target as HTMLElement).style.filter = "none";
+                      (e.target as HTMLElement).style.opacity = "1";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.target as HTMLElement).style.filter =
+                        "invert(18%) sepia(87%) saturate(1633%) hue-rotate(326deg) brightness(85%) contrast(92%) opacity(0.6)";
+                    }}
                     sizes={`${company.width}px`}
                   />
                 </div>
