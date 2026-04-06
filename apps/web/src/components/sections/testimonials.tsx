@@ -281,24 +281,26 @@ export function TestimonialsSection() {
                   className="relative transition-all duration-500 ease-in-out group-hover:scale-110"
                   style={{ width: company.width, height: company.height }}
                 >
+                  {/* Layer 1: Red Tinted Logo (Visible by default) */}
                   <Image
                     src={company.logo}
                     alt={company.name}
                     fill
-                    className="object-contain transition-all duration-500"
+                    className="object-contain opacity-100 transition-opacity duration-500 group-hover:opacity-0"
                     style={{
-                      // Tint logos to brand-red (#a21c3c) by default
+                      // Permanent tint to brand-red (#a21c3c)
                       filter:
-                        "invert(18%) sepia(87%) saturate(1633%) hue-rotate(326deg) brightness(85%) contrast(92%) opacity(0.6)",
+                        "brightness(0) saturate(100%) invert(18%) sepia(87%) saturate(1633%) hue-rotate(326deg) brightness(85%) contrast(92%) opacity(0.6)",
                     }}
-                    onMouseEnter={(e) => {
-                      (e.target as HTMLElement).style.filter = "none";
-                      (e.target as HTMLElement).style.opacity = "1";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.target as HTMLElement).style.filter =
-                        "invert(18%) sepia(87%) saturate(1633%) hue-rotate(326deg) brightness(85%) contrast(92%) opacity(0.6)";
-                    }}
+                    sizes={`${company.width}px`}
+                  />
+
+                  {/* Layer 2: Original Color Logo (Fades in on hover) */}
+                  <Image
+                    src={company.logo}
+                    alt={company.name}
+                    fill
+                    className="object-contain opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     sizes={`${company.width}px`}
                   />
                 </div>
