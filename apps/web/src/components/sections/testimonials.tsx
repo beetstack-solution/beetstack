@@ -1,10 +1,27 @@
 "use client";
 
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useVelocity,
+  useSpring,
+  useTransform,
+  useAnimationFrame,
+  useMotionValue,
+} from "framer-motion";
 import Image from "next/image";
 
 import { TESTIMONIALS, COMPANIES } from "@/data";
+
+/**
+ * Standard wrapping function for infinite scrolling
+ */
+const wrap = (min: number, max: number, v: number) => {
+  const rangeSize = max - min;
+  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+};
 
 // Arc positions for 7 avatars — mapped to dist from activeIndex
 const ARC_POSITIONS = [
@@ -33,9 +50,12 @@ const Avatar = ({
   const [error, setError] = useState(false);
   const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=a21c3c&color=fff`;
 
+  // Use fallback if src is empty or if an error occurred during loading
+  const finalSrc = src && src.trim() !== "" && !error ? src : fallback;
+
   return (
     <Image
-      src={error ? fallback : src}
+      src={finalSrc}
       alt={name}
       fill={fill}
       className={className}
@@ -44,6 +64,52 @@ const Avatar = ({
     />
   );
 };
+
+interface VelocityScrollProps {
+  children: React.ReactNode;
+  baseVelocity: number;
+}
+
+function VelocityScroll({ children, baseVelocity = 100 }: VelocityScrollProps) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false,
+  });
+
+  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+
+  const directionFactor = useRef<number>(1);
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+    if (velocityFactor.get() < 0) {
+      directionFactor.current = -1;
+    } else if (velocityFactor.get() > 0) {
+      directionFactor.current = 1;
+    }
+
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  return (
+    <div className="flex flex-nowrap overflow-hidden whitespace-nowrap">
+      <motion.div className="flex flex-nowrap whitespace-nowrap" style={{ x }}>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+      </motion.div>
+    </div>
+  );
+}
 
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(3); // start centre
@@ -267,15 +333,12 @@ export function TestimonialsSection() {
           }}
         />
 
-        <div
-          className="animate-scroll-ticker flex w-max items-center hover:[animation-play-state:paused]"
-          style={{ gap: "4rem" }}
-        >
-          {Array.from({ length: 6 }).flatMap((_, setIdx) =>
-            COMPANIES.map((company) => (
+        <VelocityScroll baseVelocity={-5}>
+          <div className="flex items-center gap-32 px-8">
+            {COMPANIES.map((company) => (
               <div
-                key={`${setIdx}-${company.id}`}
-                className="group flex flex-shrink-0 items-center justify-center px-4"
+                key={company.id}
+                className="group relative flex flex-shrink-0 items-center justify-center"
               >
                 <div
                   className="relative transition-all duration-500 ease-in-out group-hover:scale-110"
@@ -305,9 +368,9 @@ export function TestimonialsSection() {
                   />
                 </div>
               </div>
-            )),
-          )}
-        </div>
+            ))}
+          </div>
+        </VelocityScroll>
       </div>
     </section>
   );
